@@ -1,5 +1,5 @@
 ---
-- hosts: webservers
+- hosts: all
   tasks:
   - include: tasks/apache.yml
   - include: tasks/php.yml

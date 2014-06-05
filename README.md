@@ -3,7 +3,7 @@ pubstack
 
 Publisher's DevStack
 
-# Installation
+#Installation
 
 ```bash
 git clone git@github.com:NBCUOTS/pubstack.git
@@ -11,7 +11,7 @@ cd pubstack
 vagrant up
 ```
 
-Authors:
+###Authors:
 - breathingrock
 - conortm
 - ericduran

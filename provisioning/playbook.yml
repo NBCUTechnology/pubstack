@@ -2,6 +2,6 @@
 - hosts: all
   tasks:
   - include: tasks/apache.yml
-  - include: tasks/php.yml
+  - include: php-fpm/task/setup.yml
   - include: tasks/mysql.yml
   - include: tasks/composer.yml

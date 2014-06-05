@@ -1,6 +1,6 @@
 ---
 - name: install composer
-  shell: curl -sS https://getcomposer.org/installer | php
+  shell: php -r "readfile('https://getcomposer.org/installer');" | php
   tags: composer
 - name: move composer
   shell: mv composer.phar /usr/local/bin/composer

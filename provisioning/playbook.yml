@@ -2,6 +2,8 @@
 - hosts: all
   sudo: yes
   tasks:
+  - name: update apt cache
+    apt: update_cache=yes
   - include: tasks/apache.yml
   - include: php-fpm/task/setup.yml
   - include: tasks/mysql.yml

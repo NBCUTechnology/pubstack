@@ -1,6 +1,0 @@
----
-- name: install php-cli
-  action: apt name=php5-cli state=installed
-
-- name: service run php5-cli
-  action: service name=php5-cli state=started

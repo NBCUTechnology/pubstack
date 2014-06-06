@@ -38,7 +38,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
-  config.vm.synced_folder PUBSTACK_SYNCED_FOLDER, "/var/www"
+  config.vm.synced_folder PUBSTACK_SYNCED_FOLDER, "/var/www/shared"
 
   # Provider-specific configuration for VirtualBox:
   config.vm.provider "virtualbox" do |vb|

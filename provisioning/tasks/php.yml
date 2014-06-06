@@ -8,4 +8,4 @@
         - php5-gd
         - php5-mysql
         - php5-cli
-      notify: restart apache2
+      notify: restart webserver

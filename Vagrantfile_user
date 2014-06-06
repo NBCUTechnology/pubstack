@@ -1,0 +1,7 @@
+# Copy this file to ~/.vagrant.d/Vagrantfile and modify as necessary:
+
+# Set to the local folder you want shared to the VM:
+PUBSTACK_SYNCED_FOLDER = "~/Sites/www"
+
+# Adjust the Base Memory provisioned for the VM:
+PUBSTACK_VIRTUALBOX_MEMORY = "1024"

@@ -1,6 +1,6 @@
 ---
-   - name: install php-fpm
-     action: apt name=php5-fpm state=installed
+- name: install php-fpm
+  action: apt name=php5-fpm state=installed
 
-   - name: service run php5-fpm
-     action: service name=php5-fpm state=started
+- name: service run php5-fpm
+  action: service name=php5-fpm state=started

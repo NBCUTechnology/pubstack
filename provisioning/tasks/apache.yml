@@ -2,5 +2,6 @@
 - name: ensure apache is at the latest version
   apt: name=apache2 state=present
   sudo: yes
-- name: start Apache
+
+- name: start apache
   service: name=apache2 state=running enabled=yes

@@ -17,7 +17,7 @@ vagrant up
 echo "192.168.33.10 pubstack" >> /etc/hosts
 ```
 
-Then, visit http://pubstack/ in your browser.
+Then, visit [http://pubstack/](http://pubstack/) in your browser.
 
 ###Authors:
 - breathingrock

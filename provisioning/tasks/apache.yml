@@ -1,6 +1,10 @@
 ---
-- name: ensure apache is at the latest version
+- name: install apache
   apt: name=apache2 state=present
+  sudo: yes
+
+- name: 2. install PHP module for apache
+  apt: name=libapache2-mod-php5 state=present
   sudo: yes
 
 - name: start apache

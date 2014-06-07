@@ -1,0 +1,8 @@
+---
+vagrant:
+  # Set to the local folder you want shared to the VM:
+  synced_folder: "~/Sites/www"
+
+virtualbox:
+  # Adjust the Base Memory provisioned for the VM:
+  memory: "1024"

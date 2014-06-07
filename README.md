@@ -12,7 +12,7 @@ Publisher's DevStack
 ```bash
 git clone git@github.com:NBCUOTS/pubstack.git
 cd pubstack
-cp Vagrantfile_user ~/.vagrant.d/Vagrantfile
+cp default.config.yml config.yml
 vagrant up
 echo "192.168.33.10 pubstack" >> /etc/hosts
 ```

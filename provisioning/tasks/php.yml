@@ -10,3 +10,6 @@
     - php5-cli
   notify:
     - restart webserver
+
+- name: copy info.php
+  copy: src=info.php dest=/var/www/info.php

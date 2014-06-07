@@ -9,3 +9,6 @@
 
 - name: start apache
   service: name=apache2 state=running enabled=yes
+
+- name: copy index.html
+  copy: src=index.html dest=/var/www/index.html

@@ -1,0 +1,41 @@
+---
+- name: "install PHP development packages"
+  apt: name={{ item }} state=present
+  with_items:
+    - git
+    - php5-dev
+    - php5-xdebug
+    - php-pear
+    - make
+
+- name: "copy info.php"
+  copy: src=info.php dest=/var/www/info.php
+
+# PEAR
+- name: "tell PEAR to update its own channel"
+  command: pear channel-update pear.php.net
+  tags: pear
+
+- name: "update pear packages"
+  command: pear upgrade-all
+  tags: pear
+
+# Composer
+- name: "install composer"
+  shell: >
+    php -r "readfile('https://getcomposer.org/installer');" | php
+    && mv composer.phar {{ composer_install_path }}
+    creates={{ composer_install_path }}
+  tags: composer
+
+# xhprof
+- name: "check if xhprof is installed"
+  shell:  pecl list | grep -i 'xhprof'
+  ignore_errors: yes
+  register: xhprof_exists
+  tags: xhprof
+
+- name: "install xhprof"
+  shell: pecl install xhprof-{{ xhprof_version }}
+  when: xhprof_exists|failed
+  tags: xhprof

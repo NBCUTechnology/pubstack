@@ -1,14 +1,14 @@
 ---
-- name: install apache
+- name: "install apache"
   apt: name=apache2 state=present
   sudo: yes
 
-- name: 2. install PHP module for apache
+- name: "install PHP module for apache"
   apt: name=libapache2-mod-php5 state=present
   sudo: yes
 
-- name: start apache
+- name: "start apache"
   service: name=apache2 state=running enabled=yes
 
-- name: copy index.html
+- name: "copy index.html"
   copy: src=index.html dest=/var/www/index.html

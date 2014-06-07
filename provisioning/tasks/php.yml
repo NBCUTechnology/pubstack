@@ -1,5 +1,5 @@
 ---
-- name: install php
+- name: "install php"
   apt: name={{ item }} state=present
   with_items:
     - php5
@@ -10,6 +10,3 @@
     - php5-cli
   notify:
     - restart webserver
-
-- name: copy info.php
-  copy: src=info.php dest=/var/www/info.php

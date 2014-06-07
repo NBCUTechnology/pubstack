@@ -1,0 +1,27 @@
+---
+- name: "install git"
+  apt: name=git state=present
+
+- name: "clone drush from github"
+  git: >
+    repo=https://github.com/drush-ops/drush.git
+    dest={{ drush_install_path }}
+    version={{ drush_version }}
+  tags: drush
+
+- name: "install drush dependencies with composer"
+  shell: >
+    composer install
+    chdir={{ drush_install_path }}
+    creates={{ drush_install_path }}/vendor/autoload.php
+  tags: drush
+
+- name: "create drush symlink"
+  file: src={{ drush_install_path }}/drush dest={{ drush_path }} state=link
+  tags: drush
+
+- name: "run drush to finish setting it up"
+  command: "{{ drush_path }}"
+  register: drush_result
+  changed_when: "'Execute a drush command' not in drush_result.stdout"
+  tags: drush

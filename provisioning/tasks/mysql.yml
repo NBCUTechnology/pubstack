@@ -1,5 +1,5 @@
 ---
-- name: install mysql
+- name: "install mysql"
   apt: name={{ item }} state=present
   with_items:
     - mysql-server

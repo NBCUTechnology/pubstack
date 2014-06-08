@@ -16,4 +16,4 @@
   - name: "restart webserver"
     service: name=apache2 state=restarted
   - name: "restart php-fpm"
-    service: name=php-fpm state=restarted
+    service: name=php5-fpm state=restarted

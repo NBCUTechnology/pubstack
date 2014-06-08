@@ -1,0 +1,6 @@
+---
+- name: "install php-mysql"
+  apt: name=php5-mysql state=present
+  notify:
+    - restart webserver
+    - restart php-fpm

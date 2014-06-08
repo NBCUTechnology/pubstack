@@ -1,0 +1,7 @@
+---
+- name: "update apt cache"
+  apt: update_cache=yes cache_valid_time=3600
+
+- name: "install common packages"
+  apt: pkg={{ item }} state=present
+  with_items: common_apt_packages

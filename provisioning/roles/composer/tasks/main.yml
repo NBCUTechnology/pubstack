@@ -1,0 +1,6 @@
+---
+- name: "install composer"
+  shell: >
+    php -r "readfile('https://getcomposer.org/installer');" | php
+    && mv composer.phar {{ composer_install_path }}
+    creates={{ composer_install_path }}

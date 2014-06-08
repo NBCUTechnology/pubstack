@@ -1,0 +1,7 @@
+---
+common_apt_packages:
+  - curl
+  - git
+  - make
+  - python-apt
+  - python-pycurl

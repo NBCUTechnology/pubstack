@@ -1,0 +1,11 @@
+---
+- name: "install xdebug"
+  command: pecl install xdebug
+  register: xdebug_result
+  changed_when: "'already installed' not in xdebug_result.stdout"
+  failed_when: "xdebug_result.stderr"
+  notify:
+    - restart webserver
+    - restart php-fpm
+
+# @TODO: Task(s), template, and vars for xdebug.ini

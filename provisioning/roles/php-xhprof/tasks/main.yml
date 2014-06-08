@@ -1,0 +1,11 @@
+---
+- name: "install xhprof"
+  command: pecl install xhprof-{{ xhprof_version }}
+  register: xhprof_result
+  changed_when: "'already installed' not in xhprof_result.stdout"
+  failed_when: "xhprof_result.stderr"
+  notify:
+    - restart webserver
+    - restart php-fpm
+
+# @TODO: More setup for xhprof

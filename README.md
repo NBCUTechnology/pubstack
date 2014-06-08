@@ -13,6 +13,8 @@ Publisher's DevStack
 git clone git@github.com:NBCUOTS/pubstack.git
 cd pubstack
 cp default.config.yml config.yml
+# modify config.yml as needed:
+vim config.yml
 vagrant up
 echo "192.168.33.10 pubstack" >> /etc/hosts
 ```

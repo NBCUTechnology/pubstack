@@ -1,7 +1,4 @@
 ---
-- name: "install git"
-  apt: name=git state=present
-
 - name: "clone drush from github"
   git: >
     repo=https://github.com/drush-ops/drush.git

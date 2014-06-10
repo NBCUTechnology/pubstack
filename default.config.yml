@@ -8,6 +8,9 @@ virtualbox:
   memory: "1024"
 
 ansible:
+  # Whether to include the developer playbook:
+  include_developer: TRUE
+
   # Define a list of sites with the following keys:
   #
   # shortname       = site's shortname

@@ -1,2 +1,4 @@
 ---
 - include: webserver.yml
+- include: developer.yml
+  when: {{ item.include_developer }}

@@ -8,8 +8,6 @@
   - php
   - php-mysql
   - php-pear
-  - php-xdebug
-  - php-xhprof
   - composer
   - drush
   handlers:

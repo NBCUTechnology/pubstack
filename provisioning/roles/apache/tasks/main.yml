@@ -20,6 +20,11 @@
 - name: "copy index.html"
   copy: src=index.html dest=/var/www/html/index.html
 
+- name: "copy Apache2 conf"
+  copy: src={{ item }} dest=/etc/apache2/conf-available
+  with_fileglob:
+    - "conf-available/*"
+
 - name: "start apache"
   service: >
     name=apache2

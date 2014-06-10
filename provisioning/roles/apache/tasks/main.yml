@@ -10,14 +10,15 @@
 - name: "add vhosts"
   template: >
     src=virtualhost.j2
-    dest=/etc/apache2/sites-enabled/{{ item.shortname }}
+    dest=/etc/apache2/sites-available/{{ item.shortname }}
     owner=root group=root mode=644
   with_items: sites
   when: sites is defined
   notify: restart webserver
+  sudo: yes
 
 - name: "copy index.html"
-  copy: src=index.html dest=/var/www/index.html
+  copy: src=index.html dest=/var/www/html/index.html
 
 - name: "start apache"
   service: >

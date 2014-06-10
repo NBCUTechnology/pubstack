@@ -3,7 +3,7 @@
 
 # Load local config:
 require "yaml"
-pubstack_config = YAML::load_file("config.yml")
+pubstack_config = YAML::load_file(File.dirname(__FILE__) + "/config.yml")
 
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"

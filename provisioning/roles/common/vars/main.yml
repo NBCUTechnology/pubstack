@@ -5,3 +5,5 @@ common_apt_packages:
   - make
   - python-apt
   - python-pycurl
+  - python-software-properties
+  - vim

@@ -1,0 +1,14 @@
+
+<VirtualHost *:{{ apache_listen_port }}>
+  ServerName {{ item.vhost.servername }}
+  DocumentRoot {{ apache_synced_folder }}/{{ item.vhost.documentroot }}
+  <Directory "{{ apache_synced_folder }}/{{ item.vhost.documentroot }}">
+    AllowOverride All
+    Options -Indexes FollowSymLinks
+    Order allow,deny
+    Allow from all
+  </Directory>
+{% if item.vhost.extra_parameters is defined %}
+  {{ item.vhost.extra_parameters }}
+{% endif %}
+</VirtualHost>

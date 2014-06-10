@@ -7,8 +7,20 @@
   apt: name=libapache2-mod-php5 state=present
   sudo: yes
 
-- name: "start apache"
-  service: name=apache2 state=running enabled=yes
+- name: "add vhosts"
+  template: >
+    src=virtualhost.j2
+    dest=/etc/apache2/sites-enabled/{{ item.shortname }}
+    owner=root group=root mode=644
+  with_items: sites
+  when: sites is defined
+  notify: restart webserver
 
 - name: "copy index.html"
   copy: src=index.html dest=/var/www/index.html
+
+- name: "start apache"
+  service: >
+    name=apache2
+    state=started
+    enabled=yes

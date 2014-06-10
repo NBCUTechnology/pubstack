@@ -53,5 +53,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Enable provisioning with Ansible.
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "provisioning/pubstack.yml"
+    ansible.extra_vars = pubstack_config["ansible"]
   end
 end

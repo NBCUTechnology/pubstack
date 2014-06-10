@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 # Load local config:
-require 'yaml'
+require "yaml"
 pubstack_config = YAML::load_file("config.yml")
 
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
@@ -42,12 +42,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
-  config.vm.synced_folder pubstack_config['vagrant']['synced_folder'], "/var/www/shared"
+  config.vm.synced_folder pubstack_config["vagrant"]["synced_folder"], "/var/www/shared"
 
   # Provider-specific configuration for VirtualBox:
   config.vm.provider "virtualbox" do |vb|
     # Use VBoxManage to customize the VM. For example to change memory:
-    vb.customize ["modifyvm", :id, "--memory", pubstack_config['virtualbox']['memory']]
+    vb.customize ["modifyvm", :id, "--memory", pubstack_config["virtualbox"]["memory"]]
   end
 
   # Enable provisioning with Ansible.

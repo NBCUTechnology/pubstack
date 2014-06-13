@@ -5,9 +5,6 @@
   notify:
     - restart webserver
 
-- name: "install php-fpm"
-  apt: name=php5-fpm state=present
-
 - name: "service run php5-fpm"
   service: name=php5-fpm state=started enabled=yes
 

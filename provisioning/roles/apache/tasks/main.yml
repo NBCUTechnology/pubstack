@@ -25,6 +25,12 @@
   with_fileglob:
     - "conf-available/*"
 
+- name: "Enable Required Apache module"
+  shell: a2enmod actions fastcgi alias
+
+- name: "Enable Required Apache configs"
+  shell: a2enconf php5-fpm
+
 - name: "start apache"
   service: >
     name=apache2

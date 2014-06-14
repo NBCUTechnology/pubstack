@@ -5,6 +5,9 @@
   notify:
     - restart webserver
 
+- name: "copy PHP-FPM conf"
+  copy: src=fpm/ dest=/etc/php5/fpm/ directory_mode=yes
+
 - name: "service run php5-fpm"
   service: name=php5-fpm state=started enabled=yes
 

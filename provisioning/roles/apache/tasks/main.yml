@@ -3,8 +3,8 @@
   apt: name=apache2 state=present
   sudo: yes
 
-- name: "install PHP module for apache"
-  apt: name=libapache2-mod-php5 state=present
+- name: "install fastcgi module for apache"
+  apt: name=libapache2-mod-fastcgi state=present
   sudo: yes
 
 - name: "add vhosts"

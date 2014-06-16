@@ -5,6 +5,9 @@
   notify:
     - restart webserver
 
+- name: "Install pecl libraries"
+  shell: pecl install igbinary
+
 - name: "copy PHP-FPM conf"
   copy: src=fpm/ dest=/etc/php5/fpm/ directory_mode=yes
 

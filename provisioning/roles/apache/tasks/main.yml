@@ -3,8 +3,8 @@
   apt: name=apache2 state=present
   sudo: yes
 
-- name: "install PHP module for apache"
-  apt: name=libapache2-mod-php5 state=present
+- name: "install fastcgi module for apache"
+  apt: name=libapache2-mod-fastcgi state=present
   sudo: yes
 
 - name: "add vhosts"
@@ -24,6 +24,12 @@
   copy: src={{ item }} dest=/etc/apache2/conf-available
   with_fileglob:
     - "conf-available/*"
+
+- name: "Enable Required Apache module"
+  shell: a2enmod actions fastcgi alias
+
+- name: "Enable Required Apache configs"
+  shell: a2enconf php5-fpm
 
 - name: "start apache"
   service: >

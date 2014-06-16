@@ -1,4 +1,7 @@
 ---
+- name: ensure Apache PPA is enabled
+  apt_repository: repo='ppa:ondrej/apache2'
+
 - name: ensure PHP PPA is enabled
   apt_repository: repo='ppa:ondrej/php5'
 

@@ -10,8 +10,8 @@ virtualbox:
   # Ex: Forward port 80 to 8080.
   # port-forwarding:
   #   - name: http
-  #     vm: 80
-  #     local: 8080
+  #     guest: 80
+  #     host: 8080
 
 ansible:
   # Define a list of sites with the following keys:

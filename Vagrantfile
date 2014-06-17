@@ -29,7 +29,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # If you want to forward ports just follow the example in default.config.yml
   if not pubstack_config["virtualbox"]["port-forwarding"].nil?
     pubstack_config["virtualbox"]["port-forwarding"].each do |port|
-      config.vm.network "forwarded_port", guest: port['vm'], host: port['local']
+      config.vm.network "forwarded_port", guest: port['guest'], host: port['host']
     end
   end
 

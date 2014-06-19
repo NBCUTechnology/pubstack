@@ -7,18 +7,39 @@
   apt: name=libapache2-mod-fastcgi state=present
   sudo: yes
 
+- name: "create site directory"
+  shell: >
+      mkdir --parents /var/www/html/{{ item.shortname }}/docroot
+      creates=/var/www/html/{{ item.shortname }}/docroot
+  with_items: sites
+  when: sites is defined
+  sudo: yes
+
+- name: "copy site.php"
+  copy: src=site.php dest=/var/www/html/{{ item.shortname }}/docroot/index.php
+  with_items: sites
+  when: sites is defined
+  sudo: yes
+
 - name: "add vhosts"
   template: >
     src=virtualhost.j2
-    dest=/etc/apache2/sites-available/{{ item.shortname }}
+    dest=/etc/apache2/sites-available/{{ item.shortname }}.conf
     owner=root group=root mode=644
   with_items: sites
   when: sites is defined
   notify: restart webserver
   sudo: yes
 
-- name: "copy index.html"
-  copy: src=index.html dest=/var/www/html/index.html
+- name: "enable vhosts"
+  shell: a2ensite {{ item.shortname }}.conf
+  with_items: sites
+  when: sites is defined
+  notify: restart webserver
+  sudo: yes
+
+- name: "copy index.php"
+  copy: src=index.php dest=/var/www/html/index.php
 
 - name: "copy Apache2 conf"
   copy: src={{ item }} dest=/etc/apache2/conf-available

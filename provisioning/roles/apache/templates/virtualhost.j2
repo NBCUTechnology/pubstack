@@ -19,4 +19,11 @@
   SetEnv AH_NON_PRODUCTION 1
   Header set X-AH-Environment "dev"
 
+  UseCanonicalName Off
+
+  RewriteEngine On
+  RewriteRule . - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+  FileETag none
+  AddOutputFilterByType DEFLATE text/css application/javascript application/x-javascript application/json text/html
+
 </VirtualHost>

@@ -32,8 +32,13 @@
   notify: restart webserver
   sudo: yes
 
+- name: "create pubstack directory"
+  file: path=/var/www/pubstack state=directory
+  register: pubstack_directory_exists
+
 - name: "copy index.php"
-  copy: src=index.php dest=/var/www/html/index.php
+  copy: src=index.php dest=/var/www/pubstack/index.php
+  when: pubstack_directory_exists !=0
 
 - name: "copy Apache2 conf"
   copy: src={{ item }} dest=/etc/apache2/conf-available

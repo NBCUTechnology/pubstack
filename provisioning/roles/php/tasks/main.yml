@@ -18,4 +18,4 @@
   service: name=php5-fpm state=started enabled=yes
 
 - name: "copy info.php"
-  copy: src=info.php dest=/var/www/html/info.php
+  copy: src=info.php dest=/var/www/pubstack/info.php

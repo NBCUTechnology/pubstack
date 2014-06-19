@@ -18,7 +18,14 @@
   SetEnv AH_CURRENT_REGION us-east-1
   SetEnv AH_NON_PRODUCTION 1
   Header set X-AH-Environment "dev"
-
+  # Convert request property Remote_Addr into env var REMOTE_ADDR.
+  SetEnvIf Remote_Addr (.*) REMOTE_ADDR=$1
+  # Set AH_Client_IP to most recent X-Forwarded-For, if valid.
+  SetEnvIf X-Forwarded-For '^([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)' AH_Client_IP=$1
+  # Set X-AH-Client-IP header to AH_Client_IP or REMOTE_ADDR so we can log
+  # %{X-AH-Client-IP}e instead of %h.
+  RequestHeader set X-AH-Client-IP "%{AH_Client_IP}e" env=AH_Client_IP
+  RequestHeader set X-AH-Client-IP "%{REMOTE_ADDR}e" env=!AH_Client_IP
   UseCanonicalName Off
 
   RewriteEngine On

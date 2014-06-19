@@ -15,12 +15,6 @@
   when: sites is defined
   sudo: yes
 
-- name: "copy site.php"
-  copy: src=site.php dest=/var/www/html/{{ item.shortname }}/docroot/index.php
-  with_items: sites
-  when: sites is defined
-  sudo: yes
-
 - name: "add vhosts"
   template: >
     src=virtualhost.j2

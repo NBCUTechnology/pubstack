@@ -3,12 +3,20 @@
   ServerName {{ item.vhost.servername }}
   DocumentRoot {{ apache_synced_folder }}/{{ item.vhost.documentroot }}
   <Directory "{{ apache_synced_folder }}/{{ item.vhost.documentroot }}">
-    AllowOverride All
-    Options -Indexes +SymLinksIfOwnerMatch
-    Order allow,deny
+    Order Deny,Allow
     Allow from all
+    Options FollowSymLinks ExecCGI
+    AllowOverride All
   </Directory>
 {% if item.vhost.extra_parameters is defined %}
   {{ item.vhost.extra_parameters }}
 {% endif %}
+
+  # Set up some AH defaults.
+  SetEnv AH_SITE_NAME {{item.shortname}}
+  SetEnv AH_SITE_GROUP {{item.shortname}}
+  SetEnv AH_CURRENT_REGION us-east-1
+  SetEnv AH_NON_PRODUCTION 1
+  Header set X-AH-Environment "dev"
+
 </VirtualHost>

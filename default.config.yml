@@ -22,9 +22,12 @@ ansible:
   #   documentroot  = site docroot, relative to synced_folder
   #
   # Example:
-  #
-  # sites:
-  # - shortname: "site1"
-  #   vhost: {servername: "local.site1.com", documentroot: "site1/docroot"}
-  # - shortname: "site2"
-  #   vhost: {servername: "local.site2.com", documentroot: "site2/docroot"}
+  #  sites:
+  #  - shortname: "site1"
+  #    vhost:
+  #      servername: "local.site1.com"
+  #      documentroot: "site1/docroot"
+  #  - shortname: "site2"
+  #    vhost:
+  #      servername: "local.site2.com"
+  #      documentroot: "site2/docroot"

@@ -3,12 +3,41 @@
   ServerName {{ item.vhost.servername }}
   DocumentRoot {{ apache_synced_folder }}/{{ item.vhost.documentroot }}
   <Directory "{{ apache_synced_folder }}/{{ item.vhost.documentroot }}">
-    AllowOverride All
-    Options -Indexes +SymLinksIfOwnerMatch
-    Order allow,deny
+    Order Deny,Allow
     Allow from all
+    Options FollowSymLinks ExecCGI
+    AllowOverride All
   </Directory>
 {% if item.vhost.extra_parameters is defined %}
   {{ item.vhost.extra_parameters }}
 {% endif %}
+
+  # Set up some pubstack defaults.
+  Header set X-pubstack "local"
+
+  # Set up some AH defaults.
+  RewriteRule . - [E=AH_REQUEST_ARRIVED_YYYYMMDDHHMMSS:%{TIME}]
+  SetEnv AH_SITE_NAME {{item.shortname}}
+  SetEnv AH_SITE_GROUP {{item.shortname}}
+  SetEnv AH_CURRENT_REGION us-east-1
+  SetEnv AH_NON_PRODUCTION 1
+  Header set X-AH-Environment "dev"
+  Header always unset "X-Powered-By"
+  Header always unset "X-Runtime"
+  Header always unset "Server"
+  # Convert request property Remote_Addr into env var REMOTE_ADDR.
+  SetEnvIf Remote_Addr (.*) REMOTE_ADDR=$1
+  # Set AH_Client_IP to most recent X-Forwarded-For, if valid.
+  SetEnvIf X-Forwarded-For '^([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)' AH_Client_IP=$1
+  # Set X-AH-Client-IP header to AH_Client_IP or REMOTE_ADDR so we can log
+  # %{X-AH-Client-IP}e instead of %h.
+  RequestHeader set X-AH-Client-IP "%{AH_Client_IP}e" env=AH_Client_IP
+  RequestHeader set X-AH-Client-IP "%{REMOTE_ADDR}e" env=!AH_Client_IP
+  UseCanonicalName Off
+
+  RewriteEngine On
+  RewriteRule . - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+  FileETag none
+  AddOutputFilterByType DEFLATE text/css application/javascript application/x-javascript application/json text/html
+
 </VirtualHost>

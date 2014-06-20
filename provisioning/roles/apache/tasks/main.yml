@@ -36,6 +36,8 @@
   file: path=/var/www/pubstack state=directory
   register: pubstack_directory_exists
 
+- name: "copy default vhost"
+  copy: src=000-default.conf dest=/etc/apache2/sites-available/000-default.conf
 - name: "copy index.php"
   copy: src=index.php dest=/var/www/pubstack/index.php
   when: pubstack_directory_exists !=0
@@ -46,7 +48,7 @@
     - "conf-available/*"
 
 - name: "Enable Required Apache module"
-  shell: a2enmod actions fastcgi alias
+  shell: a2enmod actions fastcgi alias headers rewrite
 
 - name: "Enable Required Apache configs"
   shell: a2enconf php5-fpm

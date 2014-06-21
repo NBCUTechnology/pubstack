@@ -1,0 +1,14 @@
+---
+- hosts: all
+  remote_user: vagrant
+  sudo: yes
+  roles:
+  - common
+  - apache
+  - php
+  - php-mysql
+  - php-pear
+  - php-xdebug
+  - php-xhprof
+  - composer
+  - drush

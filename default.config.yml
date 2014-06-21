@@ -9,9 +9,12 @@ virtualbox:
   # Allow port-forwarding to be set up here.
   # Ex: Forward port 80 to 8080.
   # port-forwarding:
-  #   - name: http
+  #   http:
   #     guest: 80
-  #     host: 8080
+  #     host: 8800
+  #   varnish:
+  #     guest: 6081
+  #     host: 8900
 
 ansible:
   # Define a list of sites with the following keys:
@@ -31,3 +34,56 @@ ansible:
   #    vhost:
   #      servername: "local.site2.com"
   #      documentroot: "site2/docroot"
+  #
+  # Define the size of the provisioned stack. i.e. how many and what type of
+  # virtural machines to create.
+  #   Valid values are:
+  #     - single
+  #         one machine to serve them all
+  #     - small
+  #         a master database and a single web server
+  #     - medium
+  #         a master database, single web server and a single varnish server
+  #     @todo - large
+  #         a master and slave database, 2 web servers, 2 varnish servers and
+  #         and a load balancer
+  #     @todo - mega
+  #         a master and slave database, 4 web servers, 2 varnish servers,
+  #         a load balancer, a solr server and a memcache server
+  #     @todo - custom
+  #         set the "stack-machines" values to which machine types and how many
+  #         of each type that you'd like created
+  #
+  stack-size: "medium"
+  #
+  # @todo stack-machines:
+  #   db: single|multiple
+  #   memcache: 1
+  #   solr: 1
+  #   web: 4
+  #   varnish: 2
+  #   load: 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

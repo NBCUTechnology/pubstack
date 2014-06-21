@@ -5,6 +5,9 @@
 - name: ensure PHP PPA is enabled
   apt_repository: repo='ppa:ondrej/php5'
 
+- name: Ensure aptitude packages are up-to-date.
+  command: apt-get update
+
 - name: "update apt cache"
   apt: update_cache=yes cache_valid_time=3600
 

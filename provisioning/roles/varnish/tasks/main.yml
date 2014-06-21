@@ -1,0 +1,7 @@
+---
+- name: Install varnish
+  apt: pkg=varnish state=latest
+- name: Copy our custom default.vcl file
+  template: src=../templates/default.vcl dest=/etc/varnish/default.vcl
+- name: Start varnish
+  service: name=varnish state=restarted

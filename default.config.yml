@@ -2,6 +2,7 @@
 vagrant:
   # Set to the local folder you want shared to the VM:
   synced_folder: "~/Sites/www"
+  ip: "172.17.17.17"
 
 virtualbox:
   # Adjust the Base Memory provisioned for the VM:

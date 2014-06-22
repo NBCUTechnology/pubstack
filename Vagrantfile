@@ -34,12 +34,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
-  #if not pubstack_config["vagrant"]["synced_folder"].nil?
+  #if pubstack_config["vagrant"]["synced_folder"].nil?
   #  config.vm.synced_folder pubstack_config["vagrant"]["synced_folder"], "/var/www/html"
   #end
 
   # Assume a single machine stack if not configured.
-  #if pubstack_config["virtualbox"]["port-forwarding"].nil?
+  #if pubstack_config["ansible"]["stack-size"].nil?
   #  pubstack_config["ansible"]["stack-size"] = "single"
   #end
 
@@ -84,19 +84,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       virtual_machines["db"] = 1;
       virtual_machines["web"] = 1;
 
-    elseif pubstack_config["ansible"]["stack-size"] == "medium"
+    elsif pubstack_config["ansible"]["stack-size"] == "medium"
 
       virtual_machines["db"] = 1;
-      virtual_machines["web"] = 2;
+      virtual_machines["web"] = 1;
       virtual_machines["varnish"] = 1;
 
-    elseif pubstack_config["ansible"]["stack-size"] == "large"
-
-      virtual_machines["db"] = 2;
-      virtual_machines["slave_db"] = 1;
-      virtual_machines["web"] = 2;
-      virtual_machines["varnish"] = 2;
-      virtual_machines["load"] = 1;
+    # @todo elsif pubstack_config["ansible"]["stack-size"] == "large"
 
     # @todo elseif pubstack_config["ansible"]["stack-size"] == "mega"
 
@@ -104,72 +98,55 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     end
 
-  end
-
-  if virtual_machines["db"] == 1
-    config.vm.define "db1" do |db1|
-      db1.vm.hostname = 'db1'
-      db1.vm.network "private_network", ip: "192.168.33.10"
-      db1.vm.provision "ansible" do |ansible|
-        ansible.extra_vars = { ansible_ssh_user: 'vagrant', server_ip_address: '192.168.33.10' }
-        ansible.playbook = "provisioning/single-db.playbook.yml"
-        ansible.limit = 'db1'
-        # ansible.verbose = 'vvv'
+    if virtual_machines["db"] == 1
+      config.vm.define "db1" do |db1|
+        db1.vm.hostname = 'db1'
+        db1.vm.network "private_network", ip: "192.168.33.10"
+        db1.vm.provision "ansible" do |ansible|
+          ansible.extra_vars = { ansible_ssh_user: 'vagrant', server_ip_address: '192.168.33.0' }
+          ansible.playbook = "provisioning/single-db.playbook.yml"
+          ansible.limit = 'db1'
+          # ansible.verbose = 'vvv'
+        end
       end
     end
-  end
 
-  if virtual_machines["web"] == 1
-    config.vm.define "web1" do |web1|
-      web1.vm.hostname = 'web1'
-      web1.vm.network "private_network", ip: "192.168.33.20"
-      #if not pubstack_config["virtualbox"]["port-forwarding"]["http"].nil?
-      #  web1.vm.network "forwarded_port", guest: 80, host: pubstack_config["virtualbox"]["port-forwarding"]["http"]["host"]
-      #else
-        web1.vm.network "forwarded_port", guest: 80, host: 8800
-      #end
-      web1.vm.provision "ansible" do |ansible|
-        ansible.extra_vars = { ansible_ssh_user: 'vagrant', server_ip_address: '192.168.33.20' }
-        ansible.playbook = "provisioning/web.playbook.yml"
-        ansible.limit = 'web1'
-        # ansible.verbose = 'vvv'
+    if virtual_machines["web"] == 1
+      config.vm.define "web1" do |web1|
+        web1.vm.hostname = 'web1'
+        web1.vm.network "private_network", ip: "192.168.33.20"
+        #if not pubstack_config["virtualbox"]["port-forwarding"]["http"].nil?
+        #  web1.vm.network "forwarded_port", guest: 80, host: pubstack_config["virtualbox"]["port-forwarding"]["http"]["host"]
+        #else
+          web1.vm.network "forwarded_port", guest: 80, host: 8800
+        #end
+        web1.vm.provision "ansible" do |ansible|
+          ansible.extra_vars = { ansible_ssh_user: 'vagrant', server_ip_address: '192.168.33.10' }
+          ansible.playbook = "provisioning/web.playbook.yml"
+          ansible.limit = 'web1'
+          # ansible.verbose = 'vvv'
+        end
       end
     end
-  end
 
-  if virtual_machines["varnish"] = 1
-    config.vm.define "varnish1" do |varnish1|
-      varnish1.vm.hostname = 'varnish1'
-      varnish1.vm.network "private_network", ip: "192.168.33.30"
-      #if not pubstack_config["virtualbox"]["port-forwarding"]["varnish"].nil?
-      #  web1.vm.network "forwarded_port", guest: 6081, host: pubstack_config["virtualbox"]["port-forwarding"]["http"]["varnish"]
-      #else
-        web1.vm.network "forwarded_port", guest: 6081, host: 8900
-      #end
-      varnish1.vm.provision "ansible" do |ansible|
-        ansible.extra_vars = { ansible_ssh_user: 'vagrant', server_ip_address: '192.168.33.30' }
-        ansible.playbook = "provisioning/varnish.playbook.yml"
-        ansible.limit = 'varnish1'
-        ansible.verbose = 'vvv'
+    if virtual_machines["varnish"] == 1
+      config.vm.define "varnish1" do |varnish1|
+        varnish1.vm.hostname = 'varnish1'
+        varnish1.vm.network "private_network", ip: "192.168.33.30"
+        #if not pubstack_config["virtualbox"]["port-forwarding"]["varnish"].nil?
+        #  web1.vm.network "forwarded_port", guest: 6081, host: pubstack_config["virtualbox"]["port-forwarding"]["http"]["varnish"]
+        #else
+          varnish1.vm.network "forwarded_port", guest: 6081, host: 8900
+        #end
+        varnish1.vm.provision "ansible" do |ansible|
+          ansible.extra_vars = { ansible_ssh_user: 'vagrant', server_ip_address: '192.168.33.20' }
+          ansible.playbook = "provisioning/varnish.playbook.yml"
+          ansible.limit = 'varnish1'
+          #ansible.verbose = 'vvv'
+        end
       end
     end
+
   end
 
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

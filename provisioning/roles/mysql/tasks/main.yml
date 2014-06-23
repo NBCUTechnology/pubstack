@@ -12,6 +12,6 @@
   when: sites is defined
 
 - name: create database user
-  mysql_user: name={{ item.shortname }} password={{ mysql_insecure_pass }} priv={{ item.shortname }}.*:ALL host=localhost state=present
+  mysql_user: name={{ item.shortname }} password= priv={{ item.shortname }}.*:ALL host=localhost state=present
   with_items: sites
   when: sites is defined

@@ -2,3 +2,16 @@
 - name: "install mysql"
   apt: name={{ item }} state=present
   with_items: mysql_apt_packages
+
+- name: start mysql service
+  service: name=mysql state=started enabled=true
+
+- name: create site database
+  mysql_db: name={{ item.shortname }} state=present collation=utf8_general_ci
+  with_items: sites
+  when: sites is defined
+
+- name: create database user
+  mysql_user: name={{ item.shortname }} password= priv={{ item.shortname }}.*:ALL host=localhost state=present
+  with_items: sites
+  when: sites is defined

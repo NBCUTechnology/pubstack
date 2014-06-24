@@ -6,12 +6,6 @@ vagrant:
 virtualbox:
   # Adjust the Base Memory provisioned for the VM:
   memory: "1024"
-  # Allow port-forwarding to be set up here.
-  # Ex: Forward port 80 to 8080.
-  # port-forwarding:
-  #   - name: http
-  #     guest: 80
-  #     host: 8080
 
 ansible:
   # Define a list of sites with the following keys:

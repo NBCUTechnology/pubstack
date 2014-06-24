@@ -7,14 +7,6 @@
   apt: name=libapache2-mod-fastcgi state=present
   sudo: yes
 
-- name: "create site directory"
-  shell: >
-      mkdir --parents /var/www/html/{{ item.shortname }}/docroot
-      creates=/var/www/html/{{ item.shortname }}/docroot
-  with_items: sites
-  when: sites is defined
-  sudo: yes
-
 - name: "add vhosts"
   template: >
     src=virtualhost.j2
@@ -29,18 +21,19 @@
   shell: a2ensite {{ item.shortname }}.conf
   with_items: sites
   when: sites is defined
+  register: a2ensite_result
+  changed_when: "'Enabling site' in a2ensite_result.stdout"
   notify: restart webserver
   sudo: yes
 
 - name: "create pubstack directory"
   file: path=/var/www/pubstack state=directory
-  register: pubstack_directory_exists
+
+- name: "copy index.php"
+  copy: src=index.php dest=/var/www/pubstack/index.php
 
 - name: "copy default vhost"
   copy: src=000-default.conf dest=/etc/apache2/sites-available/000-default.conf
-- name: "copy index.php"
-  copy: src=index.php dest=/var/www/pubstack/index.php
-  when: pubstack_directory_exists !=0
 
 - name: "copy Apache2 conf"
   copy: src={{ item }} dest=/etc/apache2/conf-available
@@ -49,9 +42,13 @@
 
 - name: "Enable Required Apache module"
   shell: a2enmod actions fastcgi alias headers rewrite
+  register: a2enmod_result
+  changed_when: "'already enabled' not in a2enmod_result.stdout"
 
 - name: "Enable Required Apache configs"
   shell: a2enconf php5-fpm
+  register: a2enconf_result
+  changed_when: "'already enabled' not in a2enconf_result.stdout"
 
 - name: "start apache"
   service: >

@@ -14,14 +14,15 @@
     owner=root group=root mode=644
   with_items: sites
   when: sites is defined
-  register: vhosts_conf
   notify: restart webserver
   sudo: yes
 
 - name: "enable vhosts"
   shell: a2ensite {{ item.shortname }}.conf
   with_items: sites
-  when: vhosts_conf|changed
+  when: sites is defined
+  register: a2ensite_result
+  changed_when: "'Enabling site' in a2ensite_result.stdout"
   notify: restart webserver
   sudo: yes
 

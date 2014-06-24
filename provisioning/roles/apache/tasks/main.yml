@@ -7,14 +7,6 @@
   apt: name=libapache2-mod-fastcgi state=present
   sudo: yes
 
-- name: "create site directory"
-  shell: >
-      mkdir --parents /var/www/html/{{ item.shortname }}/docroot
-      creates=/var/www/html/{{ item.shortname }}/docroot
-  with_items: sites
-  when: sites is defined
-  sudo: yes
-
 - name: "add vhosts"
   template: >
     src=virtualhost.j2
@@ -34,13 +26,12 @@
 
 - name: "create pubstack directory"
   file: path=/var/www/pubstack state=directory
-  register: pubstack_directory_exists
+
+- name: "copy index.php"
+  copy: src=index.php dest=/var/www/pubstack/index.php
 
 - name: "copy default vhost"
   copy: src=000-default.conf dest=/etc/apache2/sites-available/000-default.conf
-- name: "copy index.php"
-  copy: src=index.php dest=/var/www/pubstack/index.php
-  when: pubstack_directory_exists !=0
 
 - name: "copy Apache2 conf"
   copy: src={{ item }} dest=/etc/apache2/conf-available

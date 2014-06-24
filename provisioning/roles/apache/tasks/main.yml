@@ -14,13 +14,14 @@
     owner=root group=root mode=644
   with_items: sites
   when: sites is defined
+  register: vhosts_conf
   notify: restart webserver
   sudo: yes
 
 - name: "enable vhosts"
   shell: a2ensite {{ item.shortname }}.conf
   with_items: sites
-  when: sites is defined
+  when: vhosts_conf|changed
   notify: restart webserver
   sudo: yes
 
@@ -40,9 +41,13 @@
 
 - name: "Enable Required Apache module"
   shell: a2enmod actions fastcgi alias headers rewrite
+  register: a2enmod_result
+  changed_when: "'already enabled' not in a2enmod_result.stdout"
 
 - name: "Enable Required Apache configs"
   shell: a2enconf php5-fpm
+  register: a2enconf_result
+  changed_when: "'already enabled' not in a2enconf_result.stdout"
 
 - name: "start apache"
   service: >

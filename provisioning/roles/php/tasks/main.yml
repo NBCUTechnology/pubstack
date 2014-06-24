@@ -8,7 +8,7 @@
 - name: "Install pecl libraries"
   shell: pecl install igbinary uploadprogress
   register: pecl_result
-  changed_when: "'already installed' not in pecl_result.stdout"
+  changed_when: "'Nothing to install' not in pecl_result.stdout"
   failed_when: "pecl_result.stderr"
 
 - name: "copy PHP-FPM conf"

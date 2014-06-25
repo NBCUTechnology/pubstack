@@ -4,8 +4,26 @@
   register: xhprof_result
   changed_when: "'already installed' not in xhprof_result.stdout"
   failed_when: "xhprof_result.stderr"
+
+- name: "copy xhprof.ini"
+  copy: src=xhprof.ini dest=/etc/php5/fpm/conf.d/xhprof.ini
   notify:
-    - restart webserver
     - restart php-fpm
 
-# @TODO: More setup for xhprof
+- name: "copy default vhost"
+  copy: src=xhprof.conf dest=/etc/apache2/sites-available/xhprof.conf
+
+- name: "enable xhprof vhosts"
+  shell: a2ensite xhprof.conf
+  register: a2ensite_result
+  changed_when: "'Enabling xhprof' in a2ensite_result.stdout"
+  notify: restart webserver
+
+- name: "Create xhprof tmp directory"
+  shell: mkdir /tmp/xhprof
+
+- name: "Fix user perm for xhprof tmp directory"
+  shell: chown www-data /tmp/xhprof/ -R;
+
+- name: "Fix group perm for xhprof tmp directory"
+  shell: chgrp www-data /tmp/xhprof/ -R;

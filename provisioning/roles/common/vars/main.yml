@@ -2,6 +2,7 @@
 common_apt_packages:
   - curl
   - git
+  - graphviz
   - make
   - python-apt
   - python-pycurl

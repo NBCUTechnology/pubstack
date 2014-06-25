@@ -1,0 +1,58 @@
+# Acquia hosting memcached config file template:
+#   fields-provision.php --set-server-config web-2:memcached.conf:-m:256
+# memcached
+
+# /usr/bin/memcached -m 64 -p 11211 -u nobody -l 127.0.0.1
+
+# Run memcached as a daemon. This command is implied, and is not needed for the
+# daemon to run. See the README.Debian that comes with this package for more
+# information.
+-d
+
+# Log memcached's output to /var/log/memcached
+logfile {{ memcached_log|default('/var/log/memcached.log') }}
+# Be verbose
+# -v
+
+# Be even more verbose (print client commands as well)
+# -vv
+
+# Start with a cap of 64 megs of memory. It's reasonable, and the daemon default
+# Note that the daemon will grow to this size, but does not start out holding this much
+# memory
+-m {{ memcached_memory|default('64') }}
+# Default connection port is 11211
+-p {{ memcached_port|default('11211') }}
+
+# Run the daemon as root. The start-memcached will default to running as root if no
+# -u command is present in this config file
+-u {{ memcached_user|default('nobody') }}
+# Specify which IP address to listen on. The default is to listen on all IP addresses
+# This parameter is one of the only security measures that memcached has, so make sure
+# it's listening on a firewalled interface.
+-l {{ memcached_ip|default('10.94.75.72') }}
+# Limit the number of simultaneous incoming connections. The daemon default is 1024
+-c {{ memcached_connections|default('1024') }}
+# Lock down all paged memory. Consult with the README and homepage before you do this
+# -k
+
+# Return error when memory is exhausted (rather than removing items)
+# -M
+
+# Maximize core file limit
+# -r
+
+# Use  <factor>  as  the multiplier for computing the sizes of memory chunks that items are stored
+# in. A lower value may result in less wasted memory depending  on  the  total  amount  of  memory
+# available and the distribution of item sizes.  The default is 1.25.
+-f 1.25
+# Allocate a minimum of <size> bytes for the item key, value, and flags. The default is 48.
+# ACQUIA: For some reason defining the -s param causes memcached to start but
+# does not listen on any port. Disabling until someone actually needs to set this.
+# -s 48
+# Number of threads  to use to process incoming requests. It is typically not useful
+# to set this higher than the number of CPU cores on the memcached server.
+-t 1
+# Use  <char>  as  the  delimiter  between key prefixes and IDs. This is used for
+# per-prefix stats reporting. The default is ":"
+-D :

@@ -5,11 +5,6 @@
   changed_when: "'already installed' not in xhprof_result.stdout"
   failed_when: "xhprof_result.stderr"
 
-- name: "copy xhprof.ini"
-  copy: src=xhprof.ini dest=/etc/php5/fpm/conf.d/xhprof.ini
-  notify:
-    - restart php-fpm
-
 - name: "copy default vhost"
   copy: src=xhprof.conf dest=/etc/apache2/sites-available/xhprof.conf
 

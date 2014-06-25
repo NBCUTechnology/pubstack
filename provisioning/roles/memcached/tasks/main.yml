@@ -1,0 +1,11 @@
+---
+- name: "install memcached"
+  apt: name=memcached state=present
+  sudo: yes
+
+- name: "config file"
+  template: src=memcached.conf.j2 dest=/etc/memcached.conf
+  notify: restart memcached
+
+- name: "start and enable service"
+  service: name=memcached state=started

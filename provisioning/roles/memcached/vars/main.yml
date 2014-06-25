@@ -1,0 +1,6 @@
+memcached_log: '/var/log/memcached.log'
+memcached_memory: "64"
+memcached_port: "112111"
+memcached_user: "nobody"
+memcached_ip: "172.20.20.10"
+memcached_connections: "1024"

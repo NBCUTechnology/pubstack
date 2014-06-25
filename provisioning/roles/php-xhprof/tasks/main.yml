@@ -19,11 +19,5 @@
   changed_when: "'Enabling xhprof' in a2ensite_result.stdout"
   notify: restart webserver
 
-- name: "Create xhprof tmp directory"
-  shell: mkdir /tmp/xhprof
-
-- name: "Fix user perm for xhprof tmp directory"
-  shell: chown www-data /tmp/xhprof/ -R;
-
-- name: "Fix group perm for xhprof tmp directory"
-  shell: chgrp www-data /tmp/xhprof/ -R;
+- name: "Setup xhprof tmp directory"
+  file: path=/tmp/xhprof owner=www-data group=www-data state=directory

@@ -4,8 +4,15 @@
   register: xhprof_result
   changed_when: "'already installed' not in xhprof_result.stdout"
   failed_when: "xhprof_result.stderr"
-  notify:
-    - restart webserver
-    - restart php-fpm
 
-# @TODO: More setup for xhprof
+- name: "copy default vhost"
+  copy: src=xhprof.conf dest=/etc/apache2/sites-available/xhprof.conf
+
+- name: "enable xhprof vhosts"
+  shell: a2ensite xhprof.conf
+  register: a2ensite_result
+  changed_when: "'Enabling xhprof' in a2ensite_result.stdout"
+  notify: restart webserver
+
+- name: "Setup xhprof tmp directory"
+  file: path=/tmp/xhprof owner=www-data group=www-data state=directory

@@ -3,11 +3,21 @@
 
 # Load local config:
 require "yaml"
-config_file = File.dirname(__FILE__) + "/config.yml";
+config_file = File.dirname(__FILE__) + "/config.yml"
 if not File.file?(config_file)
-  raise 'You must create a config.yml file before using Vagrant.'
+  raise Vagrant::Errors::VagrantError.new, "You must create a config.yml file before using Vagrant."
 end
 pubstack_config = YAML::load_file(config_file)
+
+# Validate sites' docroots:
+if pubstack_config["ansible"].include? "sites"
+  pubstack_config["ansible"]["sites"].each {|site|
+    documentroot = pubstack_config["vagrant"]["synced_folder"] + "/" + site["vhost"]["documentroot"]
+    if not File.directory?(File.expand_path(documentroot))
+      raise Vagrant::Errors::VagrantError.new, "The docroot " + documentroot + " does not exist."
+    end
+  }
+end
 
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"

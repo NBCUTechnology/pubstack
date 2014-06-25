@@ -16,7 +16,7 @@ cp default.config.yml config.yml
 # modify config.yml as needed:
 vim config.yml
 vagrant up
-echo "192.168.33.10 pubstack" >> /etc/hosts
+echo "172.20.20.10 pubstack" >> /etc/hosts
 ```
 
 Then, visit [http://pubstack/](http://pubstack/) in your browser.

@@ -17,6 +17,8 @@
   handlers:
   - name: "restart webserver"
     service: name=apache2 state=restarted
+  - name: restart mysql
+    service: name=mysqld state=restarted
   - name: "restart php-fpm"
     service: name=php5-fpm state=restarted
   - name: "restart memcached"

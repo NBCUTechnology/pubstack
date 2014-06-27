@@ -5,6 +5,8 @@
 
 - name: "copy my.cnf"
   copy: src=my.cnf dest=/etc/mysql/my.cnf
+  notify:
+  - restart mysql
 
 - name: start mysql service
   service: name=mysql state=started enabled=true

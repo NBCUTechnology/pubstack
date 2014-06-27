@@ -1,0 +1,16 @@
+---
+- name: "create site-php directory"
+  file: path=/var/www/site-php/{{ item.shortname }} state=directory
+  with_items: sites
+  when: sites is defined
+  sudo: yes
+
+# Note this is the same location as on Acquia, so it's automatically included
+- name: "add site local settings file"
+  template: >
+    src=settings.j2
+    dest=/var/www/site-php/{{ item.shortname }}/{{ item.shortname }}-settings.inc
+    owner=root group=root mode=644
+  with_items: sites
+  when: sites is defined
+  sudo: yes

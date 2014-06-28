@@ -13,6 +13,8 @@
 
 - name: "allow remote root login"
   mysql_user: name=root password= priv=*.*:ALL,GRANT host='%'
+  notify:
+  - restart mysql
 
 - name: create site database
   mysql_db: name={{ item.shortname }} state=present collation=utf8_general_ci

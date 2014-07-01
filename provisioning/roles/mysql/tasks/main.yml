@@ -5,12 +5,16 @@
 
 - name: "copy my.cnf"
   copy: src=my.cnf dest=/etc/mysql/my.cnf
+  notify:
+  - restart mysql
 
 - name: start mysql service
   service: name=mysql state=started enabled=true
 
 - name: "allow remote root login"
-  shell: mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '' WITH GRANT OPTION; FLUSH PRIVILEGES;"
+  mysql_user: name=root password= priv=*.*:ALL,GRANT host='%'
+  notify:
+  - restart mysql
 
 - name: create site database
   mysql_db: name={{ item.shortname }} state=present collation=utf8_general_ci

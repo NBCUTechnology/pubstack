@@ -10,9 +10,9 @@ end
 pubstack_config = YAML::load_file(config_file)
 
 # Validate sites' docroots:
-if pubstack_config["ansible"].include? "sites"
-  pubstack_config["ansible"]["sites"].each {|site|
-    documentroot = pubstack_config["vagrant"]["synced_folder"] + "/" + site["vhost"]["documentroot"]
+if pubstack_config.include? "sites"
+  pubstack_config["sites"].each {|site|
+    documentroot = pubstack_config["synced_folder"] + "/" + site["vhost"]["documentroot"]
     if not File.directory?(File.expand_path(documentroot))
       raise Vagrant::Errors::VagrantError.new, "The docroot " + documentroot + " does not exist."
     end
@@ -49,18 +49,18 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # the path on the host to the actual folder. The second argument is
     # the path on the guest to mount the folder. And the optional third
     # argument is a set of non-required options.
-    dev.vm.synced_folder pubstack_config["vagrant"]["synced_folder"], "/var/www/html"
+    dev.vm.synced_folder pubstack_config["synced_folder"], "/var/www/html"
 
     # Provider-specific configuration for VirtualBox:
     dev.vm.provider "virtualbox" do |vb|
       # Use VBoxManage to customize the VM. For example to change memory:
-      vb.customize ["modifyvm", :id, "--memory", pubstack_config["virtualbox"]["memory"]]
+      vb.customize ["modifyvm", :id, "--memory", pubstack_config["memory"]]
     end
 
     # Enable provisioning with Ansible.
-    dev.vm.provision "ansible" do |ansible|
-      ansible.playbook = "provisioning/pubstack.yml"
-      ansible.extra_vars = pubstack_config["ansible"]
+    dev.vm.provision 'ansible' do |ansible|
+      ansible.playbook = 'provisioning/pubstack.yml'
+      ansible.extra_vars = {:sites => pubstack_config['sites']}
     end
   end
 end

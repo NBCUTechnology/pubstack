@@ -1,27 +1,25 @@
 ---
-vagrant:
-  # Set to the local folder you want shared to the VM:
-  synced_folder: "~/Sites/www"
+# Set to the local folder you want shared to the VM. Note this directory must
+# exist on the your machine before running Vagrant.
+synced_folder: ~/Sites/www
 
-virtualbox:
-  # Adjust the Base Memory provisioned for the VM:
-  memory: "1024"
+# Adjust the Base Memory provisioned for the VM.
+memory: 1024
 
-ansible:
-  # Define a list of sites with the following keys:
-  #
-  # shortname       = site's shortname
-  # vhost           = assoc array with:
-  #   servername    = domain name
-  #   documentroot  = site docroot, relative to synced_folder
-  #
-  # Example:
-  #  sites:
-  #  - shortname: "site1"
-  #    vhost:
-  #      servername: "local.site1.com"
-  #      documentroot: "site1/docroot"
-  #  - shortname: "site2"
-  #    vhost:
-  #      servername: "local.site2.com"
-  #      documentroot: "site2/docroot"
+# Define a list of sites with the following keys:
+# - shortname: The site's shortname.
+# - vhost: An associative array, containing:
+#   - servername: The domain.
+#   - documentroot: Path to the site docroot, relative to synced_folder. Note
+#     this directory must exist on your machine before running Vagrant.
+#
+# Example:
+#  sites:
+#  - shortname: site1
+#    vhost:
+#      servername: local.site1.com
+#      documentroot: site1/docroot
+#  - shortname: site2
+#    vhost:
+#      servername: local.site2.com
+#      documentroot: site2/docroot

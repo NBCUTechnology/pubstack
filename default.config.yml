@@ -3,8 +3,9 @@
 # exist on the your machine before running Vagrant.
 synced_folder: ~/Sites/www
 
-# Adjust the Base Memory provisioned for the VM.
+# Adjust the Base Memory and CPUs provisioned for the VM.
 memory: 1024
+cpus: 2
 
 # Define a list of sites with the following keys:
 # - shortname: The site's shortname.

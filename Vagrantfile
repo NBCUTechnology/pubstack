@@ -53,8 +53,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     # Provider-specific configuration for VirtualBox:
     dev.vm.provider 'virtualbox' do |vb|
-      # Use VBoxManage to customize the VM. For example to change memory:
-      vb.customize ['modifyvm', :id, '--memory', pubstack_config['memory']]
+      vb.memory = pubstack_config['memory']
+      vb.cpus = pubstack_config['cpus']
     end
 
     # Enable provisioning with Ansible.

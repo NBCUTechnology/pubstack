@@ -12,7 +12,7 @@
   register: php_xdebug_so_path
 
 - name: xdebug ini
-  template: src=xdebug.ini.j2 dest=/etc/php5/conf.d/xdebug.ini
+  template: src=xdebug.ini.j2 dest=/etc/php5/fpm/conf.d/xdebug.ini
   notify:
     - restart webserver
     - restart php-fpm

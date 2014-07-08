@@ -31,6 +31,7 @@ Publisher's DevStack
     ```bash
     vagrant up
     ```
+    **NOTE:** after the initial `vagrant up`, you will want to run `vagrant provision` any time you edit your config file values.
 
 1. Modify your `/etc/hosts` file with an entry for pubstack and any additional domains defined in the sites array in your `config.yml` file, for example:
 

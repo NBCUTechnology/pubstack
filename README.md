@@ -8,7 +8,7 @@ Publisher's DevStack
 1. Install [Vagrant](http://www.vagrantup.com/).
 1. Install [VirtualBox](https://www.virtualbox.org/).
 1. Install Ansible:
-    - [Latest Releases Via Homebrew (Mac OSX)](http://docs.ansible.com/intro_installation.html#latest-releases-via-homebrew-mac-osx))
+    - [Latest Releases Via Homebrew (Mac OSX)](http://docs.ansible.com/intro_installation.html#latest-releases-via-homebrew-mac-osx)
     - [Latest Releases Via Apt (Ubuntu)](http://docs.ansible.com/intro_installation.html#latest-releases-via-apt-ubuntu)
     - [See all](http://docs.ansible.com/intro_installation.html#installing-the-control-machine)
 1. Add project files to your machine (for example in `~Sites/www`).

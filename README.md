@@ -32,10 +32,12 @@ Publisher's DevStack
     vagrant up
     ```
 
-1. Modify your `hosts` file with an entry for pubstack and any additional domains defined in the sites array in your `config.yml` file:
+1. Modify your `/etc/hosts` file with an entry for pubstack and any additional domains defined in the sites array in your `config.yml` file, for example:
 
-    ```bash
-    sudo echo "172.20.20.10 pubstack" >> /etc/hosts
+    ```ini
+    172.20.20.10 pubstack
+    172.20.20.10 local.site1.com
+    172.20.20.10 local.site2.com
     ```
 
 1. Visit [http://pubstack/](http://pubstack/) in your browser.

@@ -39,17 +39,31 @@
     <li><p>Install <a href="http://www.vagrantup.com/">Vagrant</a>.</p></li>
     <li><p>Install <a href="https://www.virtualbox.org/">VirtualBox</a>.</p></li>
     <li><p>Add project files to your machine (for example in <code>~Sites/www</code>).</p></li>
-    <li><p>Run the following:</p>
-
-        <p><pre><code>
-git clone git@github.com:NBCUOTS/pubstack.git
-cd pubstack
-cp default.config.yml config.yml
-# modify config.yml as needed (note each config has commented instructions):
-vim config.yml
-vagrant up
-echo &quot;172.20.20.10 pubstack&quot; &gt;&gt; /etc/hosts
-        </code></pre></p></li>
+    <li><p>Clone this repo:</p>
+      <p><pre><code>
+      git clone git@github.com:NBCUOTS/pubstack.git
+      cd pubstack
+      </code></pre></p>
+    </li>
+    <li><p>Create your config file from the default template and modify as needed (note each config has commented instructions):</p>
+      <p><pre><code>
+      cp default.config.yml config.yml
+      vim config.yml
+      </code></pre></p>
+    </li>
+    <li><p>Start-up your vagrant box:</p>
+      <p><pre><code>
+      vagrant up
+      </code></pre></p>
+      <p><strong>**NOTE:**</strong>after the initial `vagrant up`, you will want to run `vagrant provision` any time you edit your config file values.</p>
+    </li>
+    <li>Modify your `/etc/hosts` file with an entry for pubstack and any additional domains defined in the sites array in your `config.yml` file, for example:
+      <p><pre><code>
+      172.20.20.10 pubstack
+      172.20.20.10 local.site1.com
+      172.20.20.10 local.site2.com
+      </code></pre></p>
+    </li>
     <li><p>Visit <a href="http://pubstack/">http://pubstack/</a> in your browser.</p></li>
 </ol>
 

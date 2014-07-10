@@ -19,6 +19,13 @@ if pubstack_config.include? 'sites'
   }
 end
 
+# Set synced_folder_type to 'smb' only if Windows:
+synced_folder_type = 'nfs'
+require 'rbconfig'
+if (RbConfig::CONFIG['host_os'] =~ /mswin|msys|mingw|cygwin|bccwin|wince|emc/)
+  synced_folder_type = 'smb'
+end
+
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = '2'
 
@@ -49,7 +56,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # the path on the host to the actual folder. The second argument is
     # the path on the guest to mount the folder. And the optional third
     # argument is a set of non-required options.
-    dev.vm.synced_folder pubstack_config['synced_folder'], '/var/www/html'
+    dev.vm.synced_folder pubstack_config['synced_folder'], '/var/www/html',
+      type: synced_folder_type
 
     # Provider-specific configuration for VirtualBox:
     dev.vm.provider 'virtualbox' do |vb|

@@ -8,4 +8,11 @@
     - restart webserver
     - restart php-fpm
 
-# @TODO: Task(s), template, and vars for xdebug.ini
+- shell: locate -i xdebug.so
+  register: php_xdebug_so_path
+
+- name: xdebug ini
+  template: src=xdebug.ini.j2 dest=/etc/php5/fpm/conf.d/xdebug.ini
+  notify:
+    - restart webserver
+    - restart php-fpm

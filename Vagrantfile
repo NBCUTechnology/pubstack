@@ -43,7 +43,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define 'dev' do |dev|
     # Create a private network, which allows host-only access to the machine
     # using a specific IP.
-    dev.vm.network 'private_network', ip: '172.20.20.10'
+    dev.vm.network 'private_network', ip: '172.25.128.10'
 
     # Share an additional folder to the guest VM. The first argument is
     # the path on the host to the actual folder. The second argument is

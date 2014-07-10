@@ -51,9 +51,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # argument is a set of non-required options.
     dev.vm.synced_folder pubstack_config['synced_folder'], '/var/www/html',
       type: "rsync",
-      rsync__auto: "true",
       rsync__exclude: ".git/",
       id: "webroot"
+
+    if Vagrant.has_plugin?("vagrant-gatling-rsync")
+      config.gatling.latency = 2.5
+    end
 
     # Provider-specific configuration for VirtualBox:
     dev.vm.provider 'virtualbox' do |vb|

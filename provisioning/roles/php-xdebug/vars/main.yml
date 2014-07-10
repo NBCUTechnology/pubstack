@@ -1,7 +1,8 @@
 ---
-php_xdebug_remote_enable: "false"
-php_xdebug_remote_connect_back: "false"
-php_xdebug_remote_host: localhost
-php_xdebug_remote_port: "9000"
-php_xdebug_remote_log: /tmp/xdebug.log
-php_xdebug_idekey: PHPSTORM
+xdebug_remote_enable: On
+xdebug_remote_host: 172.20.20.10
+xdebug_remote_port: 9000
+xdebug_remote_handler: dbgp
+xdebug_remote_connect_back: 1
+xdebug_remote_autostart: On
+xdebug_idekey: PHPSTORM

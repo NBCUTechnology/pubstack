@@ -1,9 +1,8 @@
-[XDebug]
 zend_extension={{ php_xdebug_so_path.stdout }}
-xdebug.remote_enable={{ php_xdebug_remote_enable }}
-xdebug.remote_connect_back={{ php_xdebug_remote_connect_back }}
-xdebug.remote_host={{ php_xdebug_remote_host }}
-xdebug.remote_port={{ php_xdebug_remote_port }}
-xdebug.remote_handler=dbgp
-xdebug.remote_log={{ php_xdebug_remote_log }}
-xdebug.idekey="{{ php_xdebug_idekey }}"
+xdebug.remote_enable={{ xdebug_remote_enable }}
+xdebug.remote_host="{{ xdebug_remote_host }}"
+xdebug.remote_port={{ xdebug_remote_port }}
+xdebug.remote_handler={{ xdebug_remote_handler }}
+xdebug.remote_connect_back= {{ xdebug_remote_connect_back }}
+xdebug.remote_autostart={{ xdebug_remote_autostart }}
+xdebug.idekey="{{ xdebug_idekey }}"

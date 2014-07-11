@@ -8,10 +8,12 @@
     - restart webserver
     - restart php-fpm
 
-- shell: locate -i xdebug.so
+- name: "register xdebug.so location"
+  command: find /usr/lib/php5/ -name xdebug.so
+  changed_when: "'already installed' not in xdebug_result.stdout"
   register: php_xdebug_so_path
 
-- name: xdebug ini
+- name: "xdebug ini"
   template: src=xdebug.ini.j2 dest=/etc/php5/fpm/conf.d/xdebug.ini
   notify:
     - restart webserver

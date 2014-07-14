@@ -35,34 +35,47 @@
 
 <h3>
     <a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h3>
-<ol>
-    <li><p>Install <a href="http://www.vagrantup.com/">Vagrant</a>.</p></li>
-    <li><p>Install <a href="https://www.virtualbox.org/">VirtualBox</a>.</p></li>
-    <li><p>Add project files to your machine (for example in <code>~Sites/www</code>).</p></li>
-    <li><p>Clone this repo:</p>
-      <p><pre><code>
-      git clone git@github.com:NBCUOTS/pubstack.git
-      cd pubstack
-      </code></pre></p>
+<ol class="task-list">
+    <li>Install <a href="http://www.vagrantup.com/">Vagrant</a>.</li>
+    <li>Install <a href="https://www.virtualbox.org/">VirtualBox</a>.</li>
+    <li>Install Ansible:
+
+        <ul class="task-list">
+            <li><a href="http://docs.ansible.com/intro_installation.html#latest-releases-via-homebrew-mac-osx">Latest Releases Via Homebrew (Mac OSX)</a></li>
+            <li><a href="http://docs.ansible.com/intro_installation.html#latest-releases-via-apt-ubuntu">Latest Releases Via Apt (Ubuntu)</a></li>
+            <li><a href="http://docs.ansible.com/intro_installation.html#installing-the-control-machine">See all</a></li>
+        </ul>
     </li>
-    <li><p>Create your config file from the default template and modify as needed (note each config has commented instructions):</p>
-      <p><pre><code>
-      cp default.config.yml config.yml
-      vim config.yml
-      </code></pre></p>
+    <li>Add project files to your machine (for example in <code>~Sites/www</code>).</li>
+    <li>
+        <p>Clone this repo:</p>
+
+        <div class="highlight highlight-bash"><pre>git clone git@github.com:NBCUOTS/pubstack.git
+<span class="nb">cd </span>pubstack
+</pre></div>
     </li>
-    <li><p>Start-up your vagrant box:</p>
-      <p><pre><code>
-      vagrant up
-      </code></pre></p>
-      <p><strong>**NOTE:**</strong>after the initial `vagrant up`, you will want to run `vagrant provision` any time you edit your config file values.</p>
+    <li>
+        <p>Create your config file from the default template and modify as needed (note each config has commented instructions):</p>
+
+        <div class="highlight highlight-bash"><pre>cp default.config.yml config.yml
+vim config.yml
+</pre></div>
     </li>
-    <li>Modify your `/etc/hosts` file with an entry for pubstack and any additional domains defined in the sites array in your `config.yml` file, for example:
-      <p><pre><code>
-      172.20.20.10 pubstack
-      172.20.20.10 local.site1.com
-      172.20.20.10 local.site2.com
-      </code></pre></p>
+    <li>
+        <p>Start-up your vagrant box:</p>
+
+        <div class="highlight highlight-bash"><pre>vagrant up
+</pre></div>
+
+        <p><strong>NOTE:</strong> after the initial <code>vagrant up</code>, you will want to run <code>vagrant provision</code> any time you edit your config file values.</p>
+    </li>
+    <li>
+        <p>Modify your <code>/etc/hosts</code> file with an entry for pubstack and any additional domains defined in the sites array in your <code>config.yml</code> file, for example:</p>
+
+        <div class="highlight highlight-ini"><pre><span class="err">172.25.128.10</span> <span class="err">pubstack</span>
+<span class="err">172.25.128.10</span> <span class="err">local.site1.com</span>
+<span class="err">172.25.128.10</span> <span class="err">local.site2.com</span>
+</pre></div>
     </li>
     <li><p>Visit <a href="http://pubstack/">http://pubstack/</a> in your browser.</p></li>
 </ol>

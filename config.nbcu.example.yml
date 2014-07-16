@@ -1,0 +1,32 @@
+
+synced_folder: ~/Sites/nbcu
+
+memory: 2048
+cpus: 2
+
+sites:
+- subscription: nbcupublisher7
+  shortname: install
+  vhost:
+    servername: local.install.publisher7.com
+    documentroot: Publisher7/docroot
+- subscription: nbcupublisher7
+  shortname: update
+  vhost:
+    servername: local.update.publisher7.com
+    documentroot: Publisher7/docroot
+- subscription: nbcunbc
+  shortname: nbcunbc
+  vhost:
+    servername: local.nbc.com
+    documentroot: Publisher7_nbc/docroot
+- subscription: nbcutelemundo
+  shortname: nbcutelemundo
+  vhost:
+    servername: local.telemundo.com
+    documentroot: Publisher7_nbcutelemundo/docroot
+- subscription: nbcuuomerch
+  shortname: nbcuuomerch
+  vhost:
+    servername: local.nbcuuomerch.com
+    documentroot: Publisher7_nbcuuomerch/docroot

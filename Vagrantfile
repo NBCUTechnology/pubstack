@@ -19,6 +19,11 @@ if pubstack_config.include? 'sites'
   }
 end
 
+# Ensure Vagrant::Hostsupdater plugin is installed.
+unless Vagrant.has_plugin?('vagrant-hostsupdater')
+  raise Vagrant::Errors::VagrantError.new, 'The vagrant-hostsupdater plugin is not installed. Please run `vagrant plugin install vagrant-hostsupdater`.'
+end
+
 # Set synced_folder_type to 'smb' only if Windows:
 synced_folder_type = 'nfs'
 require 'rbconfig'
@@ -51,6 +56,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # Create a private network, which allows host-only access to the machine
     # using a specific IP.
     dev.vm.network 'private_network', ip: '172.25.128.10'
+
+    # Write host entries automagically with Vagrant::Hostsupdater.
+    config.hostsupdater.aliases = ['pubstack.dev', 'xhprof.pubstack.dev']
+    config.hostsupdater.aliases += pubstack_config['sites'].map {|site| site['vhost']['servername']}
 
     # Share an additional folder to the guest VM. The first argument is
     # the path on the host to the actual folder. The second argument is

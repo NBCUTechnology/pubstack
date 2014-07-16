@@ -11,3 +11,23 @@ $databases['default'] = array ('default' =>
     'prefix' => '',
   ),
 );
+
+
+// Configure Devel variables.
+$conf['devel_xhprof_url'] = 'http://xhprof.pubstack.dev';
+$conf['devel_xhprof_directory'] = '/usr/share/php/';
+$conf['devel_api_url'] = 'api.publisher7.com';
+
+// Configure Devel variables.
+$conf['devel_xhprof_url'] = 'http://xhprof.pubstack.dev';
+$conf['devel_xhprof_directory'] = '/usr/share/php/';
+$conf['devel_api_url'] = 'api.publisher7.com';
+
+// Set the program name for syslog.module.
+$conf['syslog_identity'] = '{{ item.shortname }}';
+
+// Set up memcache settings.
+$conf['memcache_key_prefix'] = '{{ item.shortname }}_';
+$conf['memcache_servers'] = array(
+   '172.25.128.10:11211' => 'default',
+);

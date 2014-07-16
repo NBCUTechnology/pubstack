@@ -1,0 +1,33 @@
+---
+# Share all NBCU related repositories.
+synced_folder: ~/Sites/nbcu
+
+# Adjust the Base Memory and CPUs provisioned for the VM.
+memory: 2048
+cpus: 2
+
+# Define a list of sites with the following keys:
+# - shortname: The site's shortname.
+# - vhost: An associative array, containing:
+#   - servername: The domain.
+#   - documentroot: Path to the site docroot, relative to synced_folder. Note
+#     this directory must exist on your machine before running Vagrant.
+#
+# Example:
+sites:
+- shortname: install
+  vhost:
+    servername: local.install.publisher7.com
+    documentroot: Publisher7/docroot
+- shortname: update
+  vhost:
+    servername: local.update.publisher7.com
+    documentroot: Publisher7/docroot
+- shortname: nbcunbc
+  vhost:
+    servername: local.nbc.com
+    documentroot: Publisher7_nbc/docroot
+- shortname: nbcutelemundo
+  vhost:
+    servername: local.telemundo.com
+    documentroot: Publisher7_nbcutelemundo/docroot

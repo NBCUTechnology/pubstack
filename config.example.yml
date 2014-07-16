@@ -1,4 +1,6 @@
 ---
+# Example config.yml only to better illustrate default.config.yml
+
 # Share all NBCU related repositories.
 synced_folder: ~/Sites/nbcu
 

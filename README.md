@@ -19,6 +19,12 @@ Publisher's DevStack
     cd pubstack
     ```
 
+1. Install Hostupdater:
+
+    ```bash
+    vagrant plugin install vagrant-hostsupdater
+    ```
+
 1. Create your config file from the default template and modify as needed (note each config has commented instructions):
 
     ```bash

@@ -58,7 +58,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     dev.vm.network 'private_network', ip: '172.25.128.10'
 
     # Write host entries automagically with Vagrant::Hostsupdater.
-    config.hostsupdater.aliases = pubstack_config['sites'].map {|site| site['vhost']['servername']}
+    config.hostsupdater.aliases = ['pubstack.dev', 'xhprof.pubstack.dev']
+    config.hostsupdater.aliases += pubstack_config['sites'].map {|site| site['vhost']['servername']}
 
     # Share an additional folder to the guest VM. The first argument is
     # the path on the host to the actual folder. The second argument is

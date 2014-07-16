@@ -9,7 +9,7 @@
 - name: "add site local settings file"
   template: >
     src=settings.j2
-    dest=/var/www/site-php/{{ item.shortname }}/{{ item.shortname }}-settings.inc
+    dest=/var/www/site-php/{{ item.subscription }}/{{ item.shortname }}-settings.inc
     owner=root group=root mode=644
   with_items: sites
   when: sites is defined

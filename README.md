@@ -38,10 +38,21 @@ Publisher's DevStack
     vagrant up
     ```
 
-1. Visit [http://pubstack/](http://pubstack/) in your browser.
+1. Visit [http://pubstack/](http://pubstack.dev/) in your browser.
 
 ## Authors
 - breathingrock
 - conortm
 - ericduran
 - scottrigby
+
+## Troubleshooting
+
+### VPN
+Cisco Anyconnect Mobility Client will not play nice with Vagrant, unless you run
+this script we've conveniently added:
+
+```bash
+./scripts/cisco.workaround.sh
+```
+You will be prompted for your password. Note you may need to run this twice.

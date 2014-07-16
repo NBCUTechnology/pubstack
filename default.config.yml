@@ -16,11 +16,18 @@ cpus: 2
 #
 # Example:
 #  sites:
-#  - shortname: site1
+#  - subscription: site1
+#    shortname: site1
 #    vhost:
 #      servername: local.site1.com
 #      documentroot: site1/docroot
-#  - shortname: site2
+#  - subscription: site2
+#    shortname: site2
 #    vhost:
 #      servername: local.site2.com
+#      documentroot: site2/docroot
+#  - subscription: site2
+#    shortname: site2_demo
+#    vhost:
+#      servername: local.demo.site2.com
 #      documentroot: site2/docroot

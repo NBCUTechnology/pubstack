@@ -18,18 +18,22 @@ cpus: 2
 # Example:
 sites:
 - shortname: install
+  subscription: nbcupublisher7
   vhost:
     servername: local.install.publisher7.com
     documentroot: Publisher7/docroot
 - shortname: update
+  subscription: nbcupublisher7
   vhost:
     servername: local.update.publisher7.com
     documentroot: Publisher7/docroot
 - shortname: nbcunbc
+  subscription: nbcunbc
   vhost:
     servername: local.nbc.com
     documentroot: Publisher7_nbc/docroot
 - shortname: nbcutelemundo
+  subscription: nbcutelemundo
   vhost:
     servername: local.telemundo.com
     documentroot: Publisher7_nbcutelemundo/docroot

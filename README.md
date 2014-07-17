@@ -32,7 +32,7 @@ Publisher's DevStack
     vim config.yml
     ```
 
-    **NOTE:** after the initial `vagrant up`, any time you edit your config file values you will want to run `vagrant reload`.
+    **NOTE:** after the initial `vagrant up`, any time you edit your config file values you will want to run `vagrant reload --provision`.
 
 1. Start-up your vagrant box:
 

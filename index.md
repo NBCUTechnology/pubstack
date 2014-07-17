@@ -24,6 +24,12 @@ Publisher's DevStack
     cd pubstack
     ```
 
+1. Install Hostupdater:
+
+    ```bash
+    vagrant plugin install vagrant-hostsupdater
+    ```
+
 1. Create your config file from the default template and modify as needed (note each config has commented instructions):
 
     ```bash
@@ -36,20 +42,23 @@ Publisher's DevStack
     ```bash
     vagrant up
     ```
-    **NOTE:** after the initial `vagrant up`, you will want to run `vagrant provision` any time you edit your config file values.
+    **NOTE:** after the initial `vagrant up`, you will want to run `vagrant reload` any time you edit your config file values.
 
-1. Modify your `/etc/hosts` file with an entry for pubstack and any additional domains defined in the sites array in your `config.yml` file, for example:
-
-    ```ini
-    172.25.128.10 pubstack
-    172.25.128.10 local.site1.com
-    172.25.128.10 local.site2.com
-    ```
-
-1. Visit [http://pubstack/](http://pubstack/) in your browser.
+1. Visit [http://pubstack.dev/](http://pubstack.dev/) in your browser.
 
 ## Authors
 - breathingrock
 - conortm
 - ericduran
 - scottrigby
+
+## Troubleshooting
+
+### VPN
+Cisco Anyconnect Mobility Client will not play nice with Vagrant, unless you run
+this script we've conveniently added:
+
+```bash
+./scripts/cisco.workaround.sh
+```
+You will be prompted for your password. Note you may need to run this twice.

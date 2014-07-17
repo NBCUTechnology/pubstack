@@ -38,7 +38,7 @@ Publisher's DevStack
     vagrant up
     ```
 
-1. Visit [http://pubstack/](http://pubstack.dev/) in your browser.
+1. Visit [http://pubstack.dev/](http://pubstack.dev/) in your browser.
 
 ## Authors
 - breathingrock

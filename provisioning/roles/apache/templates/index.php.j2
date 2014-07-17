@@ -5,21 +5,46 @@
   <title>pubstack</title>
 </head>
 <body>
+
   <h1>pubstack</h1>
   <p>Publisher's DevStack</p>
+
   <h2>PHP info</h2>
   <ul>
     <li><a href="info.php">info.php</a></li>
   </ul>
+
   <h2>Sites</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Shortname</th>
+        <th>URL</th>
+        <th>MySQL connection</th>
+      </tr>
+    </thead>
+    <tbody>
+    <?php
+      $items = array();
+      foreach(array({{ sites_php_string }}) as $shortname => $servername) {
+          $items[] = '<tr>';
+          $items[] = '<td>' . $shortname . '</td>';
+          $items[] = '<td><a href="http://' . $servername . '">http://' . $servername . '</a></td>';
+          $items[] = "<td>Server: 172.25.128.10<br />Username: {$shortname}<br />Password: ''</td>";
+          $items[] = '</tr>';
+      }
+      print implode($items, "\n");
+    ?>
+    </tbody>
+  </table>
+
+  <h2>Help</h2>
   <ul>
-  <?php
-    $items = array();
-    foreach(array({{ sites_php_string }}) as $shortname => $servername) {
-      $items[] = '<li><a href="http://' . $servername . '">' . $shortname . '</a></li>';
-    }
-    print implode($items, "\n");
-  ?>
+    <li><a href="http://nbcuots.github.io/pubstack/">Main page</a></li>
+    <li><a href="https://github.com/NBCUOTS/pubstack/wiki">Documentation</a></li>
+    <li><a href="https://github.com/NBCUOTS/pubstack/issues">Issue queue</a></li>
+    <li>Or find us on <a href="http://irccloud.com/">IRC</a> or <a href="http://nbcuots.slack.com/">Slack</a>, and we’ll help you sort it out.</li>
   </ul>
+
 </body>
 </html>

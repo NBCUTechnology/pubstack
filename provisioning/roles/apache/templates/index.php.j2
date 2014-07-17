@@ -24,17 +24,13 @@
       </tr>
     </thead>
     <tbody>
-    <?php
-      $items = array();
-      foreach(array({{ sites_php_string }}) as $shortname => $servername) {
-          $items[] = '<tr>';
-          $items[] = '<td>' . $shortname . '</td>';
-          $items[] = '<td><a href="http://' . $servername . '">http://' . $servername . '</a></td>';
-          $items[] = "<td>Server: 172.25.128.10<br />Username: {$shortname}<br />Password: ''</td>";
-          $items[] = '</tr>';
-      }
-      print implode($items, "\n");
-    ?>
+    {% for site in sites %}
+  <tr>
+        <td>{{ site.shortname }}</td>
+        <td><a href="http://{{ site.vhost.servername }}">http://{{ site.vhost.servername }}</a></td>
+        <td>Server: 172.25.128.10<br />Database: {{ site.shortname }}<br />Username: {{ site.shortname }}<br />Password: ''</td>
+      </tr>
+    {% endfor %}
     </tbody>
   </table>
 

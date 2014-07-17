@@ -31,10 +31,6 @@ if (RbConfig::CONFIG['host_os'] =~ /mswin|msys|mingw|cygwin|bccwin|wince|emc/)
   synced_folder_type = 'smb'
 end
 
-
-# Build a php string for use in our index php template.
-sites_php_string = pubstack_config['sites'].map {|site| site['shortname'].inspect + ' => ' + site['vhost']['servername'].inspect}.join(', ')
-
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = '2'
 
@@ -81,7 +77,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # Enable provisioning with Ansible.
     dev.vm.provision 'ansible' do |ansible|
       ansible.playbook = 'provisioning/pubstack.yml'
-      ansible.extra_vars = {:sites => pubstack_config['sites'], :sites_php_string => sites_php_string}
+      ansible.extra_vars = {:sites => pubstack_config['sites']}
     end
   end
 end

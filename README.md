@@ -48,13 +48,22 @@ Publisher's DevStack
 - ericduran
 - scottrigby
 
+## Setting up your IDE for debugging
+1. In PhpStorm, go to `PHP` > `Debug` > `Xdebug`
+1. Make sure `Debug port` is set to `9000`
+1. Make sure `can accept external connections` is checked
+1. Then in your workspace, click the telephone icon `Start Listen for PHP Debug Connections`
+
 ## Troubleshooting
 
 ### VPN
-Cisco Anyconnect Mobility Client will not play nice with Vagrant, unless you run
-this script we've conveniently added:
 
-```bash
-./scripts/cisco.workaround.sh
-```
-You will be prompted for your password. Note you may need to run this twice.
+- Cisco Issue
+    When enabled, the Cisco Anyconnect VPN client blocks out all IP to IP communication.
+    The fix is to remove this one line from Mac's IP Firewall, by running this script:
+
+    ```sh
+    ./scripts/cisco.workaround.sh
+    ```
+
+    You will be prompted for your password. Note you may need to run this twice.

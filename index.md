@@ -52,6 +52,16 @@ Publisher's DevStack
 - ericduran
 - scottrigby
 
+## Setting up your IDE for debugging
+1. In PhpStorm type `command + comma`. This will open up preference settings.
+1. Search for **xdebug** and you should show something similar to the following:
+
+    ![xdebug config settings](images/xdebug-config.png)
+
+     - Make sure `Debug port` is set to `9000`
+     - Make sure `can accept external connections` is checked
+1. Then in your workspace, click the telephone icon `Start Listen for PHP Debug Connections`
+
 ## Troubleshooting
 
 ### VPN

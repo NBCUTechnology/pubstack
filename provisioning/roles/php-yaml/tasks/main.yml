@@ -1,0 +1,9 @@
+---
+- name: Install PECL yaml
+  command: pecl install yaml
+  register: yaml_result
+  changed_when: "'already installed' not in yaml_result.stdout"
+  failed_when: "yaml_result.stderr or ('ERROR' in yaml_result.stdout)"
+  notify:
+    - restart webserver
+    - restart php-fpm

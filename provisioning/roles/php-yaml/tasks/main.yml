@@ -1,9 +1,26 @@
 ---
+- name: Install PECL yaml dependencies
+  apt: name=libyaml-dev state=present update_cache=yes
+  notify:
+    - restart webserver
+
 - name: Install PECL yaml
   command: pecl install yaml
   register: yaml_result
   changed_when: "'already installed' not in yaml_result.stdout"
   failed_when: "yaml_result.stderr or ('ERROR' in yaml_result.stdout)"
+  notify:
+    - restart webserver
+    - restart php-fpm
+
+- name: Create PECL yaml .ini file
+  template: src=yaml.ini.j2 dest=/etc/php5/mods-available/yaml.ini owner=root group=root mode=0644
+  notify:
+    - restart webserver
+    - restart php-fpm
+
+- name: Enable PECL yaml
+  shell: php5enmod yaml
   notify:
     - restart webserver
     - restart php-fpm

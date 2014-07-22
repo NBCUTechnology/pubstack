@@ -1,0 +1,14 @@
+---
+- name: Install nfs packages
+  apt: name={{ item }} state=present
+  with_items:
+    - cachefilesd
+  notify:
+    - restart webserver
+
+- name: Ensure cachefilesd exists
+  template: src=cachefilesd.j2 dest=/etc/default/cachefilesd owner=root group=root
+
+- name: Ensure cachefilesd service is started
+  service: name=cachefilesd state=started
+  ignore_errors: yes

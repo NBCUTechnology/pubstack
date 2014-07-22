@@ -2,3 +2,5 @@
 .vagrant
 config.yml
 .idea
+provisioning/user.playbook.yml
+provisioning/roles/user-*

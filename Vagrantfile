@@ -75,8 +75,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
 
     # Enable provisioning with Ansible.
+    user_playbook = File.dirname(__FILE__) + '/provisioning/user.playbook.yml'
     dev.vm.provision 'ansible' do |ansible|
-      ansible.playbook = 'provisioning/pubstack.yml'
+      ansible.playbook = File.file?(user_playbook) ? user_playbook : 'provisioning/pubstack.yml'
       ansible.extra_vars = {:sites => pubstack_config['sites']}
     end
   end

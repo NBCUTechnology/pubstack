@@ -42,12 +42,6 @@ Publisher's DevStack
 
 1. Visit [http://pubstack.dev/](http://pubstack.dev/) in your browser.
 
-## Authors
-- breathingrock
-- conortm
-- ericduran
-- scottrigby
-
 ## Setting up your IDE for debugging
 1. In PhpStorm type `command + comma`. This will open up preference settings.
 1. Search for **xdebug** and you should show something similar to the following:
@@ -60,6 +54,10 @@ Publisher's DevStack
 
 ## Troubleshooting
 
+### Operating Systems
+- We support Mac users running Mavericks
+- Linux users (we trust you to know what you're doing!)
+
 ### VPN
 
 - Cisco Issue
@@ -71,3 +69,9 @@ Publisher's DevStack
     ```
 
     You will be prompted for your password. Note you may need to run this twice.
+
+## Authors
+- breathingrock
+- conortm
+- ericduran
+- scottrigby

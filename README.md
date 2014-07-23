@@ -91,7 +91,9 @@ Publisher's DevStack
     You will be prompted for your password. Note you may need to run this twice.
 
 ## Authors
-- breathingrock
 - conortm
 - ericduran
 - scottrigby
+
+###contributors
+ https://github.com/NBCUOTS/pubstack/graphs/contributors

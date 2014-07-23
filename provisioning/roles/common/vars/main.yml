@@ -8,3 +8,5 @@ common_apt_packages:
   - python-pycurl
   - python-software-properties
   - vim
+  - imagemagick
+  - libmagickwand-dev

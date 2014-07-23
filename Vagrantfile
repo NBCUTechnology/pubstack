@@ -66,7 +66,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # the path on the guest to mount the folder. And the optional third
     # argument is a set of non-required options.
     dev.vm.synced_folder pubstack_config['synced_folder'], '/var/www/html',
-      type: synced_folder_type
+      type: synced_folder_type,
+      mount_options: ['rw', 'vers=3', 'tcp', 'fsc']
 
     # Provider-specific configuration for VirtualBox:
     dev.vm.provider 'virtualbox' do |vb|

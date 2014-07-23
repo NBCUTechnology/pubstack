@@ -77,6 +77,7 @@ Publisher's DevStack
 ### Operating Systems
 - We support Mac users running Mavericks
 - Linux users (we trust you to know what you're doing!)
+- Windows (untested and currently unsupported, but feedback welcome)
 
 ### VPN
 

@@ -91,9 +91,10 @@ Publisher's DevStack
     You will be prompted for your password. Note you may need to run this twice.
 
 ## Authors
-- conortm
-- ericduran
-- scottrigby
+- [conortm](https://github.com/conortm)
+- [ericduran](https://github.com/ericduran)
+- [scottrigby](https://github.com/scottrigby)
 
 ###contributors
- https://github.com/NBCUOTS/pubstack/graphs/contributors
+ - [rebmullin](https://github.com/rebmullin)
+ - https://github.com/NBCUOTS/pubstack/graphs/contributors

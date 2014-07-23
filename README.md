@@ -49,14 +49,34 @@ Publisher's DevStack
 - scottrigby
 
 ## Setting up your IDE for debugging
+
 1. In PhpStorm type `command + comma`. This will open up preference settings.
 1. Search for **xdebug** and you should show something similar to the following:
 
     ![xdebug config settings](images/xdebug-config.png)
-
-     - Make sure `Debug port` is set to `9000`
-     - Make sure `can accept external connections` is checked
+    - Make sure `Debug port` is set to `9000`
+    - Make sure `can accept external connections` is checked
 1. Then in your workspace, click the telephone icon `Start Listen for PHP Debug Connections`
+
+## Customizing
+
+1. Power users can add their own playbook(s):
+    - An optional, main user playbook will be loaded if it exists: `provisioning/user.playbook.yml`
+    - This playbook can include additional playbooks, including the main playbook, before or after your user-specific roles:
+
+        ```yaml
+        ---
+        - include: webserver.yml
+        ```
+
+2. You can also add custom roles:
+    - User-specific roles should follow this naming convention:
+
+        ```bash
+        provisioning/roles/user-ROLE-NAME
+        ```
+
+**Note:** Both your user playbook, and user-specific roles will be gitignored.
 
 ## Troubleshooting
 

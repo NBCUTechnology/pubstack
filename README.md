@@ -90,7 +90,7 @@ Publisher's DevStack
 
     You will be prompted for your password. Note you may need to run this twice.
 
-## Authors
+## Maintainers
 - [conortm](https://github.com/conortm)
 - [ericduran](https://github.com/ericduran)
 - [scottrigby](https://github.com/scottrigby)

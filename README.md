@@ -15,7 +15,7 @@ Publisher's DevStack
 1. Clone this repo:
 
     ```bash
-    git clone --branch 1.0.0 git@github.com:NBCUOTS/pubstack.git
+    git clone --branch master git@github.com:NBCUOTS/pubstack.git
     cd pubstack
     ```
 

@@ -74,6 +74,14 @@ Publisher's DevStack
 - Linux users (we trust you to know what you're doing!)
 - Windows (untested and currently unsupported, but feedback welcome)
 
+### Common Errors
+- ```PDOException: SQLSTATE[42S02]: Base table or view not found```
+ : This means your Database is empty. Pubstack only creates the database for you it does not populate it.
+
+- ```Unable to connect to :127.0.0.1:INCORRECT_DATABASE_NAME```
+ : Please make sure you do not have a ```settings.local.php``` in your site folder. If you do please remove your database credentials in that file. Pubstack sets up its own database credentials and loads those.
+
+
 ### VPN
 
 - Cisco Issue

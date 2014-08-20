@@ -11,12 +11,12 @@ Publisher's DevStack
     - [Latest Releases Via Homebrew (Mac OSX)](http://docs.ansible.com/intro_installation.html#latest-releases-via-homebrew-mac-osx)
     - [Latest Releases Via Apt (Ubuntu)](http://docs.ansible.com/intro_installation.html#latest-releases-via-apt-ubuntu)
     - [See all](http://docs.ansible.com/intro_installation.html#installing-the-control-machine)
-1. Add project files to your machine (for example in `~Sites/www`).
+1. Make sure all the git repositories for the projects you want to work on are already clone locally. (for example in `~/Sites/nbcu/Publisher7`).
 1. Clone this repo:
 
     ```bash
-    git clone --branch master git@github.com:NBCUOTS/pubstack.git
-    cd pubstack
+    git clone --branch master git@github.com:NBCUOTS/pubstack.git ~/pubstack
+    cd ~/pubstack
     ```
 
 1. Install Hostupdater:

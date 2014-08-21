@@ -26,14 +26,14 @@ Publisher's DevStack
     ```bash
     vagrant plugin install vagrant-hostsupdater
     ```
-    **NOTE:** if Bundler reports an error during this step, you may need to run `sudo gem install nokogiri -v '1.6.3.1'` first.
+    **Note**: If Bundler reports an error during this step, try running `sudo gem install nokogiri -v '1.6.3.1'` first.
 
 1. Create your config file from the default template and modify as needed (note each config has commented instructions):
     ```bash
     cp config.nbcu.example.yml config.yml
     vim config.yml
     ```
-    **NOTE:** after the initial `vagrant up`, any time you edit your config file values you will want to run `vagrant reload --provision`.
+    **Note**: After the initial `vagrant up`, any time you edit your config file values you will want to run `vagrant reload --provision`.
 
 1. Start-up your vagrant box:
     ```bash
@@ -64,7 +64,7 @@ Publisher's DevStack
         provisioning/roles/user-ROLE-NAME
         ```
 
-**Note:** Both your user playbook, and user-specific roles will be gitignored.
+**Note**: Both your user playbook, and user-specific roles will be gitignored.
 
 ## Troubleshooting
 

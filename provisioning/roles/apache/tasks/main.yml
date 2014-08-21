@@ -58,3 +58,10 @@
     name=apache2
     state=started
     enabled=yes
+
+- name: Add hosts entry for each site.
+  lineinfile:
+    dest=/etc/hosts
+    line="127.0.0.1  {{ item.vhost.servername }}"
+    insertafter=EOF
+  with_items: sites

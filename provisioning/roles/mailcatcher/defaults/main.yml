@@ -1,0 +1,7 @@
+---
+# defaults file for role-mailcatcher
+mailcatcher_ip: 172.25.128.10
+mailcatcher_smtp_ip: 172.25.128.10
+mailcatcher_smtp_port: 1025
+mailcatcher_http_ip: 172.25.128.10
+mailcatcher_http_port: 1080

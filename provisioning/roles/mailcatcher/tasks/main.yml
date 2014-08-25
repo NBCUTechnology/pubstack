@@ -27,6 +27,10 @@
 - name: Start mailcatcher properly with the start script
   command: /etc/init.d/mailcatcher
 
+- name: Reset PHP's sendmail handler
+  ini_file: dest=/etc/php5/fpm/php.ini section="mail function" option=sendmail_path value="/usr/bin/env catchmail"
+  notify: restart webserver
+
 - name: Enable Required Apache modules for mail subdomain
   shell: a2enmod proxy proxy_http
   register: a2enmod_result

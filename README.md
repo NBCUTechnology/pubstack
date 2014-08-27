@@ -26,7 +26,6 @@ Publisher's DevStack
     ```bash
     vagrant plugin install vagrant-hostsupdater
     ```
-    **Note**: If Bundler reports an error during this step, try running `sudo gem install nokogiri -v '1.6.3.1'` first.
 
 1. Create your config file from the default template and modify as needed (note each config has commented instructions):
     ```bash

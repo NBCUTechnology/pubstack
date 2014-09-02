@@ -18,3 +18,9 @@
   notify:
     - restart webserver
     - restart php-fpm
+
+- name: "xdebug cli"
+  template: src=xdebug_cli.ini.j2 dest=/etc/php5/cli/conf.d/xdebug.ini
+  notify:
+    - restart webserver
+    - restart php-fpm

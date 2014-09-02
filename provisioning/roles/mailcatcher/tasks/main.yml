@@ -29,7 +29,9 @@
 
 - name: Reset PHP's sendmail handler
   ini_file: dest=/etc/php5/fpm/php.ini section="mail function" option=sendmail_path value="/usr/bin/env catchmail"
-  notify: restart webserver
+  notify:
+    - restart webserver
+    - restart php-fpm
 
 - name: Enable Required Apache modules for mail subdomain
   shell: a2enmod proxy proxy_http

@@ -8,23 +8,23 @@
       - ruby-dev
       - rubygems
 
-- name: Install Mailcatcher dependencies
+- name: Install dependencies
   command: gem install mime-types -v 1.25.1
 
 - name: Install Mailcatcher
   command: gem install mailcatcher --no-rdoc --no-ri
 
-- name: Create startup script for mailcatcher
-  template: src=mailcatcher.j2 dest=/etc/init.d/mailcatcher mode=0755
+- name: Create startup script
+  copy: src=mailcatcher dest=/etc/init.d/mailcatcher mode=0755
 
-- name: Mailcatcher will start upon boot
+- name: Set Mailcatcher to start on boot
   command: update-rc.d mailcatcher defaults
 
 - name: Make sure Mailcatcher is not running
   command: pkill mailcatcher
   ignore_errors: yes
 
-- name: Start mailcatcher properly with the start script
+- name: Start Mailcatcher properly with the start script
   command: /etc/init.d/mailcatcher
 
 - name: Reset PHP's sendmail handler
@@ -33,7 +33,7 @@
     - restart webserver
     - restart php-fpm
 
-- name: Enable Required Apache modules for mail subdomain
+- name: Enable required Apache modules for mail subdomain
   shell: a2enmod proxy proxy_http
   register: a2enmod_result
   changed_when: "'already enabled' not in a2enmod_result.stdout"
@@ -41,7 +41,7 @@
 - name: Copy vhost settings
   copy: src=mailcatcher.conf dest=/etc/apache2/sites-available/mailcatcher.conf
 
-- name: Enable mailcatcher vhost
+- name: Enable Mailcatcher vhost
   shell: a2ensite mailcatcher.conf
   register: a2ensite_result
   changed_when: "'Enabling mailcatcher' in a2ensite_result.stdout"

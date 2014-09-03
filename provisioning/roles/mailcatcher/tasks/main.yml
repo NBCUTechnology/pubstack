@@ -9,10 +9,10 @@
       - rubygems
 
 - name: Install dependencies
-  command: gem install mime-types -v 1.25.1
+  gem: name=mime-types version=1.25.1 state=present
 
 - name: Install Mailcatcher
-  command: gem install mailcatcher --no-rdoc --no-ri
+  gem: name=mailcatcher state=latest user_install=no
 
 - name: Create startup script
   copy: src=mailcatcher dest=/etc/init.d/mailcatcher mode=0755

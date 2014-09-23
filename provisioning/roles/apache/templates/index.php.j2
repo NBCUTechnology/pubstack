@@ -25,7 +25,7 @@
     </thead>
     <tbody>
     {% for site in sites %}
-  <tr>
+      <tr>
         <td>{{ site.shortname }}</td>
         <td><a href="http://{{ site.vhost.servername }}">http://{{ site.vhost.servername }}</a></td>
         <td>{{ site.shortname }}:@172.25.128.10/{{ site.shortname }}</td>
@@ -37,6 +37,7 @@
   <h2>Tools</h2>
   <ul>
     <!-- tools -->
+    <li><a href="http://mail.pubstack.dev/">MailCatcher</a></li>
   </ul>
 
   <h2>Help</h2>

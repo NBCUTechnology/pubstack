@@ -9,7 +9,7 @@
       - rubygems
 
 - name: Install dependencies
-  gem: name=mime-types version=1.25.1 state=present
+  gem: name=mime-types version=1.25.1 state=present user_install=no
 
 - name: Install Mailcatcher
   gem: name=mailcatcher state=latest user_install=no

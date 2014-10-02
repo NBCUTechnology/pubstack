@@ -1,14 +1,8 @@
 Splunk
 ======
 
-## Installation
+## License
 
-1. Go to splunk.com, sign up and verify your account (by clicking on the link in your email).
+By running Pubstack, you automatically accept the license of Splunk.
 
-1. Download splunk debian file for Linux 2.6+ (64-bit) from the [Downloads](http://www.splunk.com/download) page.
-
-1. Copy that file over to pubstack/provisioning/roles/splunk/files.
-
-1. Reprovision your vagrant box by running `vagrant reload --provision`.
-
-1. Open [splunk.pubstack.dev](http://splunk.pubstack.dev) in your browser.
+For more details about the Splunk license, go [here](http://www.splunk.com/view/SP-CAAAAFA)

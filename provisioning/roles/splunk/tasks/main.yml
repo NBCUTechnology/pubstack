@@ -23,4 +23,13 @@
   notify: restart webserver
 
 - name: "Adding Splunk to Pubstack Tools"
-  replace: dest=/var/www/pubstack/index.php regexp='(<!-- tools -->)' replace='<li><a href="http://splunk.pubstack.dev">Splunk</a></li><!-- tools -->'
+  replace: dest=/var/www/pubstack/index.php regexp='(<!-- tools -->)' replace='<li><a href="http://splunk.pubstack.dev">Splunk</a> (admin/changeme)</li><!-- tools -->'
+
+- name: "Flush notify handlers"
+  meta: flush_handlers
+
+- name: "Monitor Syslog"
+  command: /opt/splunk/bin/splunk add monitor /var/log/syslog -auth admin:changeme
+
+- name: "Monitor Apache error log"
+  command: /opt/splunk/bin/splunk add monitor /var/log/apache2/error.log -auth admin:changeme

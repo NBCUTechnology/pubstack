@@ -30,6 +30,8 @@
 
 - name: "Monitor Syslog"
   command: /opt/splunk/bin/splunk add monitor /var/log/syslog -auth admin:changeme
+  ignore_errors: yes
 
 - name: "Monitor Apache error log"
   command: /opt/splunk/bin/splunk add monitor /var/log/apache2/error.log -auth admin:changeme
+  ignore_errors: yes

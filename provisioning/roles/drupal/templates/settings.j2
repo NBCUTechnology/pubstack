@@ -27,6 +27,7 @@ $conf['devel_api_url'] = 'api.publisher7.com';
 
 // Set the program name for syslog.module.
 $conf['syslog_identity'] = '{{ item.shortname }}';
+$conf['syslog_format'] = 'base_url=!base_url timestamp=!timestamp type=!type ip=!ip request_uri=!request_uri referer=!referer uid=!uid link=!link message=!message';
 
 // Set up memcache settings.
 $conf['memcache_key_prefix'] = '{{ item.shortname }}_';

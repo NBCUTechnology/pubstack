@@ -1,0 +1,6 @@
+---
+- name: "start splunk accept license"
+  command: /opt/splunk/bin/splunk start --accept-license
+
+- name: "start splunk on boot"
+  command: /opt/splunk/bin/splunk enable boot-start

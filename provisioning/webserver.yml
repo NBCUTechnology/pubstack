@@ -15,6 +15,7 @@
   - memcached
   - nfs
   - drupal
+  - splunk
   handlers:
   - name: "restart webserver"
     service: name=apache2 state=restarted

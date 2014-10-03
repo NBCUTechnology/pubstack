@@ -1,0 +1,37 @@
+---
+- name: "Downloading Splunk... please be patient, its a 78MB file"
+  get_url: dest=/var/cache/apt/archives/splunk-6.1.3-220630-linux-2.6-amd64.deb mode=0644 url=http://www.splunk.com/page/download_track?file=6.1.3/splunk/linux/splunk-6.1.3-220630-linux-2.6-amd64.deb&ac=&wget=true&name=wget&platform=Linux&architecture=x86_64&version=6.1.3&product=splunk&typed=release
+
+- name: "Install Splunk"
+  apt: deb=/var/cache/apt/archives/splunk-6.1.3-220630-linux-2.6-amd64.deb state=installed
+  notify:
+  - start splunk accept license
+  - start splunk on boot
+
+- name: "Enable required Apache modules for rev proxy"
+  shell: a2enmod proxy proxy_http
+  register: a2enmod_result
+  changed_when: "'already enabled' not in a2enmod_result.stdout"
+
+- name: "Copy vhost settings"
+  copy: src=splunk.conf dest=/etc/apache2/sites-available/splunk.conf
+
+- name: "Enable Splunk vhost"
+  shell: a2ensite splunk.conf
+  register: a2ensite_result
+  changed_when: "'Enabling site splunk' in a2ensite_result.stdout"
+  notify: restart webserver
+
+- name: "Adding Splunk to Pubstack Tools"
+  replace: dest=/var/www/pubstack/index.php regexp='(<!-- tools -->)' replace='<li><a href="http://splunk.pubstack.dev">Splunk</a> (admin/changeme)</li><!-- tools -->'
+
+- name: "Flush notify handlers"
+  meta: flush_handlers
+
+- name: "Monitor Syslog"
+  command: /opt/splunk/bin/splunk add monitor /var/log/syslog -auth admin:changeme
+  ignore_errors: yes
+
+- name: "Monitor Apache error log"
+  command: /opt/splunk/bin/splunk add monitor /var/log/apache2/error.log -auth admin:changeme
+  ignore_errors: yes

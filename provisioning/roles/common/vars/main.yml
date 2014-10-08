@@ -7,7 +7,7 @@ common_packages:
   - python
   - libcurl
   - pycurl
-  - software-properties-common
+#  - software-properties-common
   - vim
   - ImageMagick
   - ImageMagick-devel

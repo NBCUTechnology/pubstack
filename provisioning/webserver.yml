@@ -4,18 +4,18 @@
   roles:
   - common
   - apache
-  - mysql
-  - php
-  - php-mysql
-  - php-pear
-  - php-xdebug
-  - php-xhprof
-  - composer
-  - drush
-  - memcached
-  - nfs
-  - drupal
-  - splunk
+#  - mysql
+#  - php
+#  - php-mysql
+#  - php-pear
+#  - php-xdebug
+#  - php-xhprof
+#  - composer
+#  - drush
+#  - memcached
+#  - nfs
+#  - drupal
+#  - splunk
   handlers:
   - name: "restart webserver"
     service: name=apache2 state=restarted

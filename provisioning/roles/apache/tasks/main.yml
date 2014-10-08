@@ -6,12 +6,12 @@
   yum: >
     name={{ item }}
     state=installed
-    enablerepo={{ apache_enablerepo }}
+    enablerepo=""
   with_items: apache_packages
 
 - name: Configure Apache (RedHat).
   lineinfile: >
-    dest=/etc/httpd/conf/httpd.conf
+    dest={{ apache_server_root }}/conf/{{ apache_daemon }}.conf
     regexp="{{ item.regexp }}"
     line="{{ item.line }}"
     state=present
@@ -40,10 +40,14 @@
 - name: "copy index.php"
   template: src=index.php.j2 dest=/var/www/pubstack/index.php
 
-- name: "copy Apache2 conf"
-  copy: src={{ item }} dest={{ apache_conf_path }}
-  with_fileglob:
-    - "conf-available/*"
+# We can not do this here as CentOS is not as forgiving as Ubuntu.
+# TODO Fix "Invalid command 'MaxProcessCount', perhaps misspelled or defined by
+#   a module not included in the server configuration"
+# TODO Fix "bad user name nbcuqa3"
+#- name: "copy Apache2 conf"
+#  copy: src={{ item }} dest={{ apache_conf_path }}
+#  with_fileglob:
+#    - "conf-available/*"
 
 - name: "start apache"
   service: >

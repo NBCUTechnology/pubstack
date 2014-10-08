@@ -6,14 +6,9 @@ cpus: 2
 
 sites:
 - subscription: nbcupublisher7
-  shortname: install
+  shortname: nbcupublisher7 
   vhost:
-    servername: local.install.publisher7.com
-    documentroot: Publisher7/docroot
-- subscription: nbcupublisher7
-  shortname: update
-  vhost:
-    servername: local.update.publisher7.com
+    servername: local.publisher7.com
     documentroot: Publisher7/docroot
 - subscription: nbcunbc
   shortname: nbcunbc

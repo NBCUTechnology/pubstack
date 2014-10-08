@@ -70,6 +70,7 @@ Publisher's Local Development Stack
 ### Operating Systems
 - We support Mac users running Mavericks
 - Linux users (we trust you to know what you're doing!)
+-- https://github.com/NBCUOTS/pubstack/wiki/Installing-Pubstack-on-Ubuntu-14.04
 - Windows (untested and currently unsupported, but feedback welcome)
 
 ### Common Errors

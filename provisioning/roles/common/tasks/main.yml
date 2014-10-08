@@ -1,16 +1,7 @@
 ---
-- name: ensure Apache PPA is enabled
-  apt_repository: repo='ppa:ondrej/apache2'
-
-- name: ensure PHP PPA is enabled
-  apt_repository: repo='ppa:ondrej/php5'
-
-- name: "update apt cache"
-  apt: update_cache=yes cache_valid_time=3600
-
 - name: "install common packages"
-  apt: pkg={{ item }} state=present
-  with_items: common_apt_packages
+  yum: pkg={{ item }} state=present
+  with_items: common_packages
 
 - name: Copy host.conf so curl can resolve host names
   copy: src=host.conf dest=/etc/host.conf

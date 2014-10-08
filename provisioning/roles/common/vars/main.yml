@@ -1,12 +1,13 @@
 ---
-common_apt_packages:
+common_packages:
   - curl
   - git
   - graphviz
   - make
-  - python-apt
-  - python-pycurl
-  - python-software-properties
+  - python
+  - libcurl
+  - pycurl
+  - software-properties-common
   - vim
-  - imagemagick
-  - libmagickwand-dev
+  - ImageMagick
+  - ImageMagick-devel

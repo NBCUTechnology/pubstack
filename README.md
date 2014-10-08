@@ -32,7 +32,8 @@ Publisher's Local Development Stack
     cp config.nbcu.example.yml config.yml
     vim config.yml
     ```
-    **Note**: After the initial `vagrant up`, any time you edit your config file values you will want to run `vagrant reload --provision`.
+    **Note**: After the initial `vagrant up`, any time you edit your config file values you will want to run
+    `vagrant reload --provision`.
 
 1. Start-up your vagrant box:
     ```bash

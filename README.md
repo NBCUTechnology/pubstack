@@ -1,7 +1,7 @@
 pubstack
 ========
 
-Publisher's DevStack
+Publisher's Local Development Stack
 
 ## Installation
 

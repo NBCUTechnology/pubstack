@@ -1,30 +1,38 @@
 ---
-- name: "install apache"
-  apt: name=apache2 state=present
-  sudo: yes
+- name: Include OS-specific variables.
+  include_vars: "{{ ansible_os_family }}.yml"
 
-- name: "install fastcgi module for apache"
-  apt: name=libapache2-mod-fastcgi state=present
-  sudo: yes
+- name: Ensure Apache is installed (RedHat).
+  yum: >
+    name={{ item }}
+    state=installed
+    enablerepo={{ apache_enablerepo }}
+  with_items: apache_packages
 
-- name: "add vhosts"
+- name: Configure Apache (RedHat).
+  lineinfile: >
+    dest=/etc/httpd/conf/httpd.conf
+    regexp="{{ item.regexp }}"
+    line="{{ item.line }}"
+    state=present
+  with_items:
+  - {
+    regexp: "^Listen ",
+    line: "Listen {{ apache_listen_port }}"
+  }
+  - {
+    regexp: "^NameVirtualHost ",
+    line: "NameVirtualHost *:{{ apache_listen_port }}"
+  }
+  notify: restart apache
+
+- name: Add apache vhosts configuration.
   template: >
-    src=virtualhost.j2
-    dest=/etc/apache2/sites-available/{{ item.shortname }}.conf
+    src=vhosts.conf.j2
+    dest={{ apache_conf_path }}/vhosts.conf
     owner=root group=root mode=644
-  with_items: sites
+  notify: restart apache
   when: sites is defined
-  notify: restart webserver
-  sudo: yes
-
-- name: "enable vhosts"
-  shell: a2ensite {{ item.shortname }}.conf
-  with_items: sites
-  when: sites is defined
-  register: a2ensite_result
-  changed_when: "'Enabling site' in a2ensite_result.stdout"
-  notify: restart webserver
-  sudo: yes
 
 - name: "create pubstack directory"
   file: path=/var/www/pubstack state=directory
@@ -32,27 +40,14 @@
 - name: "copy index.php"
   template: src=index.php.j2 dest=/var/www/pubstack/index.php
 
-- name: "copy default vhost"
-  copy: src=000-default.conf dest=/etc/apache2/sites-available/000-default.conf
-
 - name: "copy Apache2 conf"
-  copy: src={{ item }} dest=/etc/apache2/conf-available
+  copy: src={{ item }} dest={{ apache_conf_path }}
   with_fileglob:
     - "conf-available/*"
 
-- name: "Enable Required Apache module"
-  shell: a2enmod actions fastcgi alias headers rewrite
-  register: a2enmod_result
-  changed_when: "'already enabled' not in a2enmod_result.stdout"
-
-- name: "Enable Required Apache configs"
-  shell: a2enconf php5-fpm
-  register: a2enconf_result
-  changed_when: "'already enabled' not in a2enconf_result.stdout"
-
 - name: "start apache"
   service: >
-    name=apache2
+    name={{ apache_daemon }}
     state=started
     enabled=yes
 

@@ -1,6 +1,15 @@
 ---
-- name: "install php-mysql"
-  apt: name=php5-mysql state=present
+- name: Include OS-specific variables.
+  include_vars: "{{ ansible_os_family }}.yml"
+
+- name: Install PHP MySQL dependencies (RedHat).
+  yum: >
+    name={{ item }}
+    state=installed
+    enablerepo={{ php_enablerepo }}
+  with_items:
+    - php-mysql
   notify:
     - restart webserver
     - restart php-fpm
+  when: ansible_os_family == 'RedHat'

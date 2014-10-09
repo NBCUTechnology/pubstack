@@ -6,7 +6,7 @@
   - apache
   - mysql
   - php
-#  - php-mysql
+  - php-mysql
 #  - php-pear
 #  - php-xdebug
 #  - php-xhprof

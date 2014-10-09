@@ -4,7 +4,7 @@
   roles:
   - common
   - apache
-#  - mysql
+  - mysql
 #  - php
 #  - php-mysql
 #  - php-pear
@@ -19,8 +19,6 @@
   handlers:
   - name: "restart webserver"
     service: name=apache2 state=restarted
-  - name: restart mysql
-    service: name=mysql state=restarted
   - name: "restart php-fpm"
     service: name=php5-fpm state=restarted
   - name: "restart memcached"

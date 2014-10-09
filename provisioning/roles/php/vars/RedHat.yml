@@ -2,24 +2,24 @@
 php_conf_path: /etc
 php_extension_conf_path: /etc/php.d
 php_apc_conf_filename: apc.ini
+# Test php 5.5.
+php_enablerepo: "remi,remi-php55,epel"
 __php_packages:
   - ImageMagick
   - php
-  - php-cli
   - php-common
-  - php-devel
-  - php-fpm
+  - php-cli
   - php-gd
-  - php-imap
-  - php-ldap
-  - php-mbstring
-  - php-pdo
   - php-pear
-  - php-pecl-apc
-  - php-pecl-igbinary
-#  - php-devel
-#  - gcc
-#  - uploadprogress
+  - php-mysqlnd
+  - php-pdo
+  - php-sqlite
+  - php-pecl-memcached
+  - php-pecl-memcache
+  # msg: No Package matching 'php-mbstrin' found available, installed or updated.
+#  - php-mbstrin
   - php-xml
-  - php-xmlrpc
+  - php-soap
+  - php-mcrypt
+  - php-fpm
 php_webserver_daemon: "httpd"

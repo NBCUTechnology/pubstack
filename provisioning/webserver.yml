@@ -5,7 +5,7 @@
   - common
   - apache
   - mysql
-#  - php
+  - php
 #  - php-mysql
 #  - php-pear
 #  - php-xdebug

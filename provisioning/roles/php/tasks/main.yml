@@ -1,21 +1,66 @@
 ---
-- name: "install php"
-  yum: name={{ item }} state=present
-  with_items: php_packages
-  notify:
-    - restart webserver
+- name: Include OS-specific variables.
+  include_vars: "{{ ansible_os_family }}.yml"
 
+- name: Define php_packages.
+  set_fact:
+    php_packages: "{{ __php_packages | list }}"
+  when: php_packages is not defined
+
+- name: Ensure PHP packages are installed (RedHat).
+  yum:
+    name: "{{ item }}"
+    state: installed
+    enablerepo: "{{ php_enablerepo }}"
+  with_items: php_packages
+  notify: restart webserver
+  when: ansible_os_family == 'RedHat'
+
+- name: Ensure configuration directories exist.
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - "{{ php_conf_path }}"
+    - "{{ php_extension_conf_path }}"
+
+- name: Place PHP configuration file in place.
+  template:
+    src: php.ini.j2
+    dest: "{{ php_conf_path }}/php.ini"
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart webserver
+
+- name: Place APC configuration file in place.
+  template:
+    src: apc.ini.j2
+    dest: "{{ php_extension_conf_path }}/{{ php_apc_conf_filename }}"
+    owner: root
+    group: root
+    mode: 0644
+  when: php_enable_apc
+  notify: restart webserver
+
+# TODO Do we still need this?
+#- name: "copy PHP-FPM conf"
+#  copy: src=fpm/ dest=/etc/php5/fpm/ directory_mode=yes
+
+- name: Ensure php-fpm is started and enabled at boot (if configured).
+  service:
+    name: php-fpm
+    state: started
+    enabled: yes
+  when: php_enable_php_fpm
+
+# TODO Do we need to do this on CentOS now with php-pecl-igbinary and
+#   uploadprogress packages.
 - name: "Install pecl libraries"
   shell: pecl install igbinary uploadprogress
   register: pecl_result
   changed_when: "'Nothing to install' not in pecl_result.stdout"
   failed_when: "pecl_result.stderr"
-
-- name: "copy PHP-FPM conf"
-  copy: src=fpm/ dest=/etc/php5/fpm/ directory_mode=yes
-
-- name: "service run php5-fpm"
-  service: name=php5-fpm state=started enabled=yes
 
 - name: "copy info.php"
   copy: src=info.php dest=/var/www/pubstack/info.php

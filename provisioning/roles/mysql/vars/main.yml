@@ -1,5 +1,0 @@
----
-mysql_apt_packages:
-  - mysql-server
-  # Required for mysql_db tasks
-  - python-mysqldb

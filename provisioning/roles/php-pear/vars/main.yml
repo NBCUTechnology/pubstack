@@ -1,7 +1,7 @@
 ---
-pear_channels:
+php_pear_channels:
   - pear.phpunit.de
   - pear.symfony.com
-pear_libraries:
+php_pear_libraries:
   - phpunit/PHPUnit
   - PHP_CodeSniffer

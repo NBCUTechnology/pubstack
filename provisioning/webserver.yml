@@ -7,7 +7,7 @@
   - mysql
   - php
   - php-mysql
-#  - php-pear
+  - php-pear
 #  - php-xdebug
 #  - php-xhprof
 #  - composer

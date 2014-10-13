@@ -11,7 +11,7 @@
 #  - php-xdebug
 #  - php-xhprof
   - composer
-#  - drush
+  - drush
 #  - memcached
 #  - nfs
 #  - drupal

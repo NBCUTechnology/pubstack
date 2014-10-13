@@ -14,7 +14,7 @@
   - drush
 #  - memcached
 #  - nfs
-#  - drupal
+  - drupal
 #  - splunk
   handlers:
   - name: "restart webserver"

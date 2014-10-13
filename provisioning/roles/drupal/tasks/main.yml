@@ -6,6 +6,7 @@
   sudo: yes
 
 # Note this is the same location as on Acquia, so it's automatically included
+# in Publisher's default settings.php file.
 - name: "add site local settings file"
   template: >
     src=settings.j2

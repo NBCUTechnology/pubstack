@@ -10,7 +10,7 @@
   - php-pear
 #  - php-xdebug
 #  - php-xhprof
-#  - composer
+  - composer
 #  - drush
 #  - memcached
 #  - nfs

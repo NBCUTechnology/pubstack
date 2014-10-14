@@ -1,0 +1,4 @@
+---
+xhprof_enablerepo: ""
+xhprof_packages:
+  - graphviz

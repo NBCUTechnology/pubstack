@@ -1,11 +1,24 @@
 ---
-- name: "install memcached"
-  apt: name=memcached state=present
-  sudo: yes
+- name: Include OS-specific variables.
+  include_vars: "{{ ansible_os_family }}.yml"
 
-- name: "config file"
-  template: src=memcached.conf.j2 dest=/etc/memcached.conf
+- name: Ensure packages are present (RedHat).
+  yum: >
+    name={{ item }}
+    state=present
+    enablerepo={{ memcached_enablerepo }}
+  with_items: memcached_packages
+
+- name: Config file
+  template: src=memcached.conf.j2 dest={{ memcached_conf }}
   notify: restart memcached
 
-- name: "start and enable service"
-  service: name=memcached state=started
+- name: Set to autostart on boot
+  command: chkconfig memcached on
+  notify: restart memcached
+
+- name: Start and enable service
+  service: >
+    name=memcached
+    state=started
+    enabled=yes

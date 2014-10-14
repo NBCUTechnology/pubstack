@@ -12,12 +12,10 @@
 #  - php-xhprof
   - composer
   - drush
-#  - memcached
+  - memcached
 #  - nfs
   - drupal
 #  - splunk
   handlers:
   - name: "restart webserver"
     service: name=apache2 state=restarted
-  - name: "restart memcached"
-    service: name=memcached state=restarted

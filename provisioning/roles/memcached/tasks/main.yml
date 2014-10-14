@@ -16,6 +16,7 @@
 - name: Set to autostart on boot
   command: chkconfig memcached on
   notify: restart memcached
+  when: ansible_os_family == 'RedHat'
 
 - name: Start and enable service
   service: >

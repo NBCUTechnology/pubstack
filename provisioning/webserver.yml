@@ -13,7 +13,7 @@
   - composer
   - drush
   - memcached
-#  - nfs
+  - nfs
   - drupal
 #  - splunk
   handlers:

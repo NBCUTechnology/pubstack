@@ -1,0 +1,5 @@
+---
+- name: restart cachefilesd
+  service: >
+    name=cachefilesd
+    state=restarted

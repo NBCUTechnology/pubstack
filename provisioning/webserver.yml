@@ -9,7 +9,7 @@
   - php-mysql
   - php-pear
 #  - php-xdebug
-#  - php-xhprof
+  - php-xhprof
   - composer
   - drush
   - memcached

@@ -27,7 +27,7 @@
     - option: extension
       value: xhprof.so
     - option: xhprof.output_dir
-      value: /tmp/xhprof
+      value: '"/tmp/xhprof"'
 
 - name: "Setup xhprof tmp directory"
   file: path=/tmp/xhprof mode=0777 state=directory

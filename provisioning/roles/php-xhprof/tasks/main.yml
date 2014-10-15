@@ -11,7 +11,7 @@
   when: ansible_os_family == 'RedHat'
 
 - name: Install xhprof
-  command: pecl install xhprof-{{ xhprof_version }}
+  command: pecl install xhprof-{{ xhprof_version }} creates=/usr/lib64/php/modules/xhprof.so
   register: xhprof_result
   changed_when: "'already installed' not in xhprof_result.stdout"
   failed_when: "xhprof_result.stderr"

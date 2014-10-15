@@ -9,6 +9,8 @@ __php_packages:
   - php
   - php-common
   - php-cli
+  # Needed for phpize command (needed for xhprof. See verbose output otherwise).
+  - php-devel
   - php-gd
   - php-pear
   - php-mysqlnd

@@ -81,6 +81,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     dev.vm.provision 'ansible' do |ansible|
       ansible.playbook = File.file?(user_playbook) ? user_playbook : 'provisioning/pubstack.yml'
       ansible.extra_vars = {:sites => pubstack_config['sites']}
+      # ansible.verbose = 'vvvv'
     end
   end
 end

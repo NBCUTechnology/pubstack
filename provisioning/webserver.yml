@@ -8,7 +8,7 @@
   - php
   - php-mysql
   - php-pear
-#  - php-xdebug
+  - php-xdebug
   - php-xhprof
   - composer
   - drush

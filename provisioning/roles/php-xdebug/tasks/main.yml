@@ -1,5 +1,5 @@
 ---
-- name: "install xdebug"
+- name: Install Xdebug
   command: pecl install xdebug
   register: xdebug_result
   changed_when: "'already installed' not in xdebug_result.stdout"
@@ -8,19 +8,49 @@
     - restart apache
     - restart php-fpm
 
-- name: "register xdebug.so location"
-  command: find /usr/lib/php5/ -name xdebug.so
+- name: Register xdebug.so location
+  command: find /usr/lib64/php/modules/ -name xdebug.so
   changed_when: "'already installed' not in xdebug_result.stdout"
   register: php_xdebug_so_path
 
-- name: "xdebug ini"
-  template: src=xdebug.ini.j2 dest=/etc/php5/fpm/conf.d/xdebug.ini
+# TODO Move this back to a file added to /etc/php.d.
+- name: Add to ini
+  ini_file:
+      dest: "{{ php_conf_path }}/php.ini"
+      section: xdebug
+      option: "{{ item.option }}"
+      value: "{{ item.value }}"
+      backup: yes
+  with_items:
+    - option: zend_extension
+      value: "{{ php_xdebug_so_path.stdout }}"
+    - option: xdebug.remote_enable
+      value: "{{ xdebug_remote_enable }}"
+    - option: xdebug.remote_host
+      value: '"{{ xdebug_remote_host }}"'
+    - option: xdebug.remote_port
+      value: "{{ xdebug_remote_port }}"
+    - option: xdebug.remote_handler
+      value: "{{ xdebug_remote_handler }}"
+    - option: xdebug.remote_connect_back
+      value: "{{ xdebug_remote_connect_back }}"
+    - option: xdebug.remote_autostart
+      value: "{{ xdebug_remote_autostart }}"
+    - option: xdebug.idekey
+      value: '"{{ xdebug_idekey }}"'
   notify:
     - restart apache
     - restart php-fpm
 
-- name: "xdebug cli"
-  template: src=xdebug_cli.ini.j2 dest=/etc/php5/cli/conf.d/xdebug.ini
-  notify:
-    - restart apache
-    - restart php-fpm
+#- name: "xdebug ini"
+#  template: src=xdebug.ini.j2 dest=/etc/php5/fpm/conf.d/xdebug.ini
+#  notify:
+#    - restart apache
+#    - restart php-fpm
+
+# TODO Where is php cli ini file on CentOS?
+#- name: "xdebug cli"
+#  template: src=xdebug_cli.ini.j2 dest=/etc/php5/cli/conf.d/xdebug.ini
+#  notify:
+#    - restart apache
+#    - restart php-fpm

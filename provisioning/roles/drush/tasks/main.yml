@@ -22,3 +22,17 @@
   register: drush_result
   changed_when: "'Execute a drush command' not in drush_result.stdout"
   tags: drush
+
+- name: "copy drush file for bash alias and autocompletion"
+  shell: cp {{ drush_install_path }}/examples/example.bashrc /home/vagrant/.drush_bashrc
+  args:
+    creates: /home/vagrant/.drush_bashrc
+  tags: drush
+
+- name: "include drush in bash profile"
+  lineinfile:
+    dest=/home/vagrant/.profile
+    regexp="^.*drush_bashrc"
+    line="if [ -f ~/.drush_bashrc ] ; then . ~/.drush_bashrc ; fi"
+    state=present
+  tags: drush

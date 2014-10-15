@@ -10,6 +10,6 @@
   with_items:
     - php-mysql
   notify:
-    - restart webserver
+    - restart apache
     - restart php-fpm
   when: ansible_os_family == 'RedHat'

@@ -4,7 +4,7 @@
   with_items:
     - cachefilesd
   notify:
-    - restart webserver
+    - restart apache
 
 - name: Ensure cachefilesd exists
   template: src=cachefilesd.j2 dest=/etc/default/cachefilesd owner=root group=root

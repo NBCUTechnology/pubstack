@@ -20,7 +20,7 @@
   shell: a2ensite splunk.conf
   register: a2ensite_result
   changed_when: "'Enabling site splunk' in a2ensite_result.stdout"
-  notify: restart webserver
+  notify: restart apache
 
 - name: "Adding Splunk to Pubstack Tools"
   replace: dest=/var/www/pubstack/index.php regexp='(<!-- tools -->)' replace='<li><a href="http://splunk.pubstack.dev">Splunk</a> (admin/changeme)</li><!-- tools -->'

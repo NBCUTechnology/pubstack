@@ -5,7 +5,7 @@
   changed_when: "'already installed' not in xdebug_result.stdout"
   failed_when: "xdebug_result.stderr"
   notify:
-    - restart webserver
+    - restart apache
     - restart php-fpm
 
 - name: "register xdebug.so location"
@@ -16,11 +16,11 @@
 - name: "xdebug ini"
   template: src=xdebug.ini.j2 dest=/etc/php5/fpm/conf.d/xdebug.ini
   notify:
-    - restart webserver
+    - restart apache
     - restart php-fpm
 
 - name: "xdebug cli"
   template: src=xdebug_cli.ini.j2 dest=/etc/php5/cli/conf.d/xdebug.ini
   notify:
-    - restart webserver
+    - restart apache
     - restart php-fpm

@@ -61,3 +61,4 @@
     line="127.0.0.1  {{ item.vhost.servername }}"
     insertafter=EOF
   with_items: sites
+  when: sites is defined

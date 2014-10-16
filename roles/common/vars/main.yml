@@ -1,4 +1,6 @@
 ---
+# TODO Add meta role dependencies. See:
+# http://docs.ansible.com/playbooks_roles.html#role-dependencies
 common_packages:
   - curl
   - git

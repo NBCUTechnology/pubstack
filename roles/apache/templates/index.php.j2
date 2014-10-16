@@ -28,7 +28,7 @@
   <tr>
         <td>{{ site.shortname }}</td>
         <td><a href="http://{{ site.vhost.servername }}">http://{{ site.vhost.servername }}</a></td>
-        <td>{{ site.shortname }}:@172.25.128.10/{{ site.shortname }}</td>
+        <td>{{ site.shortname }}:@{{ mysql_host }}/{{ site.shortname }}</td>
       </tr>
     {% endfor %}
     </tbody>

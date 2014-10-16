@@ -4,7 +4,6 @@ memcached_port: 11211
 memcached_user: memcached
 memcached_connections: 1024
 memcached_cachesize: 4096
-memcached_ip: 172.25.128.10
 memcached_enablerepo: ""
 memcached_packages:
   - memcached

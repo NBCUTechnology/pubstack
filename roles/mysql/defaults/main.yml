@@ -1,4 +1,6 @@
 ---
+mysql_host: 172.25.128.10
+
 mysql_user_home: /root
 mysql_root_username: root
 mysql_root_password: ""

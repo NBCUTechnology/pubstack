@@ -53,7 +53,7 @@ Publisher's Local Development Stack
 ## Customizing
 
 1. Power users can add their own playbook(s):
-    - An optional, main user playbook will be loaded if it exists: `provisioning/user.playbook.yml`
+    - An optional, main user playbook will be loaded if it exists: `user.playbook.yml`
     - This playbook can include additional playbooks, including the main playbook, before or after your user-specific roles:
         ```yaml
         ---
@@ -63,7 +63,7 @@ Publisher's Local Development Stack
 2. You can also add custom roles:
     - User-specific roles should follow this naming convention:
         ```bash
-        provisioning/roles/user-ROLE-NAME
+        roles/user-ROLE-NAME
         ```
 
 **Note**: Both your user playbook, and user-specific roles will be gitignored.

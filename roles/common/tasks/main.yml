@@ -5,3 +5,59 @@
 
 - name: Copy host.conf so curl can resolve host names
   copy: src=host.conf dest=/etc/host.conf
+
+- name: Performance-tune kernel | limits
+  lineinfile: >
+    dest=/etc/security/limits.conf
+    line="{{ item }}"
+    insertafter=EOF
+  with_items:
+    - "vagrant        hard    nproc           65535"
+    - "vagrant        soft    nproc           65535"
+    - "apache         hard    nproc           65535"
+    - "apache         soft    nproc           65535"
+  sudo: yes
+  when: ansible_os_family == 'RedHat'
+
+- name: Kernel performance | sysctl
+  lineinfile: >
+    dest=/etc/sysctl.conf
+    line="{{ item }}"
+    insertafter=EOF
+  with_items:
+    - "# Cut down on needless wait time for junk connections"
+    - net.ipv4.tcp_fin_timeout = 15
+    - net.ipv4.tcp_keepalive_time = 1800
+    - net.ipv4.tcp_keepalive_intvl = 15
+    - ""
+    - "# Apache Hard Core"
+    - fs.file-max = 65535
+    - net.core.rmem_default = 8738000
+    - net.core.rmem_max = 8738000
+    - net.core.wmem_default = 6553600
+    - net.core.wmem_max = 6553600
+    - ""
+    - "# Increase Number of Incoming Connections Backlog"
+    - net.core.netdev_max_backlog = 10000
+    - "# Do not cache ssthresh from previous connections"
+    - net.ipv4.tcp_no_metrics_save = 1
+    - ""
+    - "# We are Gig so Make sure it is on"
+    - net.ipv4.tcp_timestamps = 1
+    - ""
+    - "# Allow reuse of time_wait connections"
+    - net.ipv4.tcp_tw_recycle = 1
+    - net.ipv4.tcp_tw_reuse = 1
+    - ""
+    - "# Enable really big (>65kB) TCP window scaling if we want"
+    - net.ipv4.tcp_window_scaling = 1
+    - net.ipv4.tcp_rmem = 8192 873800 8738000
+    - net.ipv4.tcp_wmem = 4096 262144 16777216
+    - ""
+    - vm.min_free_kbytes = 65536
+    - net.ipv4.tcp_max_syn_backlog = 8192
+    - ""
+    - "# default value is 5 -> ~ 180 secs, 2 -> ~21 seconds"
+    - "# net.ipv4.tcp_synack_retries = 2"
+  sudo: yes
+  when: ansible_os_family == 'RedHat'

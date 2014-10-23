@@ -26,6 +26,19 @@
   }
   notify: restart apache
 
+# TODO consider a better way to do this. For now, this accommodates both a
+#   Vagrant config file, or a server string passing a single instance of the
+#   same variables. See ushedev.nbcuext.com in hosts file for an example.
+- name: Define sites if extra vars are passed for a single site
+  set_fact:
+    sites:
+    - subscription: "{{ subscription }}"
+      shortname: "{{ shortname }}"
+      vhost:
+        servername: "{{ servername }}"
+        documentroot: "{{ documentroot }}"
+  when: sites is not defined and subscription is defined
+
 - name: Add apache vhosts configuration.
   template: >
     src=vhosts.conf.j2

@@ -13,6 +13,7 @@
   - composer
   - drush
   - memcached
-  - nfs
   - drupal
+  # TODO Move to separate 'vagrant' playbook.
+#  - nfs
 #  - splunk

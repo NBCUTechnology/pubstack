@@ -8,12 +8,12 @@
   - php
   - php-mysql
   - php-pear
-  - php-xdebug
   - php-xhprof
   - composer
   - drush
   - memcached
   - drupal
   # TODO Move to separate 'vagrant' playbook.
+#  - php-xdebug
 #  - nfs
 #  - splunk

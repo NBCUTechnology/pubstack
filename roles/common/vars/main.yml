@@ -11,5 +11,7 @@ common_packages:
   - pycurl
 #  - software-properties-common
   - vim
+  # Provides a C compiler needed to install xdebug.
+  - gcc
   - ImageMagick
   - ImageMagick-devel

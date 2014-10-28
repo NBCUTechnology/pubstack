@@ -8,7 +8,7 @@ DirectoryIndex index.php index.html
   DocumentRoot {{ apache_synced_folder }}/{{ site.vhost.documentroot }}
   <Directory "{{ apache_synced_folder }}/{{ site.vhost.documentroot }}">
     AllowOverride All
-    Options -Indexes FollowSymLinks
+    Options -Indexes +FollowSymLinks
     Order allow,deny
     Allow from all
   </Directory>

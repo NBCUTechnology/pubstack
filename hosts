@@ -3,4 +3,4 @@ pubstack-test sitename=nbcuusah subscription=nbcuusah apache_servername=pubstack
 # Add additional hosts here.
 nbcuushe.sandbox.publisher7.com sitename=nbcuushe subscription=nbcuushe apache_servername=nbcuushe.sandbox.publisher7.com
 nbcuushe.qa.publisher7.com sitename=nbcuushe subscription=nbcuushe apache_servername=nbcuushe.qa.publisher7.com
-ushedev.nbcuext.com subscription=nbcuushe shortname=nbcuushe servername=ushedev.nbcuext.com documentroot=nbcuushe mysql_host=localhost
+ushedev.nbcuext.com subscription=nbcuushe shortname=nbcuushe servername=ushedev.nbcuext.com documentroot=nbcuushe/docroot mysql_host=localhost memcached_ip=localhost

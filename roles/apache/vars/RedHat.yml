@@ -5,5 +5,5 @@ apache_conf_path: /etc/httpd/conf.d
 apache_packages:
   - httpd24
   - httpd24-devel
-  - mod_ssl
+  - mod24_ssl
   - openssh

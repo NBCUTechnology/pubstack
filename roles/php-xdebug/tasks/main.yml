@@ -15,7 +15,7 @@
     - restart php-fpm
 
 - name: Register xdebug.so location
-  command: find /usr/lib64/php/5.5/modules/ -name xdebug.so
+  command: find "{{ php_xdebug_so_directory }}" -name xdebug.so
   changed_when: "'already installed' not in xdebug_result.stdout"
   register: php_xdebug_so_path
 

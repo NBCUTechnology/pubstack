@@ -13,5 +13,3 @@ common_packages:
   - vim
   # Provides a C compiler needed to install xdebug.
   - gcc
-  - ImageMagick
-  - ImageMagick-devel

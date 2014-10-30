@@ -2,28 +2,4 @@
 php_conf_path: /etc
 php_extension_conf_path: /etc/php.d
 php_apc_conf_filename: apc.ini
-# For php 5.5.
-php_enablerepo: "remi-php55"
-__php_packages:
-  # Temp disable this to track down php 5.3 dependencies.
-#  - ImageMagick
-  - php55
-  - php55-common
-  - php55-cli
-  # Needed for phpize command (needed for xhprof. See verbose output otherwise).
-  - php55-devel
-  - php55-gd
-  - php-pear
-  - php55-mysqlnd
-  - php55-pdo
-  # Do we need this?
-#  - php-sqlite
-  - php55-pecl-memcached
-  - php55-pecl-memcache
-  # msg: No Package matching 'php-mbstrin' found available, installed or updated.
-#  - php-mbstrin
-  - php55-xml
-  - php55-soap
-  - php55-mcrypt
-  - php55-fpm
 php_webserver_daemon: "httpd"

@@ -1,0 +1,24 @@
+---
+# For php 5.5.
+php_enablerepo: "remi-php55,remi,epel"
+__php_packages:
+  - ImageMagick
+  - ImageMagick-devel
+  - php
+  - php-common
+  - php-cli
+  # Needed for phpize command (needed for xhprof. See verbose output otherwise).
+  - php-devel
+  - php-gd
+  - php-pear
+  - php-mysqlnd
+  - php-pdo
+  - php-sqlite
+  - php-pecl-memcached
+  - php-pecl-memcache
+  # msg: No Package matching 'php-mbstrin' found available, installed or updated.
+#  - php-mbstrin
+  - php-xml
+  - php-soap
+  - php-mcrypt
+  - php-fpm

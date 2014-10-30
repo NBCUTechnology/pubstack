@@ -1,0 +1,6 @@
+---
+apache_packages:
+  - httpd24
+  - httpd24-devel
+  - mod24_ssl
+  - openssh

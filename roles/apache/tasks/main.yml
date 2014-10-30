@@ -1,6 +1,10 @@
 ---
+# Note
 - name: Include OS-specific variables.
   include_vars: "{{ ansible_os_family }}.yml"
+
+- name: Include Distribution-specific variables.
+  include_vars: "{{ ansible_distribution }}.yml"
 
 - name: Ensure Apache is installed (RedHat).
   yum: >

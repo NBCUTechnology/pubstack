@@ -2,15 +2,20 @@
 - name: Include OS-specific variables.
   include_vars: "{{ ansible_os_family }}.yml"
 
+- name: Include Distribution-specific variables.
+  include_vars: "{{ ansible_distribution }}.yml"
+
 - name: Install EPEL.
   yum:
     name: http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
     state: installed
+  when: ansible_os_family == 'RedHat'
 
 - name: Install php 5.5 (RedHat).
   yum:
     name: http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
     state: installed
+  when: ansible_os_family == 'RedHat'
 
 - name: Define php_packages.
   set_fact:

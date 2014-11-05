@@ -41,11 +41,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Every Vagrant virtual environment requires a box to build off of.
   # Temporarily rename the box so I can do parallel development.
-  config.vm.box = 'pubstack_centos'
+  config.vm.box = 'pubstack_amazonlinux'
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
-  config.vm.box_url = 'https://github.com/2creatives/vagrant-centos/releases/download/v6.5.3/centos65-x86_64-20140116.box'
+  config.vm.box_url = 'http://images.geekandi.com/amazon-linux/vagrant-amazon-linux64-2014.03-public-virtualbox.box'
 
   # If true, then any SSH connections made will enable agent forwarding.
   # Default value: false

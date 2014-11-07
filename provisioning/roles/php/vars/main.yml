@@ -14,7 +14,7 @@ php_apt_packages:
   - php5-ldap
   - php5-mcrypt
   - php5-memcache
-  - php5-memcached
+  - php5-mongo
   - php5-oauth
   - php5-pspell
   - php5-sqlite

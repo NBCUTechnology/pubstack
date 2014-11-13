@@ -61,7 +61,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     # Write host entries automagically with Vagrant::Hostsupdater.
     unless pubstack_config['hostupdater'] == false
-      config.hostsupdater.aliases = ['pubstack.dev', 'xhprof.pubstack.dev', 'splunk.pubstack.dev']
+      config.hostsupdater.aliases = ['pubstack.dev', 'xhprof.pubstack.dev', 'splunk.pubstack.dev', 'mail.pubstack.dev']
       config.hostsupdater.aliases += pubstack_config['sites'].map {|site| site['vhost']['servername']}
     end
 

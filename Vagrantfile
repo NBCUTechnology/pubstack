@@ -20,8 +20,10 @@ if pubstack_config.include? 'sites'
 end
 
 # Ensure Vagrant::Hostsupdater plugin is installed.
-unless Vagrant.has_plugin?('vagrant-hostsupdater')
-  raise Vagrant::Errors::VagrantError.new, 'The vagrant-hostsupdater plugin is not installed. Please run `vagrant plugin install vagrant-hostsupdater`.'
+unless pubstack_config['hostupdater'] == false
+  unless Vagrant.has_plugin?('vagrant-hostsupdater')
+    raise Vagrant::Errors::VagrantError.new, 'The vagrant-hostsupdater plugin is not installed. Please run `vagrant plugin install vagrant-hostsupdater`.'
+  end
 end
 
 # Set synced_folder_type to 'smb' only if Windows:
@@ -58,8 +60,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     dev.vm.network 'private_network', ip: '172.25.128.10'
 
     # Write host entries automagically with Vagrant::Hostsupdater.
-    config.hostsupdater.aliases = ['pubstack.dev', 'xhprof.pubstack.dev', 'splunk.pubstack.dev']
-    config.hostsupdater.aliases += pubstack_config['sites'].map {|site| site['vhost']['servername']}
+    unless pubstack_config['hostupdater'] == false
+      config.hostsupdater.aliases = ['pubstack.dev', 'xhprof.pubstack.dev', 'splunk.pubstack.dev']
+      config.hostsupdater.aliases += pubstack_config['sites'].map {|site| site['vhost']['servername']}
+    end
 
     # Share an additional folder to the guest VM. The first argument is
     # the path on the host to the actual folder. The second argument is

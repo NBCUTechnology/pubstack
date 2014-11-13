@@ -1,5 +1,10 @@
 ---
 mysql_apt_packages:
-  - mysql-server
+  - vim
   # Required for mysql_db tasks
+  - python-pycurl
   - python-mysqldb
+percona_server_packages:
+  - percona-server-common-5.5
+  - percona-server-client-5.5
+  - percona-server-server-5.5

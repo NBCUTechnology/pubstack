@@ -16,6 +16,8 @@
   - nfs
   - drupal
   - splunk
+  - nodejs
+  - ruby
   handlers:
   - name: "restart webserver"
     service: name=apache2 state=restarted

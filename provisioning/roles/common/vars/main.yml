@@ -3,10 +3,13 @@ common_apt_packages:
   - curl
   - git
   - graphviz
+  - htop
+  - imagemagick
+  - iotop
   - make
   - python-apt
   - python-pycurl
   - python-software-properties
+  - sysstat
   - vim
-  - imagemagick
-  - libmagickwand-dev
+  - wget

@@ -1,7 +1,31 @@
 ---
-- name: "install mysql"
+- name: Add Percona apt signing key
+  sudo: yes
+  apt_key: keyserver=keys.gnupg.net id=1C4CBDCDCD2EFD2A state=present
+
+- name: Add Percona repository
+  sudo: yes
+  apt_repository: repo='deb http://repo.percona.com/apt precise main' state=present
+
+- name: Add Percona source repository
+  sudo: yes
+  apt_repository: repo='deb-src http://repo.percona.com/apt precise main' state=present
+
+- name: Update apt cache
+  sudo: yes
+  apt: update_cache=yes
+
+- name: Install python packages
+  sudo: yes
   apt: name={{ item }} state=present
   with_items: mysql_apt_packages
+
+- name: Install Percona packages
+  sudo: yes
+  apt: name={{ item }} state=present update_cache=yes
+  with_items: percona_server_packages
+  environment:
+    DEBIAN_FRONTEND: noninteractive
 
 - name: "copy my.cnf"
   copy: src=my.cnf dest=/etc/mysql/my.cnf

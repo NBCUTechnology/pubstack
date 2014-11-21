@@ -75,8 +75,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     # Provider-specific configuration for VirtualBox:
     dev.vm.provider 'virtualbox' do |vb|
-      vb.memory = pubstack_config['memory']
-      vb.cpus = pubstack_config['cpus']
+      vb.customize ["modifyvm", :id, "--cpus", pubstack_config['cpus']]
+      vb.customize ["modifyvm", :id, "--ioapic", "on"]
+      vb.customize ["modifyvm", :id, "--memory", pubstack_config['memory']]
+      vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
     end
 
     # Enable provisioning with Ansible.

@@ -1,0 +1,8 @@
+---
+nodejs_apt_packages:
+  - nodejs
+npm_global_packages:
+  - bower
+  - grunt-cli
+  - gulp
+  - jshint

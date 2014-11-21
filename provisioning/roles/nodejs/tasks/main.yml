@@ -1,0 +1,11 @@
+---
+- name: "ensure Node.js PPA is enabled"
+  apt_repository: repo='ppa:chris-lea/node.js'
+
+- name: "install Node.js packages"
+  apt: name={{ item }} state=latest
+  with_items: nodejs_apt_packages
+
+- name: "install global npm packages"
+  npm: name={{ item }} global=yes state=latest
+  with_items: npm_global_packages

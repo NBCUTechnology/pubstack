@@ -1,0 +1,173 @@
+#
+# This my.cnf template is for servers that are only database
+# servers. It is called my.cnf.new-dedicated.erb in puppet because it
+# is for servers that are "dedicated to MySQL", which is orthogonal to
+# "dedicated to a specific customer".
+#
+# IMPORTANT! Any changes made to this file should be reflected in
+# my.cnf.new-shared.erb as well.
+#
+
+[client]
+port            = 3306
+socket          = /var/run/mysqld/mysqld.sock
+
+# Using the --loose prefix because mysqlbinlog does not understand default-character-set.
+loose-default-character-set = utf8
+
+[mysqld_safe]
+socket          = /var/run/mysqld/mysqld.sock
+nice            = 0
+open-files-limit = 8192
+
+[mysqld]
+user            = mysql
+pid-file        = /var/run/mysqld/mysqld.pid
+socket          = /var/run/mysqld/mysqld.sock
+port            = 3306
+basedir         = /usr
+datadir         = /var/lib/mysql
+
+lc_messages_dir = /usr/share/mysql
+
+skip-external-locking
+
+
+character-set-server = utf8
+collation-server = utf8_general_ci
+
+#non-Variable
+query_cache_size=40M #This is about as much as we are going to want
+key_buffer_size=20M #Settings this to something reasonable for temp tables
+join_buffer_size=512K
+read_buffer_size=512K
+read_rnd_buffer_size=512K
+sort_buffer_size=512K
+table_cache=2500
+thread_cache_size=200
+tmpdir=/mnt/tmp/mysql
+
+max_allowed_packet=100M
+query_cache_limit=5M
+query_cache_min_res_unit=1024
+max_connect_errors=9999999
+wait_timeout=600
+net_write_timeout=600
+interactive_timeout=600
+log_queries_not_using_indexes=0
+port=3306
+datadir=/var/lib/mysql
+slow_query_log=1
+long_query_time=1
+
+#Variable
+innodb_buffer_pool_size = 19382927360
+innodb_thread_concurrency = 8
+
+# To compute max connections, we take mysqld's total percentage of memory
+# (80% on this MySQL-only server) and subtract all static buffers (key,
+# query cache, log, and InnoDB). We then divide that by the dynamic buffers
+# (in our case they are all 512k so we do 4x512k).
+
+max_connections = 100
+
+
+#####################
+#INNODB Settings
+####################
+
+# Percona 5.5 optimizations:
+#   - Quickly drop tables and prioritize other queries over the drops.
+#   - Write page data for buffer pool to disk for warm cache at startup.
+#   - Split buffer pool into 4 instances to reduce contention on the pool.
+innodb_lazy_drop_table=1
+innodb_buffer_pool_restore_at_startup=300
+innodb_buffer_pool_instances=4
+innodb_file_format = Barracuda
+# End 5.5 optimizations.
+
+default_storage_engine = INNODB
+innodb_data_file_path=ibdata1:10M:autoextend
+innodb_flush_method=O_DIRECT
+innodb_log_file_size=200M
+innodb_log_files_in_group=3
+innodb_log_buffer_size=8M
+# innodb_flush_log_at_trx_commit:
+#  0: Log buffer is written out to the log file once per second and the flush
+#     to disk operation is performed on the log file, but nothing is done at a
+#     transaction commit.
+#  1: (default) Log buffer is written out to the log file at each transaction
+#     commit and the flush to disk operation is performed on the log file.
+#  2: Log buffer is written out to the file at each commit, but the flush to
+#     disk operation is not performed on it. However, the flushing on the log
+#     file takes place once per second also when the value is 2. Note that the
+#     once-per-second flushing is not 100% guaranteed to happen every second,
+#     due to process scheduling issues.
+#  This was 2 on AH up until Nov 2010 but we also had
+#  binlog corruption issues on AH so switching it to 1.
+innodb_flush_log_at_trx_commit=0
+
+innodb_file_per_table
+
+
+
+# Limit data dictionary cache size with percona.
+innodb_dict_size_limit=256M
+
+
+# Do not generate InnoDB index statistics for each table every time the information
+# schema is queried
+innodb_stats_on_metadata=OFF
+
+
+#replication settings
+
+# Addressing binlog corruption issues on AH
+# If the value of this variable is greater than 0, the MySQL server
+# synchronizes its binary log to disk (using fdatasync()) after every
+# sync_binlog writes to the binary log. There is one write to the binary log
+# per statement if autocommit is enabled, and one write per transaction
+# otherwise.
+sync_binlog=1
+
+log-bin                         = binlog
+expire_logs_days                = 5
+
+report-host                     = fsdb-9548.prod.hosting.acquia.com
+relay-log                       = relaylog
+relay-log-index                 = relay-index
+replicate-wild-ignore-table     = mysql.ibbackup_binlog_marker
+
+relay-log-recovery              = 1
+
+# MySQL replication is not supported with InnoDB when using
+# statement based replication.  Since row based was added to MySQL
+# in version 5.1 and later, let's try to leverage it.  We
+# set mixed mode so MySQL can decide which is better for the
+# storage engine that it is running.
+# http://dev.mysql.com/doc/refman/5.1/en/binary-log-mixed.html
+binlog_format=mixed
+
+# Do not log 1592 Unsafe replication warnings. They blow up the log since they result
+# from the mk-table-checksum/pt-table-checksum tool. This option is Percona Server
+# specific as MySQL has never addressed this.
+log_warnings_suppress           = 1592
+
+
+auto_increment_increment        = 5
+
+[mysqldump]
+quick # buffer a line at a time
+quote-names
+max_allowed_packet=100M
+
+[mysql]
+#no-auto-rehash # faster start of mysql but no tab completion
+
+[isamchk]
+key_buffer              = 16M
+
+[mysqld]
+max_heap_table_size = 32M
+tmp_table_size = 32M
+query_cache_size = 40M

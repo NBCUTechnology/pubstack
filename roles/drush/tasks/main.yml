@@ -24,16 +24,9 @@
   changed_when: "'Execute a drush command' not in drush_result.stdout"
   tags: drush
 
-- name: "copy drush file for bash alias and autocompletion"
-  shell: cp {{ drush_install_path }}/examples/example.bashrc /home/vagrant/.drush_bashrc
+# See explanation in /etc/bashrc of global user profile /etc/profile.d scripts
+- name: Copy drush bashrc file to global profile for alias and autocompletion
+  shell: cp {{ drush_install_path }}/examples/example.bashrc /etc/profile.d/drush_bashrc.sh
   args:
-    creates: /home/vagrant/.drush_bashrc
-  tags: drush
-
-- name: "include drush in bash profile"
-  lineinfile:
-    dest=/home/vagrant/.profile
-    regexp="^.*drush_bashrc"
-    line="if [ -f ~/.drush_bashrc ] ; then . ~/.drush_bashrc ; fi"
-    state=present
+    creates: /etc/profile.d/drush_bashrc.sh
   tags: drush

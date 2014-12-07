@@ -5,3 +5,6 @@ nbcuushe.sandbox.publisher7.com sitename=nbcuushe subscription=nbcuushe apache_s
 nbcuushe.qa.publisher7.com sitename=nbcuushe subscription=nbcuushe apache_servername=nbcuushe.qa.publisher7.com
 ushedev.nbcuext.com subscription=nbcuushe shortname=nbcuushe servername=ushedev.nbcuext.com documentroot=nbcuushe/docroot mysql_host=localhost memcached_ip=localhost
 ushedev-centos.nbcuext.com subscription=nbcuushe shortname=nbcuushe servername=ushedev-centos.nbcuext.com documentroot=nbcuushe/docroot mysql_host=localhost memcached_ip=localhost
+use-qa.nbcuext.com subscription=nbcuushe shortname=nbcuushe servername=use-qa.nbcuext.com documentroot=nbcuushe/docroot mysql_host=localhost memcached_ip=localhost
+use-acc.nbcuext.com subscription=nbcuushe shortname=nbcuushe servername=use-acc.nbcuext.com documentroot=nbcuushe/docroot mysql_host=localhost memcached_ip=localhost
+use-prod.nbcuext.com subscription=nbcuushe shortname=nbcuushe servername=use-prod.nbcuext.com documentroot=nbcuushe/docroot mysql_host=localhost memcached_ip=localhost

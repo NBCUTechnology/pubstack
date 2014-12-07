@@ -45,7 +45,7 @@ read_rnd_buffer_size=512K
 sort_buffer_size=512K
 table_cache=2500
 thread_cache_size=200
-tmpdir=/tmp/mysql
+tmpdir=/mnt/tmp/mysql
 
 max_allowed_packet=100M
 query_cache_limit=5M
@@ -64,7 +64,7 @@ long_query_time=1
 innodb_buffer_pool_size = 19382927360
 innodb_thread_concurrency = 8
 
-# To compute max connections, we take mysqld's total percentage of memory 
+# To compute max connections, we take mysqld's total percentage of memory
 # (80% on this MySQL-only server) and subtract all static buffers (key,
 # query cache, log, and InnoDB). We then divide that by the dynamic buffers
 # (in our case they are all 512k so we do 4x512k).
@@ -119,7 +119,7 @@ innodb_dict_size_limit=256M
 # schema is queried
 innodb_stats_on_metadata=OFF
 
-// Disable on pubstack.
+
 #replication settings
 
 # Addressing binlog corruption issues on AH
@@ -128,17 +128,17 @@ innodb_stats_on_metadata=OFF
 # sync_binlog writes to the binary log. There is one write to the binary log
 # per statement if autocommit is enabled, and one write per transaction
 # otherwise.
-#sync_binlog=1
+sync_binlog=1
 
-#log-bin                         = binlog
-#expire_logs_days                = 5
+log-bin                         = binlog
+expire_logs_days                = 5
 
-#report-host                     = fsdb-9548.prod.hosting.acquia.com
-#relay-log                       = relaylog
-#relay-log-index                 = relay-index
-#replicate-wild-ignore-table     = mysql.ibbackup_binlog_marker
+report-host                     = fsdb-9548.prod.hosting.acquia.com
+relay-log                       = relaylog
+relay-log-index                 = relay-index
+replicate-wild-ignore-table     = mysql.ibbackup_binlog_marker
 
-#relay-log-recovery              = 1
+relay-log-recovery              = 1
 
 # MySQL replication is not supported with InnoDB when using
 # statement based replication.  Since row based was added to MySQL
@@ -146,12 +146,12 @@ innodb_stats_on_metadata=OFF
 # set mixed mode so MySQL can decide which is better for the
 # storage engine that it is running.
 # http://dev.mysql.com/doc/refman/5.1/en/binary-log-mixed.html
-#binlog_format=mixed
+binlog_format=mixed
 
 # Do not log 1592 Unsafe replication warnings. They blow up the log since they result
 # from the mk-table-checksum/pt-table-checksum tool. This option is Percona Server
 # specific as MySQL has never addressed this.
-#log_warnings_suppress           = 1592
+log_warnings_suppress           = 1592
 
 
 auto_increment_increment        = 5

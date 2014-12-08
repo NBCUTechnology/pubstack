@@ -85,6 +85,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     dev.vm.provision 'ansible' do |ansible|
       ansible.playbook = File.file?(user_playbook) ? user_playbook : 'site.yml'
       ansible.extra_vars = {:sites => pubstack_config['sites']}
+      # Set PHP errors on.
+      ansible.extra_vars.php_display_errors = 'On'
+      ansible.extra_vars.php_display_startup_errors = 'On'
+      ansible.extra_vars.php_track_errors = 'On'
       # ansible.verbose = 'vvvv'
     end
   end

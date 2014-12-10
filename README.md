@@ -81,6 +81,9 @@ Publisher's Local Development Stack
 - ```PDOException: SQLSTATE[42S02]: Base table or view not found```
  : This means your Database is empty. Pubstack only creates the database for you it does not populate it.
 
+- NFS issues?
+ : https://github.com/NBCUOTS/pubstack/wiki/NFS-Mounting-issues
+
 - ```Unable to connect to :127.0.0.1:INCORRECT_DATABASE_NAME```
  : Please make sure your ```settings.local.php``` in your site folder includes the credentials found on [http://pubstack.dev/](http://pubstack.dev/). If you do please remove your database credentials in that file. Pubstack sets up its own database credentials and loads those.
 

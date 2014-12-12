@@ -25,6 +25,7 @@ DirectoryIndex index.php index.html
   SetEnv AH_SITE_GROUP {{site.shortname}}
   SetEnv AH_CURRENT_REGION us-east-1
   SetEnv AH_NON_PRODUCTION 1
+  SetEnv AH_SITE_ENVIRONMENT {{ environment }}
   Header set X-AH-Environment "dev"
   Header always unset "X-Powered-By"
   Header always unset "X-Runtime"

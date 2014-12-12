@@ -79,3 +79,10 @@
     insertafter=EOF
   with_items: sites
   when: sites is defined
+
+# We can not add this to the global /var/www/sitescripts/siteinfo.php because
+# ah_site_info() supplies not only environment but project info, and we
+# optionally support multiple projects on the same server.
+# @TODO Suggest Acquia switch to a real env variable and we will use getenv().
+- name: Ensure environment variable is set on CLI
+  template: src=environment.j2 dest=/etc/profile.d/environment.sh

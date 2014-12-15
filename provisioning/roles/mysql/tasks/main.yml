@@ -32,6 +32,9 @@
   notify:
   - restart mysql
 
+- name: "Setup mysql tmp directory"
+  file: path=/tmp/mysql owner=mysql group=mysql state=directory mode="a+rwx"
+
 - name: start mysql service
   service: name=mysql state=started enabled=true
 

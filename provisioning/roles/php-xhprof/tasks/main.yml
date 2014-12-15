@@ -15,4 +15,4 @@
   notify: restart webserver
 
 - name: "Setup xhprof tmp directory"
-  file: path=/tmp/xhprof owner=www-data group=www-data state=directory
+  file: path=/tmp/xhprof owner=www-data group=www-data state=directory mode="a+rwx"

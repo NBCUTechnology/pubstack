@@ -62,3 +62,10 @@
     line="127.0.0.1  {{ item.vhost.servername }}"
     insertafter=EOF
   with_items: sites
+
+# We can not add this to the global /var/www/sitescripts/siteinfo.php because
+# ah_site_info() supplies not only environment but project info, and we support
+# multiple projects on the same virtual server.
+# @TODO Suggest Acquia switch to a real env variable and we use getenv().
+- name: Ensure environment variable is set on CLI
+  template: src=environment.sh.j2 dest=/etc/profile.d/environment.sh

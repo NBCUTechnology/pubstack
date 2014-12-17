@@ -20,6 +20,7 @@
   SetEnv AH_SITE_NAME {{item.shortname}}
   SetEnv AH_SITE_GROUP {{item.shortname}}
   SetEnv AH_CURRENT_REGION us-east-1
+  SetEnv AH_SITE_ENVIRONMENT pubstack
   SetEnv AH_NON_PRODUCTION 1
   Header set X-AH-Environment "dev"
   Header always unset "X-Powered-By"

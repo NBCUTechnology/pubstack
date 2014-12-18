@@ -1,6 +1,6 @@
 [pubstack]
 pubstack-test sitename=nbcuusah subscription=nbcuusah apache_servername=pubstack.publisher7.com
 # Add additional hosts here.
-use-int.nbcuext.com subscription=nbcuushe shortname=nbcuushe servername=use-int.nbcuext.com documentroot=nbcuushe/docroot mysql_host=localhost memcached_ip=localhost environment=int
-use-acc.nbcuext.com subscription=nbcuushe shortname=nbcuushe servername=use-acc.nbcuext.com documentroot=nbcuushe/docroot mysql_host=localhost memcached_ip=localhost environment=acc
-use-prod.nbcuext.com subscription=nbcuushe shortname=nbcuushe servername=use-prod.nbcuext.com documentroot=nbcuushe/docroot mysql_host=localhost memcached_ip=localhost environment=prod
+use-int.nbcuext.com subscription=nbcuushe shortname=nbcuushe servername=use-int.nbcuext.com documentroot=nbcuushe/docroot mysql_host=localhost memcached_ip=localhost env=int
+use-acc.nbcuext.com subscription=nbcuushe shortname=nbcuushe servername=use-acc.nbcuext.com documentroot=nbcuushe/docroot mysql_host=localhost memcached_ip=localhost env=acc
+use-prod.nbcuext.com subscription=nbcuushe shortname=nbcuushe servername=use-prod.nbcuext.com documentroot=nbcuushe/docroot mysql_host=localhost memcached_ip=localhost env=prod

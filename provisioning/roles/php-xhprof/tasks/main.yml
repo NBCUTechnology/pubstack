@@ -14,5 +14,16 @@
   changed_when: "'Enabling xhprof' in a2ensite_result.stdout"
   notify: restart webserver
 
-- name: "Setup xhprof tmp directory"
-  file: path=/tmp/xhprof owner=www-data group=www-data state=directory mode="a+rwx"
+- name: "Copy pubstack_xhprof init script"
+  copy: src=pubstack_xhprof dest=/etc/init.d/pubstack_xhprof mode=0755
+
+- name: "Ensure xhprof init script runs on start up"
+  command: update-rc.d pubstack_xhprof defaults
+
+- name: "Run the xhprof init script once now"
+  command: /etc/init.d/pubstack_xhprof
+  args:
+    creates: /tmp/xhprof
+
+- name: "Adding XHProf to Pubstack Tools"
+  replace: dest=/var/www/pubstack/index.php regexp='(<!-- tools -->)' replace='<li><a href="http://xhprof.pubstack.dev">XHProf</a></li><!-- tools -->'

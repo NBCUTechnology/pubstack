@@ -1,0 +1,5 @@
+#!/bin/bash
+if [ ! -d /tmp/xhprof ]; then
+  mkdir /tmp/xhprof
+  chown www-data:www-data /tmp/xhprof
+fi

@@ -41,7 +41,7 @@
     - "conf-available/*"
 
 - name: "Enable Required Apache module"
-  shell: a2enmod actions fastcgi alias headers rewrite
+  shell: a2enmod actions expires fastcgi alias headers rewrite
   register: a2enmod_result
   changed_when: "'already enabled' not in a2enmod_result.stdout"
 

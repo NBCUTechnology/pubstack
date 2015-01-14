@@ -71,7 +71,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # argument is a set of non-required options.
     dev.vm.synced_folder pubstack_config['synced_folder'], '/var/www/html',
       type: synced_folder_type,
-      mount_options: ['rw', 'vers=3', 'tcp', 'fsc']
+      mount_options: ['rw', 'vers=3', 'tcp', 'fsc', 'actimeo=1']
 
     # Provider-specific configuration for VirtualBox:
     dev.vm.provider 'virtualbox' do |vb|

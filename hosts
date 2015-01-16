@@ -1,6 +1,7 @@
 [pubstack]
 pubstack-test sitename=nbcuusah subscription=nbcuusah apache_servername=pubstack.publisher7.com
-# Add additional hosts here.
-use-int.nbcuext.com subscription=nbcuushe shortname=nbcuushe servername=use-int.nbcuext.com documentroot=nbcuushe/docroot mysql_host=localhost memcached_ip=localhost env=int
-use-acc.nbcuext.com subscription=nbcuushe shortname=nbcuushe servername=use-acc.nbcuext.com documentroot=nbcuushe/docroot mysql_host=localhost memcached_ip=localhost env=acc
-use-prod.nbcuext.com subscription=nbcuushe shortname=nbcuushe servername=use-prod.nbcuext.com documentroot=nbcuushe/docroot mysql_host=localhost memcached_ip=localhost env=prod
+# Add additional hosts here. Note for USE, Stage and Prod are managed by Puppet.
+use-int.nbcuext.com subscription=nbcuuse shortname=nbcuuse servername=use-int.nbcuext.com documentroot=nbcuuse/docroot mysql_host=localhost memcached_ip=localhost env=int
+use-acc.nbcuext.com subscription=nbcuuse shortname=nbcuuse servername=use-acc.nbcuext.com documentroot=nbcuuse/docroot mysql_host=localhost memcached_ip=localhost env=acc
+# Temporarily Prod is a single-instance web.
+use-prod.nbcuext.com subscription=nbcuuse shortname=nbcuuse servername=use-prod.nbcuext.com documentroot=nbcuuse/docroot mysql_host=localhost memcached_ip=localhost env=prod

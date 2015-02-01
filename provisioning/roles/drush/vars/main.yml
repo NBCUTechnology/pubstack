@@ -2,3 +2,7 @@
 drush_install_path: /usr/local/share/drush
 drush_path: /usr/local/bin/drush
 drush_version: 6.x
+drush6_path: /usr/local/bin/drush6
+drush7_install_path: /usr/local/share/drush7
+drush7_path: /usr/local/bin/drush7
+drush7_version: 7.0.0-alpha8

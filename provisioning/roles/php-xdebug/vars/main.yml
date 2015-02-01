@@ -6,3 +6,4 @@ xdebug_remote_handler: dbgp
 xdebug_remote_connect_back: 1
 xdebug_remote_autostart: On
 xdebug_idekey: PHPSTORM
+xdebug_max_nesting_level: 500

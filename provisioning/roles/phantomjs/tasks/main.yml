@@ -1,0 +1,14 @@
+---
+- name: "Install global npm packages"
+  npm: name={{ item }} global=yes state=latest
+  with_items: phantomjs_nodejs_global_packages
+
+- name: "Install PhantomJS 2 dependencies"
+  apt: name={{ item }} state=present
+  sudo: yes
+  with_items: phantomjs_global_dependencies
+
+- name: "Copy phantomjs2"
+  copy: src=phantomjs dest=/usr/bin/phantomjs mode=0755
+
+

@@ -18,6 +18,7 @@
   - splunk
   - nodejs
   - ruby
+  - phantomjs
   handlers:
   - name: "restart webserver"
     service: name=apache2 state=restarted

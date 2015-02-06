@@ -20,10 +20,10 @@ sites:
   vhost:
     servername: local.telemundo.com
     documentroot: Publisher7_nbcutelemundo/docroot
-- subscription: patternlabnbcutelemundo
+- subscription: patternlabtlmd
   shortname: patternlabtlmd
   vhost:
-    servername: patternlab.local.telemundo.com
+    servername: local.patternlab.telemundo.com
     documentroot: Publisher7_nbcutelemundo/prototype/patternlab-php/public
 - subscription: nbcuuomerch
   shortname: nbcuuomerch

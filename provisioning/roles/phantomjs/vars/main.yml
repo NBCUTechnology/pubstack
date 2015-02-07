@@ -4,7 +4,6 @@ phantomjs_nodejs_global_packages:
 
 phantomjs_global_dependencies:
   - libsqlite3-dev
-  - ruby
   - gperf
   - bison
   - flex

@@ -10,7 +10,7 @@ Publisher's Local Development Stack
 1. Install [VirtualBox](https://www.virtualbox.org/).
 
 1. Install Ansible:
-    - [Latest Releases Via Homebrew (Mac OSX)](http://docs.ansible.com/intro_installation.html#latest-releases-via-homebrew-mac-osx)
+    - [Latest Releases Via Homebrew (Mac OSX)](http://docs.ansible.com/intro_installation.html#latest-releases-via-homebrew-mac-osx) : 
       `brew update && brew install ansible`
 
     - [Latest Releases Via Apt (Ubuntu)](http://docs.ansible.com/intro_installation.html#latest-releases-via-apt-ubuntu)

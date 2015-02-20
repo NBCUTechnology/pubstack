@@ -6,3 +6,5 @@ npm_global_packages:
   - grunt-cli
   - gulp
   - jshint
+  - yo
+  - generator-atlas

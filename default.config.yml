@@ -31,3 +31,9 @@ sites:
   vhost:
     servername: local.demo.site2.com
     documentroot: site2/docroot
+
+config:
+  nodejs: true
+  phantomjs: true
+  ruby: true
+  splunk: true

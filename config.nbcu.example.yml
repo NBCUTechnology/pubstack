@@ -30,3 +30,9 @@ sites:
   vhost:
     servername: local.nbcuuomerch.com
     documentroot: Publisher7_nbcuuomerch/docroot
+
+config:
+  nodejs: true
+  phantomjs: true
+  ruby: true
+  splunk: true

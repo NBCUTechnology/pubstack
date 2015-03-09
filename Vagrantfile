@@ -19,6 +19,11 @@ if pubstack_config.include? 'sites'
   }
 end
 
+# Ensure that the new config dictionary exists.
+if not pubstack_config.include? 'config'
+  raise Vagrant::Errors::VagrantError.new, 'You must include the `config` key in your configuration. See default.config.yml for an examle.'
+end
+
 # Ensure Vagrant::Hostsupdater plugin is installed.
 unless pubstack_config['hostupdater'] == false
   unless Vagrant.has_plugin?('vagrant-hostsupdater')
@@ -85,7 +90,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     user_playbook = File.dirname(__FILE__) + '/provisioning/user.playbook.yml'
     dev.vm.provision 'ansible' do |ansible|
       ansible.playbook = File.file?(user_playbook) ? user_playbook : 'provisioning/pubstack.yml'
-      ansible.extra_vars = {:sites => pubstack_config['sites']}
+      ansible.extra_vars = {:sites => pubstack_config['sites'], :config => pubstack_config['config']}
     end
   end
 end

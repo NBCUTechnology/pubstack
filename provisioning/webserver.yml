@@ -15,10 +15,10 @@
   - memcached
   - nfs
   - drupal
-  - splunk
-  - nodejs
-  - ruby
-  - phantomjs
+  - { role: nodejs, when: config.nodejs }
+  - { role: ruby, when: config.ruby }
+  - { role: phantomjs, when: config.phantomjs }
+  - { role: splunk, when: config.splunk }
   handlers:
   - name: "restart webserver"
     service: name=apache2 state=restarted

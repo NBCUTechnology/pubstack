@@ -89,6 +89,9 @@ Publisher's Local Development Stack
 - ```Unable to connect to :127.0.0.1:INCORRECT_DATABASE_NAME```
  : Please make sure your ```settings.local.php``` in your site folder includes the credentials found on [http://pubstack.dev/](http://pubstack.dev/). If you do please remove your database credentials in that file. Pubstack sets up its own database credentials and loads those.
 
+- Drupal 8 support
+ : Set the `d8` key to `true` in your site definition.
+
 ### VPN
 - Cisco Issue
     When enabled, the Cisco Anyconnect VPN client blocks out all IP to IP communication.

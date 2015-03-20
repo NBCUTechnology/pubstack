@@ -1,48 +1,25 @@
 <?php
 
-$base_url = 'http://{{ item.vhost.servername }}';
+function ah_drupal_core_version() {
+  if (defined('DRUPAL_CORE_COMPATIBILITY')) {
+    switch (DRUPAL_CORE_COMPATIBILITY) {
+      case '8.x':
+        return '8';
+      case '7.x':
+        return '7';
+    }
+  }
+  // in D8, the old var got removed:
+  // https://drupal.org/node/2067017
+  else if (class_exists('Drupal') && defined('Drupal::CORE_COMPATIBILITY')) {
+    switch (Drupal::CORE_COMPATIBILITY) {
+      case '8.x':
+        return '8';
+      case '7.x':
+        return '7';
+    }
+  }
+}
 
-$databases['default'] = array ('default' =>
-  array (
-    'database' => '{{ item.shortname }}',
-    'username' => '{{ item.shortname }}',
-    'password' => '',
-    'host' => '172.25.128.10',
-    'port' => '',
-    'driver' => 'mysql',
-    'prefix' => '',
-    {% if item.d8 is defined %}
-    'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
-    {% endif %}
-  ),
-);
-
-{% if item.d8 is defined %}
-  {# This is where new configuration for our Drupal 8 sites should go #}
-{% else %}
-
-// Configure Devel variables.
-$conf['devel_xhprof_url'] = 'http://xhprof.pubstack.dev';
-$conf['devel_xhprof_directory'] = '/usr/share/php/';
-$conf['devel_api_url'] = 'api.publisher7.com';
-
-// In order to use xhprof, enable `devel` module and uncomment line below.
-//$conf['devel_xhprof_enabled'] = 1;
-
-// Set the program name for syslog.module.
-$conf['syslog_identity'] = '{{ item.shortname }}';
-$conf['syslog_format'] = 'base_url=!base_url timestamp=!timestamp type=!type ip=!ip request_uri=!request_uri referer=!referer uid=!uid link=!link message=!message';
-
-// Set up memcache settings.
-$conf['memcache_key_prefix'] = '{{ item.shortname }}_';
-$conf['memcache_servers'] = array(
-   '172.25.128.10:11211' => 'default',
-);
-
-// Imagemagick 'path to convert binary' setting.
-$conf['imagemagick_convert'] = '/usr/bin/convert';
-
-// Set tmp directory.
-$conf['file_temporary_path'] = '/tmp';
-
-{% endif %}
+$config_file = __DIR__ . '/D' . ah_drupal_core_version() . '-{{ item.shortname }}-settings.inc';
+require_once $config_file;

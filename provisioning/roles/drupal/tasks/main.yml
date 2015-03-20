@@ -14,3 +14,21 @@
   with_items: sites
   when: sites is defined
   sudo: yes
+
+- name: "add site D7 settings file"
+  template: >
+    src=d7-settings.j2
+    dest=/var/www/site-php/{{ item.subscription }}/D7-{{ item.shortname }}-settings.inc
+    owner=root group=root mode=644
+  with_items: sites
+  when: sites is defined
+  sudo: yes
+
+- name: "add site D8 settings file"
+  template: >
+    src=d8-settings.j2
+    dest=/var/www/site-php/{{ item.subscription }}/D8-{{ item.shortname }}-settings.inc
+    owner=root group=root mode=644
+  with_items: sites
+  when: sites is defined
+  sudo: yes

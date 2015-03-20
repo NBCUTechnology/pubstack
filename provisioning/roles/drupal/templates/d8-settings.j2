@@ -1,0 +1,32 @@
+<?php
+
+$base_url = 'http://{{ item.vhost.servername }}';
+
+$databases['default'] = array ('default' =>
+  array (
+    'database' => '{{ item.shortname }}',
+    'username' => '{{ item.shortname }}',
+    'password' => '',
+    'host' => '172.25.128.10',
+    'port' => '',
+    'driver' => 'mysql',
+    'prefix' => '',
+    'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
+  ),
+);
+
+// Set the program name for syslog.module.
+$conf['syslog_identity'] = '{{ item.shortname }}';
+$conf['syslog_format'] = 'base_url=!base_url timestamp=!timestamp type=!type ip=!ip request_uri=!request_uri referer=!referer uid=!uid link=!link message=!message';
+
+// Set up memcache settings.
+$conf['memcache_key_prefix'] = '{{ item.shortname }}_';
+$conf['memcache_servers'] = array(
+   '172.25.128.10:11211' => 'default',
+);
+
+// Imagemagick 'path to convert binary' setting.
+$conf['imagemagick_convert'] = '/usr/bin/convert';
+
+// Set tmp directory.
+$conf['file_directory_temp'] = '/tmp';

@@ -38,6 +38,18 @@ if (RbConfig::CONFIG['host_os'] =~ /mswin|msys|mingw|cygwin|bccwin|wince|emc/)
   synced_folder_type = 'smb'
 end
 
+# Run the firewall fixer script if Mac and the config file doesn't say otherwise.
+unless pubstack_config['mac_firewall_script'] == false
+  if RbConfig::CONFIG['host_os'][0,6] = 'darwin'
+    darwinVersion = Integer(RbConfig::CONFIG['host_os'][7,8])
+    if darwinVersion > 13
+      # @TODO: ipfw removed in Yosemite and above. HTF does `pf` work?
+    else
+      `./scripts/cisco.workaround.sh`
+    end
+  end
+end
+
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = '2'
 

@@ -29,7 +29,7 @@ Publisher's Local Development Stack
     ```bash
     vagrant plugin install vagrant-hostsupdater
     ```
-    Note you can disable automatic hosts file management by adding `hostupdater: false` to your `config.yml` (see below). If you do this, you will need to manage hosts file entries yourself.
+    **Note**: you can disable automatic hosts file management by adding `hostupdater: false` to your `config.yml` (see below). If you do this, you will need to manage hosts file entries yourself.
 
 1. Create your config file from the default template and modify as needed (note each config has commented instructions):
     ```bash

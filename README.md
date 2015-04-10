@@ -23,6 +23,7 @@ Publisher's Local Development Stack
     git clone --branch master git@github.com:NBCUOTS/pubstack.git ~/pubstack
     cd ~/pubstack
     ```
+    **Note**: the full path where you clone this repo **should not include spaces** or you will experience errors when you start up your vagrant box for the first time.
 
 1. Install Hostupdater:
     ```bash

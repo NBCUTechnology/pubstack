@@ -43,4 +43,5 @@ config:
   phantomjs: true
   ruby: true
   splunk: true
+  # Note that the mailcatcher role requires the ruby role.
   mailcatcher: true

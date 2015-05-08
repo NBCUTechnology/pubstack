@@ -20,7 +20,7 @@
   - { role: ruby, when: config.ruby }
   - { role: phantomjs, when: config.phantomjs }
   - { role: splunk, when: config.splunk }
-  - { role: mailcatcher, when: config.mailcatcher }
+  - { role: mailcatcher, when: config.ruby and config.mailcatcher }
   handlers:
   - name: "restart webserver"
     service: name=apache2 state=restarted

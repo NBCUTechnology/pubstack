@@ -33,6 +33,8 @@ sites:
     documentroot: site2/docroot
 
 config:
+  newrelic_license: licensekey
+  newrelic_prefix: username
   nodejs: true
   phantomjs: true
   ruby: true

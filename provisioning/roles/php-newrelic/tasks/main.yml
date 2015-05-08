@@ -11,7 +11,10 @@
   sudo: yes
   apt: update_cache=yes
 
-- name: "install php newrelic"
+- name: Setup newrelic.ini
+  template: src=newrelic.ini.j2 dest=/etc/php5/mods-available/newrelic.ini
+
+- name: Install php newrelic
   apt: name=newrelic-php5 state=present
   notify:
     - restart webserver

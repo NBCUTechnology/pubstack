@@ -3,6 +3,16 @@ pubstack
 
 Publisher's Local Development Stack
 
+## Features
+ - PHP 5.5.x
+  - Drupal/Drush 
+  - XhProf
+  - XDEBUG
+  - New Relic
+ - memcached
+ - Splunk
+ - Ruby/NodeJS
+
 ## Installation
 
 1. Install [Vagrant](http://www.vagrantup.com/).

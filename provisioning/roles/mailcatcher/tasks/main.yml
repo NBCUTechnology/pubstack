@@ -27,8 +27,14 @@
 - name: Start Mailcatcher properly with the start script
   command: /etc/init.d/mailcatcher
 
-- name: Reset PHP's sendmail handler
-  ini_file: dest=/etc/php5/fpm/php.ini section="mail function" option=sendmail_path value="/usr/bin/env catchmail"
+- name: Reset PHP's sendmail handler (fpm)
+  copy: src=php-mailcatcher.ini dest=/etc/php5/fpm/conf.d/mailcatcher.ini mode=0644
+  notify:
+    - restart webserver
+    - restart php-fpm
+
+- name: Reset PHP's sendmail handler (cli)
+  copy: src=php-mailcatcher.ini dest=/etc/php5/cli/conf.d/mailcatcher.ini mode=0644
   notify:
     - restart webserver
     - restart php-fpm

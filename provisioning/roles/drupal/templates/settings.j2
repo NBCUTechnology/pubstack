@@ -23,3 +23,10 @@ function ah_drupal_core_version() {
 
 $config_file = __DIR__ . '/D' . ah_drupal_core_version() . '-{{ item.shortname }}-settings.inc';
 require_once $config_file;
+
+/**
+ * New Relic settings.
+ */
+if (function_exists('newrelic_set_appname')) {
+  newrelic_set_appname('{{ config.newrelic_prefix }} - {{ item.shortname }}');
+}

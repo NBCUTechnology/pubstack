@@ -32,9 +32,13 @@ sites:
     servername: local.demo.site2.com
     documentroot: site2/docroot
 
+# General config for enabling "add ons".
 config:
-  newrelic_license: licensekey
-  newrelic_prefix: username
+  # Add New Relic integration. More info: https://docs.newrelic.com/docs/agents/php-agent/getting-started/new-relic-php
+  # Remove newrelic config entirely to disable.
+  newrelic:
+    license: licensekey
+    prefix: username
   nodejs: true
   phantomjs: true
   ruby: true

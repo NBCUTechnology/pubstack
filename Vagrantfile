@@ -21,7 +21,7 @@ end
 
 # Ensure that the new config dictionary exists.
 if not pubstack_config.include? 'config'
-  raise Vagrant::Errors::VagrantError.new, 'You must include the `config` key in your configuration. See default.config.yml for an examle.'
+  raise Vagrant::Errors::VagrantError.new, 'You must include the `config` key in your configuration. See config.example.yml for an examle.'
 end
 
 # Ensure Vagrant::Hostsupdater plugin is installed.

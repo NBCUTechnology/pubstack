@@ -1,8 +1,8 @@
 extension = "newrelic.so"
-{% if config.newrelic_license %}
+{% if config.newrelic is defined %}
 newrelic.enabled = true
-newrelic.license = "{{ config.newrelic_license }}"
-newrelic.appname = "{{ config.newrelic_prefix }}"
+newrelic.license = "{{ config.newrelic.license }}"
+newrelic.appname = "{{ config.newrelic.prefix }}"
 {% else %}
 newrelic.enabled = false
 {% endif %}

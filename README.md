@@ -5,7 +5,7 @@ Publisher's Local Development Stack
 
 ## Features
  - PHP 5.5.x
-  - Drupal/Drush 
+  - Drupal/Drush
   - XhProf
   - XDEBUG
   - New Relic
@@ -20,7 +20,7 @@ Publisher's Local Development Stack
 1. Install [VirtualBox](https://www.virtualbox.org/).
 
 1. Install Ansible:
-    - [Latest Releases Via Homebrew (Mac OSX)](http://docs.ansible.com/intro_installation.html#latest-releases-via-homebrew-mac-osx) : 
+    - [Latest Releases Via Homebrew (Mac OSX)](http://docs.ansible.com/intro_installation.html#latest-releases-via-homebrew-mac-osx):
       `brew update && brew install ansible`
 
     - [Latest Releases Via Apt (Ubuntu)](http://docs.ansible.com/intro_installation.html#latest-releases-via-apt-ubuntu)
@@ -41,12 +41,12 @@ Publisher's Local Development Stack
     ```
     **Note**: you can disable automatic hosts file management by adding `hostupdater: false` to your `config.yml` (see below). If you do this, you will need to manage hosts file entries yourself.
 
-1. Create your config file from the default template and modify as needed (note each config has commented instructions):
+1. Create your config file from the [example config](./config.example.yml) and modify as needed (each config has commented instructions):
     ```bash
-    cp config.nbcu.example.yml config.yml
+    cp config.example.yml config.yml
     vim config.yml
     ```
-    **Note**: After the initial `vagrant up`, any time you edit your config file values you will want to run
+    **Note**: After the initial `vagrant up`, any time you edit your config file values you will want to run:
     ```
     vagrant reload --provision
     ```

@@ -6,7 +6,7 @@ cpus: 2
 
 sites:
 - subscription: nbcupublisher7
-  shortname: nbcupublisher7 
+  shortname: nbcupublisher7
   vhost:
     servername: local.publisher7.com
     documentroot: Publisher7/docroot
@@ -32,6 +32,9 @@ sites:
     documentroot: Publisher7_nbcuuomerch/docroot
 
 config:
+  newrelic:
+    license: licensekey
+    prefix: username
   nodejs: true
   phantomjs: true
   ruby: true

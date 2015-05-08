@@ -1,0 +1,5 @@
+#!/bin/sh
+#/etc/init.d/mailcatcher
+#
+
+/usr/local/bin/mailcatcher --ip=127.0.0.1

@@ -39,3 +39,4 @@ config:
   phantomjs: true
   ruby: true
   splunk: true
+  mailcatcher: true

@@ -1,0 +1,18 @@
+---
+- name: Add New Relic apt signing key
+  sudo: yes
+  apt_key: url=https://download.newrelic.com/548C16BF.gpg state=present
+
+- name: Add New Relic repository
+  sudo: yes
+  apt_repository: repo='deb http://apt.newrelic.com/debian/ newrelic non-free' state=present
+
+- name: Update apt cache
+  sudo: yes
+  apt: update_cache=yes
+
+- name: "install php newrelic"
+  apt: name=newrelic-php5 state=present
+  notify:
+    - restart webserver
+    - restart php-fpm

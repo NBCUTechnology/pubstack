@@ -1,0 +1,60 @@
+---
+# tasks file for role-mailcatcher
+- name: Install required software
+  apt: pkg={{ item }} state=latest
+  with_items:
+      - sqlite3
+      - libsqlite3-dev
+      - ruby-dev
+      - rubygems
+
+- name: Install dependencies
+  gem: name=mime-types version=1.25.1 state=present user_install=no
+
+- name: Install Mailcatcher
+  gem: name=mailcatcher state=latest user_install=no
+
+- name: Create startup script
+  copy: src=mailcatcher dest=/etc/init.d/mailcatcher mode=0755
+
+- name: Set Mailcatcher to start on boot
+  command: update-rc.d mailcatcher defaults
+
+- name: Make sure Mailcatcher is not running
+  command: pkill mailcatcher
+  ignore_errors: yes
+
+- name: Start Mailcatcher properly with the start script
+  command: /etc/init.d/mailcatcher
+
+- name: Reset PHP's sendmail handler (fpm)
+  copy: src=php-mailcatcher.ini dest=/etc/php5/fpm/conf.d/mailcatcher.ini mode=0644
+  notify:
+    - restart webserver
+    - restart php-fpm
+
+- name: Reset PHP's sendmail handler (cli)
+  copy: src=php-mailcatcher.ini dest=/etc/php5/cli/conf.d/mailcatcher.ini mode=0644
+  notify:
+    - restart webserver
+    - restart php-fpm
+
+- name: Reset PHP CLI sendmail handler
+  ini_file: dest=/etc/php5/cli/php.ini section="mail function" option=sendmail_path value="/usr/bin/env catchmail"
+
+- name: Enable required Apache modules for mail subdomain
+  shell: a2enmod proxy proxy_http
+  register: a2enmod_result
+  changed_when: "'already enabled' not in a2enmod_result.stdout"
+
+- name: Copy vhost settings
+  copy: src=mailcatcher.conf dest=/etc/apache2/sites-available/mailcatcher.conf
+
+- name: Enable Mailcatcher vhost
+  shell: a2ensite mailcatcher.conf
+  register: a2ensite_result
+  changed_when: "'Enabling site mailcatcher' in a2ensite_result.stdout"
+  notify: restart webserver
+
+- name: "Adding Mailcatcher to Pubstack Tools"
+  replace: dest=/var/www/pubstack/index.php regexp='(<!-- tools -->)' replace='<li><a href="http://mail.pubstack.dev">Mailcatcher</a></li><!-- tools -->'

@@ -7,10 +7,9 @@
   tags: drush
 
 - name: "install drush dependencies with composer"
-  shell: >
-    composer install
-    chdir={{ drush_install_path }}
-    creates={{ drush_install_path }}/vendor/autoload.php
+  composer: >
+    command=install
+    working_dir={{ drush_install_path }}
   tags: drush
 
 - name: "create drush symlink"
@@ -49,10 +48,9 @@
   tags: drush
 
 - name: "install drush7 dependencies with composer"
-  shell: >
-    composer install
-    chdir={{ drush7_install_path }}
-    creates={{ drush7_install_path }}/vendor/autoload.php
+  composer: >
+    command=install
+    working_dir={{ drush7_install_path }}
   tags: drush
 
 - name: "create drush7 symlink"

@@ -113,6 +113,7 @@ Publisher's Local Development Stack
 - [conortm](https://github.com/conortm)
 - [ericduran](https://github.com/ericduran)
 - [scottrigby](https://github.com/scottrigby)
+- [cweagans](https://github.com/cweagans)
 
 ### Contributors
  - [rebmullin](https://github.com/rebmullin)

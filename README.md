@@ -13,7 +13,19 @@ Publisher's Local Development Stack
  - Splunk
  - Ruby/NodeJS
 
-## Installation
+## Easy Installation
+
+Using [nbcutechnology/pubstack-shell](https://github.com/NBCUTechnology/pubstack-shell) is the easy way to get started with Pubstack
+
+1. Install Composer
+2. `composer global require nbcutechnology/pubstack-shell ~1.0`
+3. `pubstack init`
+4. `vagrant plugin install vagrant-hostsupdater`
+5. `pubstack configure` (and edit the configuration to how you want it)
+6. `pubstack up`
+
+
+## Manual Installation
 
 1. Install [Vagrant](http://www.vagrantup.com/).
 

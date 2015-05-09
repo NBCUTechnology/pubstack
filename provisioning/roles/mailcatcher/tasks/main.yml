@@ -16,16 +16,16 @@
 
 - name: Create startup script
   copy: src=mailcatcher dest=/etc/init.d/mailcatcher mode=0755
-
-- name: Set Mailcatcher to start on boot
-  command: update-rc.d mailcatcher defaults
+  register: mailcatcher_init_status
 
 - name: Make sure Mailcatcher is not running
   command: pkill mailcatcher
   ignore_errors: yes
+  when: mailcatcher_init_status.changed
 
-- name: Start Mailcatcher properly with the start script
-  command: /etc/init.d/mailcatcher
+- name: Start Mailcatcher and start it on boot
+  service: name=mailcatcher state=started enabled=yes
+  when: mailcatcher_init_status.changed
 
 - name: Reset PHP's sendmail handler (fpm)
   copy: src=php-mailcatcher.ini dest=/etc/php5/fpm/conf.d/mailcatcher.ini mode=0644
@@ -57,4 +57,9 @@
   notify: restart webserver
 
 - name: "Adding Mailcatcher to Pubstack Tools"
-  replace: dest=/var/www/pubstack/index.php regexp='(<!-- tools -->)' replace='<li><a href="http://mail.pubstack.dev">Mailcatcher</a></li><!-- tools -->'
+  lineinfile: >
+    dest=/var/www/pubstack/index.php
+    state=present
+    regexp="mail.pubstack.dev"
+    insertafter="\<\!-- tools --\>"
+    line="<li><a href='http://mail.pubstack.dev'>Mailcatcher</a></li>"

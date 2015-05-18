@@ -1,55 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <title>pubstack</title>
-</head>
-<body>
+  <head>
+    <meta charset="utf-8">
+    <title>Pubstack</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css" />
+    <link href="//cdn.jsdelivr.net/normalize/3.0.3/normalize.min.css" rel="stylesheet" />
+    <link href="//cdn.jsdelivr.net/skeleton/2.0.4/css/skeleton.css" rel="stylesheet" />
+    <style>
+      * {
+        font-family:
+      }
+      .container{
+        margin-top: 30px;
+        max-width: 1200px;
+      }
+      table {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
 
-  <h1>pubstack</h1>
-  <p>Publisher's DevStack</p>
+    <div class="container">
+      <div class="row">
+        <div class="twelve columns">
+          <h1>Pubstack</h1>
+          <hr />
+        </div>
+      </div>
+      <div class="row">
+        <div class="two-thirds column">
+          <h2>Sites</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Shortname</th>
+                <th>URL</th>
+                <th>MySQL connection</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for site in sites %}
+              <tr>
+                <td>{{ site.shortname }}</td>
+                <td><a href="http://{{ site.vhost.servername }}">http://{{ site.vhost.servername }}</a></td>
+                <td>{{ site.shortname }}:@172.25.128.10/{{ site.shortname }}</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <div class="one-third column">
+          <h2>Tools</h2>
+          <ul>
+            <!-- tools -->
+            <li><a href="info.php">phpinfo</a></li>
+            <!-- TODO: Change this to use a config flag -->
+            <li><a href="http://xhprof.pubstack.dev">XHProf</a></li>
+            {% if config.splunk %}<li><a href="http://splunk.pubstack.dev">Splunk</a></li>{% endif %}
+            {% if config.mailcatcher %}<li><a href="http://mail.pubstack.dev">Mailcatcher</a></li>{% endif %}
+          </ul>
 
-  <h2>PHP info</h2>
-  <ul>
-    <li><a href="info.php">info.php</a></li>
-  </ul>
+          <hr />
 
-  <h2>Sites</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Shortname</th>
-        <th>URL</th>
-        <th>MySQL connection</th>
-      </tr>
-    </thead>
-    <tbody>
-    {% for site in sites %}
-      <tr>
-        <td>{{ site.shortname }}</td>
-        <td><a href="http://{{ site.vhost.servername }}">http://{{ site.vhost.servername }}</a></td>
-        <td>{{ site.shortname }}:@172.25.128.10/{{ site.shortname }}</td>
-      </tr>
-    {% endfor %}
-    </tbody>
-  </table>
-
-  <h2>Tools</h2>
-  <ul>
-    <!-- tools -->
-    <!-- TODO: Change this to use a config flag -->
-    <li><a href="http://xhprof.pubstack.dev">XHProf</a></li>
-    {% if config.splunk %}<li><a href="http://splunk.pubstack.dev">Splunk</a></li>{% endif %}
-    {% if config.mailcatcher %}<li><a href="http://mail.pubstack.dev">Mailcatcher</a></li>{% endif %}
-  </ul>
-
-  <h2>Help</h2>
-  <ul>
-    <li><a href="http://nbcuots.github.io/pubstack/">Main page</a></li>
-    <li><a href="https://github.com/NBCUOTS/pubstack/wiki">Documentation</a></li>
-    <li><a href="https://github.com/NBCUOTS/pubstack/issues">Issue queue</a></li>
-    <li>Or find us on <a href="http://irccloud.com/">IRC</a> or <a href="http://nbcuots.slack.com/">Slack</a>, and we’ll help you sort it out.</li>
-  </ul>
-
-</body>
+          <h2>Help</h2>
+          <ul>
+            <li><a href="http://nbcuots.github.io/pubstack/">Main page</a></li>
+            <li><a href="https://github.com/nbcutechnology/pubstack/wiki">Documentation</a></li>
+            <li><a href="https://github.com/nbcutechnology/pubstack/issues">Issue queue</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

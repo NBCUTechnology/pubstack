@@ -12,10 +12,10 @@ pubstack_config = YAML::load_file(config_file)
 # If the synced folder option is specified, fix the documentroot option
 # for every site.
 if pubstack_config.include? 'synced_folder'
-  # It doesn't make sense to specify both synced_folder and synced_folders,
+  # It doesn't make sense to specify both synced_folder and shared_folders,
   # and the path to the documentroot in the VM will break, so just bail
   # if both are specified for whatever reason.
-  if pubstack_config.include? 'synced_folders'
+  if pubstack_config.include? 'shared_folders'
     raise Vagrant::Errors::VagrantError.new, 'You may only use the synced_folder option if synced_folders is not specified. Please fix your config.yml and try again.'
   end
 
@@ -23,6 +23,11 @@ if pubstack_config.include? 'synced_folder'
     site['vhost']['documentroot'] = '/var/www/html/' + site['vhost']['documentroot']
   }
   pubstack_config['shared_folders'] = [ { "map" => pubstack_config['synced_folder'], "to" => '/var/www/html'} ]
+end
+
+# Ensure that the shared_folders configuration exists.
+if not pubstack_config.include? 'shared_folders'
+  raise Vagrant::Errors::VagrantError.new, 'You must include either the synced_folder or shared_folders options in your config.yml'
 end
 
 # Ensure that the new config dictionary exists.

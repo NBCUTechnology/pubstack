@@ -16,7 +16,7 @@ if pubstack_config.include? 'synced_folder'
   # and the path to the documentroot in the VM will break, so just bail
   # if both are specified for whatever reason.
   if pubstack_config.include? 'shared_folders'
-    raise Vagrant::Errors::VagrantError.new, 'You may only use the synced_folder option if synced_folders is not specified. Please fix your config.yml and try again.'
+    raise Vagrant::Errors::VagrantError.new, 'You may only use the synced_folder option if shared_folders is not specified. Please fix your config.yml and try again.'
   end
 
   pubstack_config['sites'].each {|site|

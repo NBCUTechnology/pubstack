@@ -37,6 +37,10 @@
   <h2>Tools</h2>
   <ul>
     <!-- tools -->
+    <!-- TODO: Change this to use a config flag -->
+    <li><a href="http://xhprof.pubstack.dev">XHProf</a></li>
+    {% if config.splunk %}<li><a href="http://splunk.pubstack.dev">Splunk</a></li>{% endif %}
+    {% if config.mailcatcher %}<li><a href="http://mail.pubstack.dev">Mailcatcher</a></li>{% endif %}
   </ul>
 
   <h2>Help</h2>

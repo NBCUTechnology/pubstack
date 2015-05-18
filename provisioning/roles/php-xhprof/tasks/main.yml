@@ -24,6 +24,3 @@
   command: /etc/init.d/pubstack_xhprof
   args:
     creates: /tmp/xhprof
-
-- name: "Adding XHProf to Pubstack Tools"
-  replace: dest=/var/www/pubstack/index.php regexp='(<!-- tools -->)' replace='<li><a href="http://xhprof.pubstack.dev">XHProf</a></li><!-- tools -->'

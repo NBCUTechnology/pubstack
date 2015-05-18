@@ -20,6 +20,13 @@ if pubstack_config.include? 'synced_folder'
   end
 
   pubstack_config['sites'].each {|site|
+    # Since we know the host path and the VM path in this specific case,
+    # we can do documentroot validation.
+    documentroot = pubstack_config['synced_folder'] + '/' + site['vhost']['documentroot']
+    if not File.directory? (File.expand_path(documentroot))
+      raise Vagrant::Errors::VagrantError.new, 'The docroot ' + documentroot + ' does not exist.'
+    end
+
     site['vhost']['documentroot'] = '/var/www/html/' + site['vhost']['documentroot']
   }
   pubstack_config['shared_folders'] = [ { "map" => pubstack_config['synced_folder'], "to" => '/var/www/html'} ]

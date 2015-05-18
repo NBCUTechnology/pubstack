@@ -55,11 +55,3 @@
   register: a2ensite_result
   changed_when: "'Enabling site mailcatcher' in a2ensite_result.stdout"
   notify: restart webserver
-
-- name: "Adding Mailcatcher to Pubstack Tools"
-  lineinfile: >
-    dest=/var/www/pubstack/index.php
-    state=present
-    regexp="mail.pubstack.dev"
-    insertafter="\<\!-- tools --\>"
-    line="<li><a href='http://mail.pubstack.dev'>Mailcatcher</a></li>"

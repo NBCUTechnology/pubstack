@@ -9,6 +9,11 @@ if not File.file?(config_file)
 end
 pubstack_config = YAML::load_file(config_file)
 
+# Ensure that the sites key exists.
+if not pubstack_config.include? 'sites'
+  raise Vagrant::Errors::VagrantError.new, "You must include the sites key in your config.yml. See config.example.yml for an example."
+end
+
 # If the synced folder option is specified, fix the documentroot option
 # for every site.
 if pubstack_config.include? 'synced_folder'

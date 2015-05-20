@@ -1,0 +1,31 @@
+---
+memory: 1024
+cpus: 2
+
+shared_folders:
+  - map: ~/Documents/Code/NBCU/Sites
+    to: /var/www/html
+  - map: ~/Documents/Code/some_other_thing/drupal
+    to: /var/www/some_other_thing
+
+sites:
+- subscription: nbcupublisher7
+  shortname: nbcupublisher7
+  vhost:
+    servername: local.publisher7.com
+    documentroot: /var/www/html/Publisher7/docroot
+
+- subscription: some_other_thing
+  shortname: some_other_thing
+  vhost:
+    servername: some_other_thing.dev
+    documentroot: /var/www/some_other_thing
+
+config:
+  nodejs: false
+  phantomjs: false
+  ruby: true
+  splunk: false
+  mailcatcher: true
+
+

@@ -9,14 +9,37 @@ if not File.file?(config_file)
 end
 pubstack_config = YAML::load_file(config_file)
 
-# Validate sites' docroots:
-if pubstack_config.include? 'sites'
+# Ensure that the sites key exists.
+if not pubstack_config.include? 'sites'
+  raise Vagrant::Errors::VagrantError.new, "You must include the sites key in your config.yml. See config.example.yml for an example."
+end
+
+# If the synced folder option is specified, fix the documentroot option
+# for every site.
+if pubstack_config.include? 'synced_folder'
+  # It doesn't make sense to specify both synced_folder and shared_folders,
+  # and the path to the documentroot in the VM will break, so just bail
+  # if both are specified for whatever reason.
+  if pubstack_config.include? 'shared_folders'
+    raise Vagrant::Errors::VagrantError.new, 'You may only use the synced_folder option if shared_folders is not specified. Please fix your config.yml and try again.'
+  end
+
   pubstack_config['sites'].each {|site|
+    # Since we know the host path and the VM path in this specific case,
+    # we can do documentroot validation.
     documentroot = pubstack_config['synced_folder'] + '/' + site['vhost']['documentroot']
-    if not File.directory?(File.expand_path(documentroot))
+    if not File.directory? (File.expand_path(documentroot))
       raise Vagrant::Errors::VagrantError.new, 'The docroot ' + documentroot + ' does not exist.'
     end
+
+    site['vhost']['documentroot'] = '/var/www/html/' + site['vhost']['documentroot']
   }
+  pubstack_config['shared_folders'] = [ { "map" => pubstack_config['synced_folder'], "to" => '/var/www/html'} ]
+end
+
+# Ensure that the shared_folders configuration exists.
+if not pubstack_config.include? 'shared_folders'
+  raise Vagrant::Errors::VagrantError.new, 'You must include either the synced_folder or shared_folders options in your config.yml'
 end
 
 # Ensure that the new config dictionary exists.
@@ -80,9 +103,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # the path on the host to the actual folder. The second argument is
     # the path on the guest to mount the folder. And the optional third
     # argument is a set of non-required options.
-    dev.vm.synced_folder pubstack_config['synced_folder'], '/var/www/html',
-      type: synced_folder_type,
-      mount_options: ['rw', 'vers=3', 'tcp', 'fsc', 'actimeo=1']
+    pubstack_config['shared_folders'].each do |folder|
+      dev.vm.synced_folder folder['map'], folder['to'],
+        type: synced_folder_type,
+        mount_options: ['rw', 'vers=3', 'tcp', 'fsc', 'actimeo=1']
+    end
 
     # Provider-specific configuration for VirtualBox:
     dev.vm.provider 'virtualbox' do |vb|

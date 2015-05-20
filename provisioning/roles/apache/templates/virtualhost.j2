@@ -1,8 +1,8 @@
 
 <VirtualHost *:{{ apache_listen_port }}>
   ServerName {{ item.vhost.servername }}
-  DocumentRoot {{ apache_synced_folder }}/{{ item.vhost.documentroot }}
-  <Directory "{{ apache_synced_folder }}/{{ item.vhost.documentroot }}">
+  DocumentRoot {{ item.vhost.documentroot }}
+  <Directory "{{ item.vhost.documentroot }}">
     Order Deny,Allow
     Allow from all
     Options FollowSymLinks ExecCGI

@@ -112,6 +112,9 @@ Using [nbcutechnology/pubstack-shell](https://github.com/NBCUTechnology/pubstack
 - ```Unable to connect to :127.0.0.1:INCORRECT_DATABASE_NAME```
  : Please make sure your ```settings.local.php``` in your site folder includes the credentials found on [http://pubstack.dev/](http://pubstack.dev/). If you do please remove your database credentials in that file. Pubstack sets up its own database credentials and loads those.
 
+- 1)Installed Publisher returns frontpage for any request; 2) ```$_SERVER['SCRIPT_NAME']``` contains something like ```http://172.25.128.10/info.php``` instead of ```/info.php```
+	Solution: add ```cgi.fix_pathinfo=0``` into ```/etc/php5/fpm/php.ini```
+
 ### VPN
 - Cisco Issue
     When enabled, the Cisco Anyconnect VPN client blocks out all IP to IP communication.

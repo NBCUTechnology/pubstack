@@ -81,6 +81,7 @@ Using [nbcutechnology/pubstack-shell](https://github.com/NBCUTechnology/pubstack
 1. Power users can add their own playbook(s):
     - An optional, main user playbook will be loaded if it exists: `provisioning/user.playbook.yml`
     - This playbook can include additional playbooks, including the main playbook, before or after your user-specific roles:
+
         ```yaml
         ---
         - include: webserver.yml
@@ -88,6 +89,7 @@ Using [nbcutechnology/pubstack-shell](https://github.com/NBCUTechnology/pubstack
 
 2. You can also add custom roles:
     - User-specific roles should follow this naming convention:
+
         ```bash
         provisioning/roles/user-ROLE-NAME
         ```

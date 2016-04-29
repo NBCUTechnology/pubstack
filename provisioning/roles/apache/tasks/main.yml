@@ -12,14 +12,14 @@
     src=virtualhost.j2
     dest=/etc/apache2/sites-available/{{ item.shortname }}.conf
     owner=root group=root mode=644
-  with_items: sites
+  with_items: "{{ sites }}"
   when: sites is defined
   notify: restart webserver
   sudo: yes
 
 - name: "enable vhosts"
   shell: a2ensite {{ item.shortname }}.conf
-  with_items: sites
+  with_items: "{{ sites }}"
   when: sites is defined
   register: a2ensite_result
   changed_when: "'Enabling site' in a2ensite_result.stdout"
@@ -56,12 +56,12 @@
     state=started
     enabled=yes
 
-- name: Add hosts entry for each site.
+- name: "Add hosts entry for each site."
   lineinfile:
     dest=/etc/hosts
     line="127.0.0.1  {{ item.vhost.servername }}"
     insertafter=EOF
-  with_items: sites
+  with_items: "{{ sites }}"
 
 # We can not add this to the global /var/www/sitescripts/siteinfo.php because
 # ah_site_info() supplies not only environment but project info, and we support

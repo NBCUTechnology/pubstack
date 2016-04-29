@@ -1,29 +1,29 @@
 ---
-- name: Add Percona apt signing key
+- name: "Add Percona apt signing key"
   sudo: yes
   apt_key: keyserver=keys.gnupg.net id=1C4CBDCDCD2EFD2A state=present
 
-- name: Add Percona repository
+- name: "Add Percona repository"
   sudo: yes
   apt_repository: repo='deb http://repo.percona.com/apt precise main' state=present
 
-- name: Add Percona source repository
+- name: "Add Percona source repository"
   sudo: yes
   apt_repository: repo='deb-src http://repo.percona.com/apt precise main' state=present
 
-- name: Update apt cache
+- name: "Update apt cache"
   sudo: yes
   apt: update_cache=yes
 
-- name: Install python packages
+- name: "Install python packages"
   sudo: yes
   apt: name={{ item }} state=present
-  with_items: mysql_apt_packages
+  with_items: "{{ mysql_apt_packages }}"
 
-- name: Install Percona packages
+- name: "Install Percona packages"
   sudo: yes
   apt: name={{ item }} state=present update_cache=yes
-  with_items: percona_server_packages
+  with_items: "{{ percona_server_packages }}"
   environment:
     DEBIAN_FRONTEND: noninteractive
 
@@ -32,7 +32,7 @@
   notify:
   - restart mysql
 
-- name: start mysql service
+- name: "start mysql service"
   service: name=mysql state=started enabled=true
 
 - name: "allow remote root login"
@@ -40,12 +40,12 @@
   notify:
   - restart mysql
 
-- name: create site database
+- name: "create site database"
   mysql_db: name={{ item.shortname }} state=present collation=utf8_general_ci
-  with_items: sites
+  with_items: "{{ sites }}"
   when: sites is defined
 
-- name: create database user
+- name: "create database user"
   mysql_user: name={{ item.shortname }} password= priv={{ item.shortname }}.*:ALL host=% state=present
-  with_items: sites
+  with_items: "{{ sites }}"
   when: sites is defined

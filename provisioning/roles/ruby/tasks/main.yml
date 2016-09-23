@@ -16,13 +16,17 @@
     chdir={{ workspace }}
     creates={{ workspace }}/ruby-{{ ruby_version }}
 
+- name: "install libffi-dev"
+  apt: name=libffi-dev state=present
+  sudo: yes
+
 - name: "build ruby"
   command: >
     {{ item }}
     chdir={{ workspace }}/ruby-{{ ruby_version }}
     creates=/usr/local/bin/ruby
   with_items:
-    - ./configure --enable-shared
+    - ./configure
     - make
     - sudo make install
 
@@ -31,6 +35,7 @@
     src=/usr/local/bin/{{ item }}
     dest=/usr/bin/{{ item }}
     state=link
+    force=yes
   with_items:
     - erb
     - gem
@@ -42,5 +47,5 @@
 
 - name: "install ruby gems"
   gem: name={{ item }} state=present user_install=no
-  with_items: ruby_gems
+  with_items: "{{ ruby_gems }}"
   sudo: yes

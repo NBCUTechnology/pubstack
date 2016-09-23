@@ -1,7 +1,7 @@
 ---
 - name: "create site-php directory"
   file: path=/var/www/site-php/{{ item.subscription }} state=directory
-  with_items: sites
+  with_items: "{{ sites }}"
   when: sites is defined
   sudo: yes
 
@@ -11,7 +11,7 @@
     src=settings.j2
     dest=/var/www/site-php/{{ item.subscription }}/{{ item.shortname }}-settings.inc
     owner=root group=root mode=644
-  with_items: sites
+  with_items: "{{ sites }}"
   when: sites is defined
   sudo: yes
 
@@ -20,7 +20,7 @@
     src=d7-settings.j2
     dest=/var/www/site-php/{{ item.subscription }}/D7-{{ item.shortname }}-settings.inc
     owner=root group=root mode=644
-  with_items: sites
+  with_items: "{{ sites }}"
   when: sites is defined
   sudo: yes
 
@@ -29,6 +29,6 @@
     src=d8-settings.j2
     dest=/var/www/site-php/{{ item.subscription }}/D8-{{ item.shortname }}-settings.inc
     owner=root group=root mode=644
-  with_items: sites
+  with_items: "{{ sites }}"
   when: sites is defined
   sudo: yes

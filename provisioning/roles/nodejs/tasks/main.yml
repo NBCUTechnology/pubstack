@@ -4,8 +4,8 @@
 
 - name: "install Node.js packages"
   apt: name={{ item }} state=latest
-  with_items: nodejs_apt_packages
+  with_items: "{{ nodejs_apt_packages }}"
 
 - name: "install global npm packages"
   npm: name={{ item }} global=yes state=latest
-  with_items: npm_global_packages
+  with_items: "{{ npm_global_packages }}"

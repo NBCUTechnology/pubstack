@@ -3,7 +3,7 @@
   apt_repository: repo='ppa:ondrej/apache2'
 
 - name: "ensure PHP PPA is enabled"
-  apt_repository: repo='ppa:ondrej/php5'
+  apt_repository: repo='ppa:ondrej/php5' update_cache=yes
 
 - name: "update apt cache"
   apt: update_cache=yes cache_valid_time=3600

@@ -1,6 +1,7 @@
 ---
 phantomjs_nodejs_global_packages:
   - gemini
+  - gemini-gui
 
 phantomjs_global_dependencies:
   - libsqlite3-dev
